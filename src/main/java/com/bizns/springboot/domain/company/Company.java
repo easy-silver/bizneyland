@@ -1,6 +1,7 @@
 package com.bizns.springboot.domain.company;
 
 
+import com.bizns.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Company {
+public class Company extends BaseTimeEntity {
 
     // 회사 일련번호(PK)
     @Id

@@ -1,16 +1,16 @@
 package com.bizns.springboot.domain.member;
 
+import com.bizns.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -55,14 +55,10 @@ public class Member {
     @Column
     private Long profileFileSeq;
 
-    // 회원가입 일시
-    @Column
-    private LocalDateTime joinDt = LocalDateTime.now();
-
     @Builder
     public Member(String name, String nickname, String birth, String gender,
                   String mobile, String grade, String workingArea, String email,
-                  String fax, Long profileFileSeq, LocalDateTime joinDt) {
+                  String fax, Long profileFileSeq) {
         this.name = name;
         this.nickname = nickname;
         this.birth = birth;
@@ -73,7 +69,6 @@ public class Member {
         this.email = email;
         this.fax = fax;
         this.profileFileSeq = profileFileSeq;
-        this.joinDt = joinDt;
     }
 
     public void update(String name, String nickname, String birth, String gender,

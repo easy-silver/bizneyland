@@ -4,7 +4,6 @@ import com.bizns.springboot.domain.member.Member;
 import com.bizns.springboot.domain.member.MemberRepository;
 import com.bizns.springboot.web.dto.MemberSaveRequestDto;
 import com.bizns.springboot.web.dto.MemberUpdateRequestDto;
-import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

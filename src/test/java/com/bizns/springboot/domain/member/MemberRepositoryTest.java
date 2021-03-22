@@ -24,7 +24,7 @@ public class MemberRepositoryTest {
     }
 
     @Test
-    public void 게시글저장_불러오기() {
+    public void 회원저장_불러오기() {
         //given
         String name = "테스터";
 

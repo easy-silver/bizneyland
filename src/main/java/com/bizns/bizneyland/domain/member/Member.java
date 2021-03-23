@@ -55,10 +55,14 @@ public class Member extends BaseTimeEntity {
     @Column
     private Long profileFileSeq;
 
+    // 소속 회사 일련번호(FK)
+    @Column(nullable = false)
+    private Long companyId;
+
     @Builder
     public Member(String name, String nickname, String birth, String gender,
                   String mobile, String grade, String workingArea, String email,
-                  String fax, Long profileFileSeq) {
+                  String fax, Long profileFileSeq, Long companyId) {
         this.name = name;
         this.nickname = nickname;
         this.birth = birth;
@@ -69,12 +73,12 @@ public class Member extends BaseTimeEntity {
         this.email = email;
         this.fax = fax;
         this.profileFileSeq = profileFileSeq;
+        this.companyId = companyId;
     }
 
-    public void update(String name, String nickname, String birth, String gender,
+    public void update(String nickname, String birth, String gender,
                        String mobile, String grade, String workingArea, String email,
                        String fax, Long profileFileSeq) {
-        this.name = name;
         this.nickname = nickname;
         this.birth = birth;
         this.gender = gender;

@@ -38,6 +38,9 @@ public class Company extends BaseTimeEntity {
     @Column
     private String businessNo;
 
+    @Column
+    private Long ceoMemberId;
+
     @Builder
     public Company(String name, String address, String tel, Long logoFileSeq, String businessNo) {
         this.name = name;
@@ -45,6 +48,10 @@ public class Company extends BaseTimeEntity {
         this.tel = tel;
         this.logoFileSeq = logoFileSeq;
         this.businessNo = businessNo;
+    }
+
+    public void updateCeoMemberId(Long memberId) {
+        this.ceoMemberId = memberId;
     }
 
     public void update(String address, String tel, Long logoFileSeq) {

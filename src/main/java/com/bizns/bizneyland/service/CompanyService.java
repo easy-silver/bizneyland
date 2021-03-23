@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -21,6 +22,13 @@ public class CompanyService {
     @Transactional
     public Long save(CompanyRequestDto requestDto) {
         return repository.save(requestDto.toEntity()).getId();
+    }
+
+    @Transactional
+    public void updateCeoId(Long id, Long memberId) {
+        Company company = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다. id=" + id));
+        company.updateCeoMemberId(memberId);
     }
 
     @Transactional

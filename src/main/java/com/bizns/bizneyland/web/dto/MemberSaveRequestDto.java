@@ -30,11 +30,13 @@ public class MemberSaveRequestDto {
     private String fax;
     // 프로필 사진
     private Long profileFileSeq;
+    // 소속 회사 일련 번호
+    private Long companyId;
 
     @Builder
     public MemberSaveRequestDto(String name, String nickname, String birth, String gender,
                                 String mobile, String grade, String workingArea, String email,
-                                String fax, Long profileFileSeq) {
+                                String fax, Long profileFileSeq, Long companyId) {
         this.name = name;
         this.nickname = nickname;
         this.birth = birth;
@@ -45,6 +47,7 @@ public class MemberSaveRequestDto {
         this.email = email;
         this.fax = fax;
         this.profileFileSeq = profileFileSeq;
+        this.companyId = companyId;
     }
 
     public Member toEntity() {
@@ -59,6 +62,7 @@ public class MemberSaveRequestDto {
                 .email(email)
                 .fax(fax)
                 .profileFileSeq(profileFileSeq)
+                .companyId(companyId)
                 .build();
     }
 }

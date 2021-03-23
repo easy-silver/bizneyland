@@ -27,8 +27,7 @@ public class MemberService {
     @Transactional
     public Long update(Long id, MemberUpdateRequestDto requestDto) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id=" + id));
-        member.update(requestDto.getName(),
-                requestDto.getNickname(),
+        member.update(requestDto.getNickname(),
                 requestDto.getBirth(),
                 requestDto.getGender(),
                 requestDto.getMobile(),

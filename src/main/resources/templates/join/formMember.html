@@ -27,20 +27,20 @@
                         </div>
 
                         <form class="user" method="post" action="/join/member">
-                            <!--<div class="form-group row">
+                            <div class="form-group row">
                                 <div class="col">
-                                    <label for="nickname">회원번호(임시)</label>
-                                    <input type="text" class="form-control form-control-user" id="userSeq" name="userSeq"
-                                           th:value="${user.userSeq}" readonly>
+                                    <label for="isCeo">대표 여부</label>
+                                    <input type="text" class="form-control form-control-user" id="isCeo" name="isCeo"
+                                           th:value="${(companyId != null) && (companyId != '') ? true: false}" readonly>
                                 </div>
                                 <div class="col">
-                                    <label for="nickname">회사 일련번호
+                                    <label for="companyId">회사 일련번호
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control form-control-user" id="companySeq" name="companySeq" required
-                                            value="1">
+                                    <input type="text" class="form-control form-control-user" id="companyId" name="companyId" required
+                                            th:value="${companyId}">
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="form-group row">
                                 <div class="col">
                                     <label for="nickname">이름

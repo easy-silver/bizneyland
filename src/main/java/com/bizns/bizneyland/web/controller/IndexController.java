@@ -19,4 +19,10 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/member")
+    public String member(Model model) {
+        model.addAttribute("members", memberService.findAllDesc());
+        return "member/member";
+    }
+
 }

@@ -9,7 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
 public class MemberService {
 
@@ -42,5 +46,12 @@ public class MemberService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id=" + id));
 
         return new MemberResponseDto(entity);
+    }
+
+    public List<MemberResponseDto> findAllDesc() {
+        return memberRepository.findAllDesc()
+                .stream()
+                .map(MemberResponseDto::new)
+                .collect(Collectors.toList());
     }
 }

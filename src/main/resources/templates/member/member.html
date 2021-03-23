@@ -44,10 +44,11 @@
                             </tfoot>
                             <tbody>
                                 <tr th:each="member : ${members}">
-                                    <td th:text="${member.memberSeq}"/>
-                                    <td th:text="${member.company?.name}"/>
+                                    <td th:text="${member.id}"/>
+                                    <!--<td th:text="${member.company?.name}"/>-->
+                                    <td></td>
                                     <td>
-                                        <a th:text="${member.name}" th:href="${member.memberSeq}"/>
+                                        <a th:text="${member.name}" th:href="${member.id}"/>
                                     </td>
                                     <td th:text="${member.nickname}"></td>
                                     <td th:text="${member.mobile}"></td>

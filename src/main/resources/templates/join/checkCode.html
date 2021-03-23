@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>가입 코드 입력</title>
+
+    <link   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">회원가입 코드 입력</h1>
+                    </div>
+                    <form class="user" onsubmit="return checkCode();">
+                        <div class="form-group">
+                            <input class="form-control form-control-user" id="joinCode" name="joinCode" required
+                                   placeholder="가입에 필요한 인증번호를 입력해주세요.">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-user btn-block">제출</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const checkCode = function() {
+            const code = document.querySelector('#joinCode').value;
+            const formEl = document.querySelector('.user');
+
+            fetch('/join/check', {
+                method: 'post',
+                body: JSON.stringify({code: code}),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(res => {
+                res.text().then(text => {
+                    console.log(text);
+                    switch (text) {
+                        case "ceo":
+                            formEl.action = '/join/registerCeo';
+                            break;
+                        case "sales":
+                            formEl.action = '/join/registerMember';
+                            break;
+                        default:
+                            alert("인증코드가 유효하지 않습니다.");
+                            return;
+                    }
+                    formEl.submit();
+                });
+            });
+            return false;
+        }
+    </script>
+</body>

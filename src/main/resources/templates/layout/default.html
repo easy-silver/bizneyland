@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Bizneyland</title>
+        <th:block th:replace="fragment/config :: configFragment" ></th:block>
+    </head>
+
+    <body>
+
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- SIDE BAR -->
+            <th:block th:replace="fragment/side :: sideFragment"></th:block>
+            <!-- End of SIDE BAR -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
+                    <!-- Top bar -->
+                    <th:block th:replace="fragment/header :: headerFragment"></th:block>
+
+                    <th:block layout:fragment="content"></th:block>
+                </div>
+                <!-- End of Main Content -->
+
+                <th:block th:replace="fragment/footer :: footerFragment"> </th:block>
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+    </body>
+</html>

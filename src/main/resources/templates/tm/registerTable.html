@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+    <div layout:fragment="content">
+        <style>
+            .table th {
+                vertical-align: middle !important;
+            }
+        </style>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">TM 입력 폼</h1>
+            <p class="mb-4">상담 내역 입력 폼입니다.</p>
+
+            <div class="card shadow mb-4">
+
+                <!-- 카드 헤더 -->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">고객 상담 확인서</h6>
+                </div>
+
+                <!-- 카드 바디 -->
+                <div class="card-body">
+                    <div action="/tm/register" method="post">
+                            <table class="table">
+                                <colgroup>
+                                    <col width="5%" />
+                                    <col width="20%" />
+                                    <col width="5%" />
+                                    <col width="20%" />
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th>회사명</th>
+                                        <td>
+                                            <input class="form-control" id="companyName" name="companyName" value="티모컴퍼니">
+                                        </td>
+                                        <th>대표자</th>
+                                        <td>
+                                            <input class="form-control" id="ownerName" name="ownerName" value="티모">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>설립일</th>
+                                        <td>
+                                            <input class="form-control" id="establishDate" name="establishDate">
+                                        </td>
+                                        <th>연락처(회사)</th>
+                                        <td>
+                                            <input class="form-control" id="tel" name="tel" value="021231234">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        <hr>
+<!--
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="type">업체 구분</label>
+                                <select class="form-control" id="type" name="type">
+                                    <option value="P">개인</option>
+                                    <option value="C" selected>법인</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="mobile">연락처(대표)</label>
+                                <input class="form-control" id="mobile" name="mobile">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="sector">업종</label>
+                                <input class="form-control" id="sector" name="sector" value="서비스업">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="keyItem">주요 품목</label>
+                                <input class="form-control" id="keyItem" name="keyItem" value="SW">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="">사업장 주소</label>
+                            <input class="form-control" id="address" name="address" value="서울시 강남구">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="hopeAmount">대출 희망액</label>
+                                <input type="number" class="form-control" id="hopeAmount" name="hopeAmount">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">자금 용도</label>
+                                <input class="form-control" id="purpose" name="purpose">
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">2018년</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">세금 납부</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">2019년</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">카드/대출</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">2020년</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">주택 종류</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">2021년</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">통화 시간</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="memo">특이사항</label>
+                            <textarea class="form-control" id="memo" name="memo"></textarea>
+                        </div>
+-->
+
+                        <!-- 3단 샘플
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">City</label>
+                                <input type="text" class="form-control" id="inputCity">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputState">State</label>
+                                <select id="inputState" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputZip">Zip</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                        </div>
+                        -->
+
+                        <!-- 체크박스
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Check me out
+                                </label>
+                            </div>
+                        </div>
+                        -->
+                        <button type="submit" class="btn btn-primary">저장</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+    <div layout:fragment="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">회원 목록</h1>
+            <p class="mb-4">가입된 회원 목록입니다.</p>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>SEQ</th>
+                                    <th>소속 회사</th>
+                                    <th>이름</th>
+                                    <th>닉네임</th>
+                                    <th>휴대폰 번호</th>
+                                    <th>이메일</th>
+                                    <th>활동 지역</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>SEQ</th>
+                                    <th>소속 회사</th>
+                                    <th>이름</th>
+                                    <th>닉네임</th>
+                                    <th>휴대폰 번호</th>
+                                    <th>이메일</th>
+                                    <th>활동 지역</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr th:each="member : ${members}">
+                                    <td th:text="${member.memberSeq}"/>
+                                    <td th:text="${member.company?.name}"/>
+                                    <td>
+                                        <a th:text="${member.name}" th:href="${member.memberSeq}"/>
+                                    </td>
+                                    <td th:text="${member.nickname}"></td>
+                                    <td th:text="${member.mobile}"></td>
+                                    <td th:text="${member.email}"></td>
+                                    <td th:text="${member.workingArea}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+</html>

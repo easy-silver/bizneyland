@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+    <div layout:fragment="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">TM 상담 내역</h1>
+            <p class="mb-4">TM 상담 내역 목록입니다.</p>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <colgroup>
+                                <col width="70px"/>
+                                <col width="90px"/>
+                                <col width="90px"/>
+                                <col width="190px"/>
+                                <col/>
+                                <col width="120px"/>
+                                <col/>
+                                <col width="100px"/>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">NO</th>
+                                    <th class="text-center">TM 번호</th>
+                                    <th class="text-center">고객 번호</th>
+                                    <th>상담일시</th>
+                                    <th>업체 이름</th>
+                                    <th>상담사</th>
+                                    <th>희망 통화 시간</th>
+                                    <th>진행 상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="tm, idx : ${tmList}">
+                                    <td class="text-center" th:text="${idx.count}"/>
+                                    <td class="text-center" th:text="${tm.tmNo}"/>
+                                    <td class="text-center" th:text="${tm.clientNo}"/>
+                                    <td th:text="${tm.callDate}"/>
+                                    <td>
+                                        <a th:href="@{detail/{tmNo}(tmNo=${tm.tmNo})}" th:text="${tm.clientNo}" />
+                                    </td>
+                                    <td th:text="${tm.caller}"/>
+                                    <td th:text="${tm.hopeCallTime}"/>
+                                    <td>진행중</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

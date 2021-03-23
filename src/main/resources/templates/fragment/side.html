@@ -1,0 +1,133 @@
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+        <!-- Sidebar -->
+        <ul th:fragment="sideFragment" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-pen-fancy"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Bizney Land</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- TM 상담 관련 메뉴 -->
+            <div class="sidebar-heading">
+                TM
+            </div>
+
+            <!-- TM 상담 등록 -->
+            <li class="nav-item">
+                <a class="nav-link" href="/tm/register">
+                    <i class="fas fa-fw fa-pen"></i>
+                    <span>Register</span>
+                </a>
+            </li>
+
+            <!-- TM 상담 내역 목록 -->
+            <li class="nav-item">
+                <a class="nav-link" href="/tm/list">
+                    <i class="fas fa-fw fa-headset"></i>
+                    <span>TM LIST</span>
+                </a>
+            </li>
+
+            <!-- 고객 업체 목록 -->
+            <li class="nav-item">
+                <a class="nav-link" href="/tm/client">
+                    <i class="far fa-fw fa-address-book"></i>
+                    <span>Client</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                LIST
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/member">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Member</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/company">
+                    <i class="fas fa-fw fa-building"></i>
+                    <span>Company</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/performance/index">
+                    <i class="fas fa-fw fa-bullseye"></i>
+                    <span>Performance</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                Community
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Rank</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-bullhorn"></i>
+                    <span>News</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-comments"></i>
+                    <span>Board</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                DEV
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/temp">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>CRUD</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+
+</html>

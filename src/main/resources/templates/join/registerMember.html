@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>영업 사원 회원가입</title>
+
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+        <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+
+    </head>
+
+    <body class="bg-gradient-primary">
+        <div class="container">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">영업 사원 가입 양식</h1>
+                        </div>
+
+                        <form class="user" method="post" action="/join/registerMember">
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label for="nickname">회원번호(임시)</label>
+                                    <input type="text" class="form-control form-control-user" id="userSeq" name="userSeq"
+                                           th:value="${user.userSeq}" readonly>
+                                </div>
+                                <div class="col">
+                                    <label for="nickname">회사 일련번호
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control form-control-user" id="companySeq" name="companySeq" required
+                                            value="1">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label for="nickname">이름
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control form-control-user" id="name" name="name"
+                                           value="이지은" required>
+                                </div>
+                                <div class="col">
+                                    <label for="nickname">닉네임
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control form-control-user" id="nickname" name="nickname"
+                                           value="티모" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="birth">생년월일
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="birth" name="birth" required
+                                           value="900114" placeholder="6자리로 입력(ex.900114)" maxlength="8">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="gender">성별
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="custom-select" id="gender" name="gender" required>
+                                        <option value="">선택</option>
+                                        <option value="F" selected>여성</option>
+                                        <option value="M">남성</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile">휴대폰 번호
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-user" id="mobile" name="mobile"
+                                       value="01066491441" placeholder="하이픈(-) 없이 입력" maxlength="11" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fax">팩스 번호</label>
+                                <input type="text" class="form-control form-control-user" id="fax" name="fax"
+                                       placeholder="하이픈(-) 없이 입력">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">이메일
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="email" class="form-control form-control-user" id="email" name="email"
+                                       placeholder="example@gmail.com" value="timo@gmail.com" required>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="grade">직급 및 직책
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="custom-select" id="grade" name="grade" required>
+                                        <option value="">선택</option>
+                                        <option value="1">사원</option>
+                                        <option value="2" selected>대리</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="workingArea">활동 지역
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="custom-select" id="workingArea" name="workingArea" required>
+                                        <option value="">선택</option>
+                                        <option value="1">서울</option>
+                                        <option value="2" selected>인천</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="profileFile">프로필 사진</label>
+                                <div class="custom-file mb-3">
+                                    <input type="file" class="custom-file-input" id="profileFile">
+                                    <label class="custom-file-label" for="profileFile">Choose file...</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-user btn-block">등록</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+
+        </script>
+    </body>
+</html>

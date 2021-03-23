@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+    <div layout:fragment="content">
+        <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800">CRUD Page</h1>
+            <p class="mb-4">도메인별 CRUD 구축을 위한 개발용 페이지입니다.</p>
+
+            <!-- 회원 -->
+            <h6>MEMBER</h6>
+            <a href="#" class="btn btn-primary btn-icon-split" id="testBtn">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">CREATE</span>
+            </a>
+            <a href="#" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">READ</span>
+            </a>
+            <a href="#" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">UPDATE</span>
+            </a>
+            <a href="#" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">DELETE</span>
+            </a>
+            <!-- // 회원 -->
+
+
+            <!-- 회사 -->
+            <h6 class="mt-4">COMPANY</h6>
+            <a href="#" class="btn btn-primary btn-icon-split" id="com_c">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">CREATE</span>
+            </a>
+            <a href="#" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">READ</span>
+            </a>
+            <a href="#" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">UPDATE</span>
+            </a>
+            <a href="#" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-flag"></i>
+                </span>
+                <span class="text">DELETE</span>
+            </a>
+            <!-- // 회사 -->
+
+        </div>
+        <script type="text/javascript">
+            // 회사 create
+            $('#com_c').on('click', function () {
+                const data = {
+                    comName : "마켓컬리",
+                    ceoName : "김컬리",
+                    address : "인천시 남동구"
+                    //telNum  : "032)123-3456"
+                };
+
+                $.ajax({
+                    type : 'POST',
+                    url : '/company',
+                    dataType : 'JSON',
+                    contentType : 'application/json; charset=UTF-8',
+                    data: JSON.stringify(data)
+                }).done(function(arg) {
+                    alert('success');
+                    console.log(arg);
+                }).fail(function(error) {
+                    alert(JSON.stringify(error));
+                });
+            });
+        </script>
+    </div>
+</html>

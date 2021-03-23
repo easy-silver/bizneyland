@@ -30,6 +30,7 @@ public class MemberRepositoryTest {
         String name = "테스터";
 
         repository.save(Member.builder()
+                .companyId(1L)
                 .name(name)
                 .build());
 
@@ -46,6 +47,7 @@ public class MemberRepositoryTest {
         //given
         LocalDateTime now = LocalDateTime.of(2021, 3, 22, 0,0,0);
         repository.save(Member.builder()
+                .companyId(1L)
                 .name("이지은")
                 .nickname("티모")
                 .build());

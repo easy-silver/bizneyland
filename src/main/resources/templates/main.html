@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -42,12 +43,13 @@
 
                 <hr>
 
-                <a href="#" class="btn btn-danger">
+                <a th:if="${user == null}" href="/oauth2/authorization/google" class="btn btn-danger">
                     <span class="text">구글 로그인</span>
                 </a>
                 <div class="my-2"></div>
-                <a href="#" class="btn btn-secondary">
-                    <span class="text">Button</span>
+                <p th:if="${user != null}">Logged in as : <code th:text="${user.name}"></code></p>
+                <a th:if="${user != null}" href="/logout" class="btn btn-secondary">
+                    <span class="text">로그아웃</span>
                 </a>
                 <div class="my-2"></div>
                 <a href="/h2-console" class="btn btn-light" target="_blank">
@@ -71,35 +73,4 @@
             </div>
         </div>
     </div>
-    <script>
-        const checkCode = function() {
-            const code = document.querySelector('#joinCode').value;
-            const formEl = document.querySelector('.user');
-
-            fetch('/join/check', {
-                method: 'post',
-                body: JSON.stringify({code: code}),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            }).then(res => {
-                res.text().then(text => {
-                    console.log(text);
-                    switch (text) {
-                        case "ceo":
-                            formEl.action = '/join/registerCeo';
-                            break;
-                        case "sales":
-                            formEl.action = '/join/registerMember';
-                            break;
-                        default:
-                            alert("인증코드가 유효하지 않습니다.");
-                            return;
-                    }
-                    formEl.submit();
-                });
-            });
-            return false;
-        }
-    </script>
 </body>

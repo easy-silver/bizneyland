@@ -22,11 +22,11 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>SEQ</th>
+                                    <th>ID</th>
                                     <th>회사명</th>
                                     <th>대표자</th>
+                                    <th>주소</th>
                                     <th>전화번호</th>
-                                    <th>팩스번호</th>
                                     <th>소속 회원 수</th>
                                 </tr>
                             </thead>
@@ -34,7 +34,7 @@
                                 <tr th:each="company : ${companies}">
                                     <td th:text="${company.id}"/>
                                     <td>
-                                        <a th:href="${company.id}" th:text="${company.name}" target="_blank" />
+                                        <a th:href="${company.id}" th:text="${company.name}"/>
                                     </td>
                                     <td/>
                                     <td th:text="${company.address}"/>

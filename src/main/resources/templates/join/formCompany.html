@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Register Company</title>
+
+        <link
+                href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+                rel="stylesheet">
+        <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+    </head>
+
+    <body class="bg-gradient-primary">
+        <div class="container">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">회사 정보 등록</h1>
+                        </div>
+
+                        <form class="user" name="userForm" method="post" action="/join/company">
+                            <!-- Sample.
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            -->
+                            <!-- 단 나누기
+                            <div class="form-group row">
+                               <div class="col-sm-6 mb-3 mb-sm-0">
+                                   <input type="text" class="form-control form-control-user" id="nickname" name="nickname"
+                                          placeholder="닉네임" required>
+                               </div>
+                               <div class="col-sm-6">
+                                   <input type="text" class="form-control form-control-user" id="name" name="name"
+                                          placeholder="이름" required>
+                               </div>
+                           </div>
+                            -->
+
+                            <!-- 회사 정보 -->
+                            <div class="form-group">
+                                <label for="name">회사명
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-user" id="name" name="name"
+                                       placeholder="" value="비지니어스" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="businessNo">사업자 번호</label>
+                                <input type="text" class="form-control form-control-user" id="businessNo" name="businessNo"
+                                       placeholder="" value="124-81-00998" maxlength="12">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">주소
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-user" id="address" name="address"
+                                       placeholder="" value="인천광역시 남동구 선수촌공원로 9" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tel">전화번호
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-user" id="tel" name="tel"
+                                       placeholder="" value="032)123-1234" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="logoFileSeq">회사 로고</label>
+                                <div class="custom-file mb-3">
+                                    <input type="file" class="custom-file-input" id="logoFileSeq" name="logoFileSeq">
+                                    <label class="custom-file-label" for="logoFileSeq">Choose file...</label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-user btn-block">등록</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(function () {
+
+                    $('#businessNo').keydown(function (event) {
+                        const key = event.charCode || event.keyCode || 0;
+                        const $text = $(this);
+                        if (key !== 8 && key !== 9) {
+                            if ($text.val().length === 3) {
+                                $text.val($text.val() + '-');
+                            }
+                            if ($text.val().length === 6) {
+                                $text.val($text.val() + '-');
+                            }
+                        }
+
+                        // Key 8번 백스페이스, Key 9번 탭, Key 46번 Delete 부터 0 ~ 9까지, Key 96 ~ 105까지 넘버패트
+                        // 한마디로 JQuery 0 ~~~ 9 숫자 백스페이스, 탭, Delete 키 넘버패드외에는 입력못함
+                        return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+                    })
+                });
+
+            });
+        </script>
+    </body>
+</html>

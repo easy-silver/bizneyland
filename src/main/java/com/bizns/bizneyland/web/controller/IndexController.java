@@ -25,4 +25,9 @@ public class IndexController {
         return "member/member";
     }
 
+    @GetMapping("/company")
+    public String company(Model model) {
+        model.addAttribute("companies", companyService.findAllDesc());
+        return "company/company";
+    }
 }

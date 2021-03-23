@@ -8,7 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
 public class CompanyService {
 
@@ -33,5 +37,12 @@ public class CompanyService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다. id=" + id));
 
         return new CompanyResponseDto(entity);
+    }
+
+    public List<CompanyResponseDto> findAllDesc() {
+        return repository.findAllDesc()
+                .stream()
+                .map(CompanyResponseDto::new)
+                .collect(Collectors.toList());
     }
 }

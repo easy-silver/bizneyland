@@ -32,11 +32,11 @@
                             </thead>
                             <tbody>
                                 <tr th:each="company : ${companies}">
-                                    <td th:text="${company.companySeq}"/>
+                                    <td th:text="${company.id}"/>
                                     <td>
-                                        <a th:href="${company.companySeq}" th:text="${company.name}" target="_blank" />
+                                        <a th:href="${company.id}" th:text="${company.name}" target="_blank" />
                                     </td>
-                                    <td th:text="${company.ceoMemberSeq}"/>
+                                    <td/>
                                     <td th:text="${company.address}"/>
                                     <td th:text="${company.tel}"/>
                                     <!--<td th:text="${company.memberCount}"/>-->

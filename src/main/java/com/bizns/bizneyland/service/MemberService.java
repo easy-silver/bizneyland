@@ -4,7 +4,6 @@ import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import com.bizns.bizneyland.web.dto.MemberRequestDto;
-import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,7 @@ public class MemberService {
     }
 
     @Transactional
-    public Long update(Long id, MemberUpdateRequestDto requestDto) {
+    public Long update(Long id, MemberRequestDto requestDto) {
         Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id=" + id));
         member.update(requestDto.getNickname(),
                 requestDto.getBirth(),

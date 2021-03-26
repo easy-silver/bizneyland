@@ -3,7 +3,6 @@ package com.bizns.bizneyland.web.controller;
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import com.bizns.bizneyland.web.dto.MemberRequestDto;
-import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,7 @@ public class MemberApiController {
     }
 
     @PutMapping("/member/{id}")
-    public Long update(@PathVariable Long id, @RequestBody MemberUpdateRequestDto requestDto) {
+    public Long update(@PathVariable Long id, @RequestBody MemberRequestDto requestDto) {
         return memberService.update(id, requestDto);
     }
 

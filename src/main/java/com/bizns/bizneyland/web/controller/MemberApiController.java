@@ -2,7 +2,7 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
-import com.bizns.bizneyland.web.dto.MemberSaveRequestDto;
+import com.bizns.bizneyland.web.dto.MemberRequestDto;
 import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ public class MemberApiController {
     private final MemberService memberService;
 
     @PostMapping("/member")
-    public Long save(@RequestBody MemberSaveRequestDto requestDto) {
+    public Long save(@RequestBody MemberRequestDto requestDto) {
         return memberService.save(requestDto);
     }
 

@@ -1,8 +1,10 @@
 package com.bizns.bizneyland.web.controller;
 
+import com.bizns.bizneyland.domain.company.Company;
+import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
-import com.bizns.bizneyland.web.dto.MemberSaveRequestDto;
+import com.bizns.bizneyland.web.dto.MemberRequestDto;
 import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
@@ -35,7 +37,9 @@ public class MemberApiControllerTest {
     private int port;
 
     @Autowired
-    private MemberRepository repository;
+    private MemberRepository memberRepository;
+    @Autowired
+    private CompanyRepository companyRepository;
 
     @Autowired
     private WebApplicationContext context;
@@ -52,7 +56,7 @@ public class MemberApiControllerTest {
 
     @After
     public void tearDown() throws Exception {
-        repository.deleteAll();
+        memberRepository.deleteAll();
     }
 
     @Test
@@ -62,8 +66,10 @@ public class MemberApiControllerTest {
         String name = "테스터";
         String nickname = "티모";
 
-        MemberSaveRequestDto requestDto = MemberSaveRequestDto.builder()
-                .companyId(1L)
+        Long companyId = createCompany().getId();
+
+        MemberRequestDto requestDto = MemberRequestDto.builder()
+                .companyId(companyId)
                 .name(name)
                 .nickname(nickname)
                 .build();
@@ -77,17 +83,24 @@ public class MemberApiControllerTest {
                 .andExpect(status().isOk());
 
         //then
-        List<Member> all = repository.findAll();
+        List<Member> all = memberRepository.findAll();
         assertThat(all.get(0).getName()).isEqualTo(name);
         assertThat(all.get(0).getNickname()).isEqualTo(nickname);
+        assertThat(all.get(0).getCompany().getId()).isEqualTo(companyId);
+    }
+
+    private Company createCompany() {
+        return companyRepository.save(Company.builder()
+                .name("해태")
+                .build());
     }
 
     @Test
     @WithMockUser(roles = "USER")
     public void Member_수정된다() throws Exception {
         //given
-        Member savedMember = repository.save(Member.builder()
-                .companyId(1L)
+        Member savedMember = memberRepository.save(Member.builder()
+                .company(createCompany())
                 .name("이지은")
                 .nickname("티모")
                 .build());
@@ -108,8 +121,9 @@ public class MemberApiControllerTest {
                 .andExpect(status().isOk());
 
         //then
-        List<Member> all = repository.findAll();
+        List<Member> all = memberRepository.findAll();
         assertThat(all.get(0).getNickname()).isEqualTo(expectedNickname);
+        assertThat(all.get(0).getCompany()).isNotNull();
     }
 
 }

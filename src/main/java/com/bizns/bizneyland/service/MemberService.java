@@ -3,7 +3,7 @@ package com.bizns.bizneyland.service;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
-import com.bizns.bizneyland.web.dto.MemberSaveRequestDto;
+import com.bizns.bizneyland.web.dto.MemberRequestDto;
 import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long save(MemberSaveRequestDto requestDto) {
+    public Long save(MemberRequestDto requestDto) {
         return memberRepository.save(requestDto.toEntity()).getId();
     }
 

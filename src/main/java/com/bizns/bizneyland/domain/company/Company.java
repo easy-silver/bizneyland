@@ -17,29 +17,27 @@ public class Company extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     // 회사명
-    @Column
+    @Column(nullable = false)
     private String name;
-
     // 주소
     @Column
     private String address;
-
     // 전화번호
     @Column
     private String tel;
-
     // 회사로고
     @Column
     private Long logoFileSeq;
-
     // 사업자 번호
     @Column
     private String businessNo;
-
     @Column
     private Long ceoMemberId;
+
+    public Company(Long id) {
+        this.id = id;
+    }
 
     @Builder
     public Company(String name, String address, String tel, Long logoFileSeq, String businessNo) {

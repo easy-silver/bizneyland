@@ -25,61 +25,58 @@
                             <h1 class="h4 text-gray-900 mb-4">회사 정보 등록</h1>
                         </div>
 
-                        <form class="user" name="userForm" method="post" action="/join/company">
-                            <!-- Sample.
+                        <form class="user" name="companyForm" method="post" action="/join/company" th:object="${companyRequestDto}">
+                        <!-- Sample.
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
-                            -->
-                            <!-- 단 나누기
-                            <div class="form-group row">
-                               <div class="col-sm-6 mb-3 mb-sm-0">
-                                   <input type="text" class="form-control form-control-user" id="nickname" name="nickname"
-                                          placeholder="닉네임" required>
-                               </div>
-                               <div class="col-sm-6">
-                                   <input type="text" class="form-control form-control-user" id="name" name="name"
-                                          placeholder="이름" required>
-                               </div>
-                           </div>
-                            -->
-
+                        -->
                             <!-- 회사 정보 -->
                             <div class="form-group">
-                                <label for="name">회사명
+                                <label th:for="businessNo">사업자 번호
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" class="form-control form-control-user" id="name" name="name"
-                                       placeholder="" value="비지니어스" required>
+                                <input type="text" class="form-control form-control-user" th:field="*{businessNo}"
+                                       placeholder="" maxlength="12" aria-describedby="businessNoHelp" required>
+                                <small id="businessNoHelp" class="form-text text-muted" th:errors="*{businessNo}"/>
                             </div>
                             <div class="form-group">
-                                <label for="businessNo">사업자 번호</label>
-                                <input type="text" class="form-control form-control-user" id="businessNo" name="businessNo"
-                                       placeholder="" value="124-81-00998" maxlength="12">
-                            </div>
-                            <div class="form-group">
-                                <label for="address">주소
+                                <label th:for="name">회사명
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" class="form-control form-control-user" id="address" name="address"
+                                <input type="text" class="form-control form-control-user" th:field="*{name}"
+                                       placeholder="" value="비지니어스" aria-describedby="nameHelp" required>
+                                <small id="nameHelp" class="form-text text-muted" th:errors="*{name}"/>
+                            </div>
+                            <div class="form-group">
+                                <label th:for="address">주소
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" class="form-control form-control-user" th:field="*{address}"
                                        placeholder="" value="인천광역시 남동구 선수촌공원로 9" required>
+                                <small id="addressHelp" class="form-text text-muted" th:errors="*{address}"/>
                             </div>
                             <div class="form-group">
-                                <label for="tel">전화번호
+                                <label th:for="tel">전화번호
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" class="form-control form-control-user" id="tel" name="tel"
+                                <input type="text" class="form-control form-control-user" th:field="*{tel}"
                                        placeholder="" value="032)123-1234" required>
+                                <small id="telHelp" class="form-text text-muted" th:errors="*{tel}"/>
                             </div>
+
+                            <!-- TODO : 파일 처리 추후 진행
                             <div class="form-group">
                                 <label for="logoFileSeq">회사 로고</label>
                                 <div class="custom-file mb-3">
                                     <input type="file" class="custom-file-input" id="logoFileSeq" name="logoFileSeq">
                                     <label class="custom-file-label" for="logoFileSeq">Choose file...</label>
                                 </div>
-                            </div>
+                            </div>-->
+
+                            <div class="mb-4"></div>
 
                             <button type="submit" class="btn btn-primary btn-user btn-block">등록</button>
                         </form>
@@ -93,6 +90,7 @@
             $(document).ready(function () {
                 $(function () {
 
+                    /** 사업자 번호 하이픈(-) 표시 이벤트 */
                     $('#businessNo').keydown(function (event) {
                         const key = event.charCode || event.keyCode || 0;
                         const $text = $(this);
@@ -110,8 +108,9 @@
                         return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
                     })
                 });
-
             });
+
+            // TODO : 비동기로 중복되는 사업자 번호 존재하는지 검색해야 함
         </script>
     </body>
 </html>

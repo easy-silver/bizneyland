@@ -6,15 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 @Getter @Setter
 @NoArgsConstructor
 public class CompanyRequestDto {
 
-    private String name;
-    private String address;
-    private String tel;
-    private Long logoFileSeq;
+    @NotEmpty(message = "사업자 번호는 필수입니다.")
+    @Size(min = 12, max = 12, message = "10자리를 정확히 입력해주세요.")
     private String businessNo;
+
+    @NotEmpty(message = "회사 이름은 필수입니다.")
+    private String name;
+
+    @NotEmpty
+    private String address;
+
+    @NotEmpty
+    private String tel;
+
+    private Long logoFileSeq;
 
     @Builder
     public CompanyRequestDto(String name, String address, String tel, Long logoFileSeq, String businessNo) {

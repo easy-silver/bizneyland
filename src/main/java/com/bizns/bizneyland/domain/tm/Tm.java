@@ -2,6 +2,7 @@ package com.bizns.bizneyland.domain.tm;
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
 import com.bizns.bizneyland.domain.client.Client;
+import com.bizns.bizneyland.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class Tm extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tmSeq;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_seq", nullable = false)
     private Client client;
 
@@ -27,8 +28,9 @@ public class Tm extends BaseTimeEntity {
     private LocalDateTime callDate = LocalDateTime.now();
 
     // TM 담당자
-    @Column(nullable = false)
-    private Integer caller;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "caller_seq", referencedColumnName = "member_seq", nullable = false)
+    private Member caller;
 
     // 희망 통화 시간
     private String hopeCallTime;
@@ -61,7 +63,7 @@ public class Tm extends BaseTimeEntity {
     private String memo;
 
     @Builder
-    public Tm(Client client, LocalDateTime callDate, Integer caller, String hopeCallTime, String purpose,
+    public Tm(Client client, LocalDateTime callDate, Member caller, String hopeCallTime, String purpose,
               Integer hopeAmount, String creditStatus, String mainBank, Character arrearsYn,
               Character loanYn, Integer loanAmount, String houseType, String memo) {
         this.client = client;

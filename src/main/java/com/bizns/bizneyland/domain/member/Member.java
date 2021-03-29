@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class Member extends BaseTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "member_seq")
     private Long id;
     // 회원 이름
     @Column(nullable = false)
@@ -46,8 +47,8 @@ public class Member extends BaseTimeEntity {
     @Column
     private Long profileFileSeq;
     // 소속 회사 정보(FK)
-    @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_seq", nullable = false)
     private Company company;
 
     @Builder

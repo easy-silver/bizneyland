@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TmRepository extends JpaRepository<Tm, Long> {
 
-    @Query("SELECT t FROM Tm t ORDER BY t.id")
+    @Query("SELECT t FROM Tm t ORDER BY t.tmSeq")
     List<Tm> findAllDesc();
 }

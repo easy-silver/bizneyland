@@ -17,7 +17,7 @@ public class Owner {
     private Long ownerSeq;
 
     // 업체 정보
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_seq", nullable = false)
     private Client client;
 

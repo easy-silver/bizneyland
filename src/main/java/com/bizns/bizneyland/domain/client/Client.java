@@ -51,4 +51,7 @@ public class Client extends BaseTimeEntity {
         this.tel = tel;
         this.keyItem = keyItem;
     }
+
+    public Client(Long clientSeq) {
+    }
 }

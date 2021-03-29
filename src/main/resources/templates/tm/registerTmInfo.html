@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+    <div layout:fragment="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">TM 입력 폼</h1>
+            <p class="mb-4">상담 내역 입력 폼입니다.</p>
+
+            <div class="card shadow mb-4">
+
+                <!-- 카드 헤더 -->
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">고객 상담 확인서</h6>
+                </div>
+
+                <!-- 카드 바디 -->
+                <div class="card-body">
+                    <form action="/tm/register" method="post">
+                        <h3 class="mt-5">상담 정보</h3>
+                        <hr>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="hopeAmount">대출 희망액</label>
+                                <input type="number" class="form-control" id="hopeAmount" name="hopeAmount">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">자금 용도</label>
+                                <input class="form-control" id="purpose" name="purpose">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">세금 납부</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">카드/대출</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="">주택 종류</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">희망 통화 시간</label>
+                                <input class="form-control" id="" name="">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="mt-4 btn btn-primary btn-block">저장</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

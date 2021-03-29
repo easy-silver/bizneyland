@@ -14,26 +14,32 @@ import javax.persistence.*;
 public class Company extends BaseTimeEntity {
 
     // 회사 일련번호(PK)
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "company_seq")
     private Long id;
+
+    // 사업자 번호
+    @Column(nullable = false, length = 12)
+    private String businessNo;
+
     // 회사명
     @Column(nullable = false)
     private String name;
+
     // 주소
     @Column
     private String address;
+
     // 전화번호
     @Column
     private String tel;
+
     // 회사로고
     @Column
     private Long logoFileSeq;
-    // 사업자 번호
+
     @Column
-    private String businessNo;
-    @Column
-    private Long ceoMemberId;
+    private Long ceoMemberSeq;
 
     public Company(Long id) {
         this.id = id;
@@ -48,8 +54,8 @@ public class Company extends BaseTimeEntity {
         this.businessNo = businessNo;
     }
 
-    public void updateCeoMemberId(Long memberId) {
-        this.ceoMemberId = memberId;
+    public void updateCeoMemberId(Long memberSeq) {
+        this.ceoMemberSeq = memberSeq;
     }
 
     public void update(String address, String tel, Long logoFileSeq) {

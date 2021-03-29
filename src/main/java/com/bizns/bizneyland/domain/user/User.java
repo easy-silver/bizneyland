@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.domain.user;
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
+import com.bizns.bizneyland.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,8 @@ import javax.persistence.*;
 @Entity
 public class User extends BaseTimeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_seq")
     private Long id;
 
     @Column(nullable = false)
@@ -28,6 +29,10 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToOne
+    @JoinColumn(name = "member_seq")
+    private Member member;
 
 
     @Builder
@@ -47,6 +52,10 @@ public class User extends BaseTimeEntity {
 
     public String getRoleKey() {
         return this.role.getKey();
+    }
+
+    public void updateMemberSeq(Member member) {
+        this.member = member;
     }
 
 }

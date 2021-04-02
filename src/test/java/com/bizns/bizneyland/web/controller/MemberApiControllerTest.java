@@ -18,6 +18,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
@@ -28,6 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MemberApiControllerTest {
@@ -39,7 +41,6 @@ public class MemberApiControllerTest {
     private MemberRepository memberRepository;
     @Autowired
     private CompanyRepository companyRepository;
-
     @Autowired
     private WebApplicationContext context;
 
@@ -51,11 +52,6 @@ public class MemberApiControllerTest {
                 .webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        memberRepository.deleteAll();
     }
 
     @Test
@@ -91,6 +87,7 @@ public class MemberApiControllerTest {
     private Company createCompany() {
         return companyRepository.save(Company.builder()
                 .name("해태")
+                .businessNo("123-45-67890")
                 .build());
     }
 

@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <colgroup>
+                            <!--<colgroup>
                                 <col width="70px"/>
                                 <col width="90px"/>
                                 <col width="90px"/>
@@ -29,14 +29,14 @@
                                 <col width="120px"/>
                                 <col/>
                                 <col width="100px"/>
-                            </colgroup>
+                            </colgroup>-->
                             <thead>
                                 <tr>
                                     <th class="text-center">NO</th>
                                     <th class="text-center">TM 번호</th>
                                     <th class="text-center">고객 번호</th>
-                                    <th>상담일시</th>
                                     <th>업체 이름</th>
+                                    <th>상담일시</th>
                                     <th>상담사</th>
                                     <th>희망 통화 시간</th>
                                     <th>진행 상태</th>
@@ -45,13 +45,13 @@
                             <tbody>
                                 <tr th:each="tm, idx : ${tmList}">
                                     <td class="text-center" th:text="${idx.count}"/>
-                                    <td class="text-center" th:text="${tm.tmNo}"/>
-                                    <td class="text-center" th:text="${tm.clientNo}"/>
-                                    <td th:text="${tm.callDate}"/>
+                                    <td class="text-center" th:text="${tm.tmSeq}"/>
+                                    <td class="text-center" th:text="${tm.clientSeq}"/>
                                     <td>
-                                        <a th:href="@{detail/{tmNo}(tmNo=${tm.tmNo})}" th:text="${tm.clientNo}" />
+                                        <a th:href="@{detail/{tmSeq}(tmNo=${tm.tmSeq})}" th:text="${tm.client.companyName}" />
                                     </td>
-                                    <td th:text="${tm.caller}"/>
+                                    <td th:text="${tm.callDate}"/>
+                                    <td th:text="${tm.caller.name}"/>
                                     <td th:text="${tm.hopeCallTime}"/>
                                     <td>진행중</td>
                                 </tr>

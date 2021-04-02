@@ -17,9 +17,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
 public class MemberRepositoryTest {
 
     @Autowired
@@ -30,17 +30,13 @@ public class MemberRepositoryTest {
 
     public Company createCompany() {
         Company company = Company.builder()
+                .businessNo("123-45-67890")
                 .name("메디치")
                 .build();
 
         em.persist(company);
 
         return company;
-    }
-
-    @After
-    public void cleanup() {
-        repository.deleteAll();
     }
 
     @Test

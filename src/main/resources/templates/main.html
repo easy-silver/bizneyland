@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>임시 메인 화면</title>
+    <title>Bizneyland</title>
 
     <link   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
@@ -20,59 +20,18 @@
     <div class="container">
         <div class="card shadow mt-5 mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Menu</h6>
+                <h6 class="m-0 font-weight-bold text-primary">비즈니랜드에 오신 것을 환영합니다 :)</h6>
             </div>
             <div class="card-body">
-                <!-- 버튼 -->
-                <a href="/join/company" class="btn btn-primary btn-icon-split">
-                    <span class="text">Company 등록</span>
-                </a>
-                <div class="my-2"></div>
-                <a href="/join/member" class="btn btn-success">
-                    <span class="text">Member 등록</span>
-                </a>
-                <div class="my-2"></div>
-                <a href="/company" class="btn btn-info btn-icon-split">
-                    <span class="text">회사 목록</span>
-                </a>
-                <div class="my-2"></div>
-                <a href="/member" class="btn btn-warning btn-icon-split">
-                    <span class="text">회원 목록</span>
-                </a>
-                <div class="my-2"></div>
-
-                <hr>
-
                 <a th:if="${user == null}" href="/oauth2/authorization/google" class="btn btn-danger">
                     <span class="text">구글 로그인</span>
                 </a>
-                <div class="my-2"></div>
-                <p th:if="${user != null}">Logged in as : <code th:text="${user.name}"></code></p>
-                <a th:if="${user != null}" href="/logout" class="btn btn-secondary">
-                    <span class="text">로그아웃</span>
-                </a>
-                <div class="my-2"></div>
-                <a href="/h2-console" class="btn btn-light" target="_blank">
-                    <span class="text">H2 CONSOLE</span>
-                </a>
-                <div class="mb-4"></div>
-
-                <!--
-                <p>Also works with small and large button classes!</p>
-                <a href="#" class="btn btn-primary btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-flag"></i>
-                                        </span>
-                    <span class="text">Split Button Small</span>
-                </a>
-                <div class="my-2"></div>
-                <a href="#" class="btn btn-primary btn-icon-split btn-lg">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-flag"></i>
-                                        </span>
-                    <span class="text">Split Button Large</span>
-                </a>
-                -->
+                <div th:if="${user != null}">
+                    <p><code th:text="${user.name}"></code>님 반갑습니다!</p>
+                    <a th:if="${user != null}" href="/logout" class="btn btn-secondary">
+                        <span class="text">로그아웃</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>임시 메인 화면</title>
+
+    <link   href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card shadow mt-5 mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Menu</h6>
+            </div>
+            <div class="card-body">
+                <!-- 버튼 -->
+                <a href="/join/company" class="btn btn-primary btn-icon-split">
+                    <span class="text">Company 등록</span>
+                </a>
+                <div class="my-2"></div>
+                <a href="/join/member" class="btn btn-success">
+                    <span class="text">Member 등록</span>
+                </a>
+                <div class="my-2"></div>
+                <a href="/company" class="btn btn-info btn-icon-split">
+                    <span class="text">회사 목록</span>
+                </a>
+                <div class="my-2"></div>
+                <a href="/member" class="btn btn-warning btn-icon-split">
+                    <span class="text">회원 목록</span>
+                </a>
+                <div class="my-2"></div>
+
+                <hr>
+
+                <a th:if="${user == null}" href="/oauth2/authorization/google" class="btn btn-danger">
+                    <span class="text">구글 로그인</span>
+                </a>
+                <div class="my-2"></div>
+                <p th:if="${user != null}">Logged in as : <code th:text="${user.name}"></code></p>
+                <a th:if="${user != null}" href="/logout" class="btn btn-secondary">
+                    <span class="text">로그아웃</span>
+                </a>
+                <div class="my-2"></div>
+                <a href="/h2-console" class="btn btn-light" target="_blank">
+                    <span class="text">H2 CONSOLE</span>
+                </a>
+                <div class="mb-4"></div>
+
+                <!--
+                <p>Also works with small and large button classes!</p>
+                <a href="#" class="btn btn-primary btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                    <span class="text">Split Button Small</span>
+                </a>
+                <div class="my-2"></div>
+                <a href="#" class="btn btn-primary btn-icon-split btn-lg">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-flag"></i>
+                                        </span>
+                    <span class="text">Split Button Large</span>
+                </a>
+                -->
+            </div>
+        </div>
+    </div>
+</body>

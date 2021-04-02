@@ -21,48 +21,30 @@
 
                 <!-- 카드 바디 -->
                 <div class="card-body">
-                    <form action="/tm/registerTmInfo" method="post">
-                        <h3 class="mt-5">상담 정보</h3>
+                    <form action="/tm/registerSales" method="post">
+
+                        <h3 class="mt-5">매출 정보</h3>
                         <hr>
 
-                        <div class="form-group">
-                            <label for="clientSeq">업체 일련번호</label>
-                            <input class="form-control" id="clientSeq" name="clientSeq" readonly
-                                th:value="${clientSeq}">
-                        </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="hopeAmount">대출 희망액</label>
-                                <input type="number" class="form-control" id="hopeAmount" name="hopeAmount">
+                                <label for="year_2018">2018년</label>
+                                <input class="form-control" id="year_2018" name="year" valu>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="">자금 용도</label>
-                                <input class="form-control" id="purpose" name="purpose">
+                                <label for="year_2019">2019년</label>
+                                <input class="form-control" id="year_2019" name="year">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="">세금 납부</label>
+                                <label for="">2020년</label>
                                 <input class="form-control" id="" name="">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="">카드/대출</label>
+                                <label for="">2021년</label>
                                 <input class="form-control" id="" name="">
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="">주택 종류</label>
-                                <input class="form-control" id="" name="">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="">희망 통화 시간</label>
-                                <input class="form-control" id="" name="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="memo">특이사항</label>
-                            <textarea class="form-control" id="memo" name="memo"></textarea>
                         </div>
                         <button type="submit" class="mt-4 btn btn-primary btn-block">저장</button>
                     </form>

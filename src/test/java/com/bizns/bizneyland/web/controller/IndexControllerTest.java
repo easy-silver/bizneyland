@@ -21,7 +21,7 @@ public class IndexControllerTest {
         String body = this.restTemplate.getForObject("/", String.class);
 
         //then
-        Assertions.assertThat(body).contains("Menu");
+        Assertions.assertThat(body).contains("비즈니랜드");
     }
 
 }

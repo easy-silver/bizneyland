@@ -22,6 +22,7 @@ public class MemberRequestDto {
     private String fax;
     private Long profileFileSeq;
     private Long companyId;
+    private Long userSeq;
 
     @Builder
     public MemberRequestDto(String name, String nickname, String birth, String gender,
@@ -53,6 +54,7 @@ public class MemberRequestDto {
                 .fax(fax)
                 .profileFileSeq(profileFileSeq)
                 .company(new Company(companyId))
+                .userSeq(userSeq)
                 .build();
     }
 }

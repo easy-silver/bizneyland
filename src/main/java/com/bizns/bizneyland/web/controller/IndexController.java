@@ -4,6 +4,7 @@ import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
 import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
+import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +21,19 @@ public class IndexController {
     public String index(@LoginUser SessionUser user, Model model) {
         if (user != null) {
             model.addAttribute("user", user);
+            MemberResponseDto member = memberService.findByUserSeq(user.getUserSeq());
+            if (member == null) {
+            }
         }
         return "main";
+    }
+
+    @GetMapping("/admin")
+    public String admin(@LoginUser SessionUser user, Model model) {
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+        return "admin";
     }
 
     @GetMapping("/member")

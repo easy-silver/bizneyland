@@ -46,6 +46,13 @@ public class MemberService {
         return new MemberResponseDto(entity);
     }
 
+    public MemberResponseDto findByUserSeq(Long userSeq) {
+        Member entity = memberRepository.findById(userSeq)
+                .orElse(null);
+
+        return entity != null ? new MemberResponseDto(entity) : null;
+    }
+
     public List<MemberResponseDto> findAllDesc() {
         return memberRepository.findAllDesc()
                 .stream()

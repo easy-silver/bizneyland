@@ -51,10 +51,13 @@ public class Member extends BaseTimeEntity {
     @JoinColumn(name = "company_seq", nullable = false)
     private Company company;
 
+    @Column
+    private Long userSeq;
+
     @Builder
     public Member(String name, String nickname, String birth, String gender,
                   String mobile, String grade, String workingArea, String email,
-                  String fax, Long profileFileSeq, Company company) {
+                  String fax, Long profileFileSeq, Company company, Long userSeq) {
         this.name = name;
         this.nickname = nickname;
         this.birth = birth;
@@ -66,6 +69,7 @@ public class Member extends BaseTimeEntity {
         this.fax = fax;
         this.profileFileSeq = profileFileSeq;
         this.company = company;
+        this.userSeq = userSeq;
     }
 
     public void update(String nickname, String birth, String gender,

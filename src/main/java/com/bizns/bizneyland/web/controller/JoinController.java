@@ -1,5 +1,7 @@
 package com.bizns.bizneyland.web.controller;
 
+import com.bizns.bizneyland.config.auth.LoginUser;
+import com.bizns.bizneyland.config.auth.dto.SessionUser;
 import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.web.dto.CompanyRequestDto;
@@ -60,7 +62,9 @@ public class JoinController {
      * 회원 등록
      * */
     @PostMapping("member")
-    public String registerMember(@RequestParam("isCeo") String isCeo, MemberRequestDto requestDto) {
+    public String registerMember(@RequestParam("isCeo") String isCeo, MemberRequestDto requestDto, @LoginUser SessionUser user) {
+
+        requestDto.setUserSeq(user.getUserSeq());
         Long memberId = memberService.save(requestDto);
         Long companyId = requestDto.getCompanyId();
 

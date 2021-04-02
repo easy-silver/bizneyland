@@ -16,6 +16,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
@@ -26,19 +27,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CompanyApiControllerTest {
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
-    private CompanyRepository repository;
-
-    @Autowired
-    private WebApplicationContext context;
-
+    @LocalServerPort private int port;
+    @Autowired private CompanyRepository repository;
+    @Autowired private WebApplicationContext context;
     private MockMvc mvc;
 
     @Before
@@ -49,11 +45,6 @@ public class CompanyApiControllerTest {
                 .build();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        repository.deleteAll();
-    }
-
     @Test
     @WithMockUser(roles = "USER")
     public void Company_등록된다() throws Exception {
@@ -61,6 +52,7 @@ public class CompanyApiControllerTest {
         String name = "애플";
 
         CompanyRequestDto requestDto = CompanyRequestDto.builder()
+                .businessNo("123-45-67890")
                 .name(name)
                 .build();
 
@@ -82,6 +74,7 @@ public class CompanyApiControllerTest {
     public void Company_수정된다() throws Exception {
         //given
         Company savedCompany = repository.save(Company.builder()
+                .businessNo("123-45-67890")
                 .name("애플")
                 .address("캘리포니아")
                 .build());

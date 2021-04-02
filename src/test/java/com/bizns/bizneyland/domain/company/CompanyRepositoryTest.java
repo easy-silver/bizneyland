@@ -7,23 +7,19 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CompanyRepositoryTest {
 
-    @Autowired
-    CompanyRepository repository;
-
-    @After
-    public void cleanup() {
-        repository.deleteAll();
-    }
+    @Autowired CompanyRepository repository;
 
     @Test
     public void 회사저장_불러오기() {
@@ -31,6 +27,7 @@ public class CompanyRepositoryTest {
         String name = "애플";
 
         repository.save(Company.builder()
+                .businessNo("123-45-67890")
                 .name(name)
                 .build());
 
@@ -47,6 +44,7 @@ public class CompanyRepositoryTest {
         //given
         LocalDateTime now = LocalDateTime.of(2021, 3, 22, 0,0,0);
         repository.save(Company.builder()
+                .businessNo("123-45-67890")
                 .name("애플")
                 .build());
         //when

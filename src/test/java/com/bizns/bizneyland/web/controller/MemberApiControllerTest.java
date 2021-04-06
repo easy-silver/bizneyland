@@ -64,6 +64,7 @@ public class MemberApiControllerTest {
         Long companyId = createCompany().getId();
 
         MemberRequestDto requestDto = MemberRequestDto.builder()
+                .userSeq(1L)
                 .companyId(companyId)
                 .name(name)
                 .nickname(nickname)
@@ -96,6 +97,7 @@ public class MemberApiControllerTest {
     public void Member_수정된다() throws Exception {
         //given
         Member savedMember = memberRepository.save(Member.builder()
+                .userSeq(1L)
                 .company(createCompany())
                 .name("이지은")
                 .nickname("티모")

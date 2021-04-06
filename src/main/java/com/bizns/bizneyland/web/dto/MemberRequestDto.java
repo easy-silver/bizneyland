@@ -27,7 +27,7 @@ public class MemberRequestDto {
     @Builder
     public MemberRequestDto(String name, String nickname, String birth, String gender,
                             String mobile, String grade, String workingArea, String email,
-                            String fax, Long profileFileSeq, Long companyId) {
+                            String fax, Long profileFileSeq, Long companyId, Long userSeq) {
         this.name = name;
         this.nickname = nickname;
         this.birth = birth;
@@ -39,6 +39,7 @@ public class MemberRequestDto {
         this.fax = fax;
         this.profileFileSeq = profileFileSeq;
         this.companyId = companyId;
+        this.userSeq = userSeq;
     }
 
     public Member toEntity() {

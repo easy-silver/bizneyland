@@ -35,6 +35,7 @@ public class TmRepositoryTest {
 
     private Member registerCaller() {
         return memberRepository.save(Member.builder()
+                .userSeq(1L)
                 .name("Call Tester")
                 .company(registerCompany())
                 .build());

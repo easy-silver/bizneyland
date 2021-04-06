@@ -47,6 +47,7 @@ public class MemberRepositoryTest {
         Company company = createCompany();
 
         repository.save(Member.builder()
+                .userSeq(1L)
                 .company(company)
                 .name(name)
                 .build());
@@ -65,6 +66,7 @@ public class MemberRepositoryTest {
         //given
         LocalDateTime now = LocalDateTime.of(2021, 3, 22, 0,0,0);
         repository.save(Member.builder()
+                .userSeq(1L)
                 .company(createCompany())
                 .name("이지은")
                 .nickname("티모")

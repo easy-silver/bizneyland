@@ -20,10 +20,11 @@ public class IndexController {
     @GetMapping("/")
     public String index(@LoginUser SessionUser user, Model model) {
         if (user != null) {
-            model.addAttribute("user", user);
+            if(user.getUserSeq() == 0L)
+                return "redirect:/admin";
             MemberResponseDto member = memberService.findByUserSeq(user.getUserSeq());
-            if (member == null) {
-            }
+            model.addAttribute("user", user);
+            model.addAttribute("member", member);
         }
         return "main";
     }

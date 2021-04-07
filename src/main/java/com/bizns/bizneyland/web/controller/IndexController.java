@@ -37,6 +37,11 @@ public class IndexController {
         return "admin";
     }
 
+    @GetMapping("/mypage")
+    public String mypage(Model model) {
+        return "member/mypage";
+    }
+
     @GetMapping("/member")
     public String member(Model model) {
         model.addAttribute("members", memberService.findAllDesc());

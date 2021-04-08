@@ -38,9 +38,6 @@ public class Company extends BaseTimeEntity {
     @Column
     private Long logoFileSeq;
 
-    @Column
-    private Long ceoMemberSeq;
-
     public Company(Long id) {
         this.id = id;
     }
@@ -52,10 +49,6 @@ public class Company extends BaseTimeEntity {
         this.tel = tel;
         this.logoFileSeq = logoFileSeq;
         this.businessNo = businessNo;
-    }
-
-    public void updateCeoMemberId(Long memberSeq) {
-        this.ceoMemberSeq = memberSeq;
     }
 
     public void update(String address, String tel, Long logoFileSeq) {

@@ -1,4 +1,4 @@
-package com.bizns.bizneyland.web.controller;
+package com.bizns.bizneyland.web.restcontroller;
 
 import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.web.dto.CompanyRequestDto;

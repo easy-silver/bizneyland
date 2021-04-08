@@ -25,13 +25,6 @@ public class CompanyService {
     }
 
     @Transactional
-    public void updateCeoId(Long id, Long memberId) {
-        Company company = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다. id=" + id));
-        company.updateCeoMemberId(memberId);
-    }
-
-    @Transactional
     public Long update(Long id, CompanyRequestDto requestDto) {
         Company company = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다. id=" + id));

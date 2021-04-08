@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
-    private final CompanyService companyService;
     private final MemberService memberService;
 
     @GetMapping("/")
@@ -46,11 +45,5 @@ public class IndexController {
     public String member(Model model) {
         model.addAttribute("members", memberService.findAllDesc());
         return "member/member";
-    }
-
-    @GetMapping("/company")
-    public String company(Model model) {
-        model.addAttribute("companies", companyService.findAllDesc());
-        return "company/company";
     }
 }

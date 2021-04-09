@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -20,33 +19,33 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
+    /**
+     * 회사 목록 화면
+     * */
+    @GetMapping("/list")
+    public void company(Model model) {
+        model.addAttribute("companies", companyService.findAllDesc());
+    }
+
+    /**
+     * 회사 등록 양식
+     * */
     @GetMapping("register")
-    public String register(Model model) {
+    public void register(Model model) {
         model.addAttribute("companyRequestDto", new CompanyRequestDto());
-        return "join/formCompany";
     }
 
     /**
      * 회사 등록
      * */
-    @PostMapping("company")
-    public String registerCompany(@Valid CompanyRequestDto requestDto, BindingResult result, RedirectAttributes redirectAttributes) {
+    @PostMapping("register")
+    public String registerCompany(@Valid CompanyRequestDto requestDto, BindingResult result) {
         if (result.hasErrors())
-            return "join/formCompany";
+            return "company/register";
 
         companyService.save(requestDto);
 
         return "redirect:/company";
     }
-
-    /**
-     * 회사 목록 화면
-     * */
-    @GetMapping("/company")
-    public String company(Model model) {
-        model.addAttribute("companies", companyService.findAllDesc());
-        return "company/company";
-    }
-
 
 }

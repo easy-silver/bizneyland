@@ -34,17 +34,17 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col text-center">
-                                <img src="./img/profile_01.jpg" alt="프로필 사진">
+                                <img th:src="@{/img/profile_01.jpg}" alt="프로필 사진">
                             </div>
                             <div class="col">
                                 <table class="table">
                                     <tr>
                                         <th>이름</th>
-                                        <td>이티모</td>
+                                        <td th:text="${member.name}">이티모</td>
                                     </tr>
                                     <tr>
                                         <th>소속</th>
-                                        <td>에스알포스트</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <th>직업</th>
@@ -52,7 +52,7 @@
                                     </tr>
                                     <tr>
                                         <th>지역</th>
-                                        <td>인천 남동구</td>
+                                        <td th:text="${member.workingArea}">인천 남동구</td>
                                     </tr>
                                 </table>
                             </div>

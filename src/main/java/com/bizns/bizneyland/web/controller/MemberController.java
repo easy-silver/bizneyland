@@ -58,6 +58,6 @@ public class MemberController {
 
         }
 
-        model.addAttribute("member", member);
+        model.addAttribute("member", service.findById(member.getId()));
     }
 }

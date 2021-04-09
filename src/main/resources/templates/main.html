@@ -31,10 +31,10 @@
                     <a th:if="${user != null}" href="/logout" class="btn btn-secondary">
                         <span class="text">로그아웃</span>
                     </a>
-                    <a th:if="${member == null}" href="/join/member" class="btn btn-primary btn-icon-split">
+                    <a th:if="${member == null}" href="/member/register" class="btn btn-primary btn-icon-split">
                         <span class="text">회원정보 등록</span>
                     </a>
-                    <a th:if="${member != null}" href="/mypage" class="btn btn-primary btn-icon-split">
+                    <a th:if="${member != null}" href="/member/mypage" class="btn btn-primary btn-icon-split">
                         <span class="text">입장</span>
                     </a>
                 </div>

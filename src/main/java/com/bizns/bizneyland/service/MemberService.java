@@ -2,8 +2,8 @@ package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
-import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import com.bizns.bizneyland.web.dto.MemberRequestDto;
+import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,8 +47,7 @@ public class MemberService {
     }
 
     public MemberResponseDto findByUserSeq(Long userSeq) {
-        Member entity = memberRepository.findById(userSeq)
-                .orElse(null);
+        Member entity = memberRepository.findByUserSeq(userSeq);
 
         return entity != null ? new MemberResponseDto(entity) : null;
     }

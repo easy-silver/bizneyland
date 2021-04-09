@@ -1,7 +1,6 @@
 package com.bizns.bizneyland.domain.user;
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
-import com.bizns.bizneyland.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

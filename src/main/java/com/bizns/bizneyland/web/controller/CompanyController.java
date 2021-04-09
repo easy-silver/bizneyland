@@ -45,7 +45,7 @@ public class CompanyController {
 
         companyService.save(requestDto);
 
-        return "redirect:/company";
+        return "redirect:/company/list";
     }
 
 }

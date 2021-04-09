@@ -51,15 +51,13 @@
                                     <label for="nickname">이름
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                           value="이지은" required>
+                                    <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="col">
                                     <label for="nickname">닉네임
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" id="nickname" name="nickname"
-                                           value="티모" required>
+                                    <input type="text" class="form-control" id="nickname" name="nickname" required>
                                 </div>
                             </div>
 
@@ -68,8 +66,7 @@
                                     <label for="birth">생년월일
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control" id="birth" name="birth" required
-                                           value="900114" placeholder="6자리로 입력(ex.900114)" maxlength="8">
+                                    <input type="text" class="form-control" id="birth" name="birth" required placeholder="6자리로 입력(ex.900114)" maxlength="8">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="gender">성별
@@ -77,8 +74,8 @@
                                     </label>
                                     <select class="custom-select" id="gender" name="gender" required>
                                         <option value="">선택</option>
-                                        <option value="F" selected>여성</option>
                                         <option value="M">남성</option>
+                                        <option value="F">여성</option>
                                     </select>
                                 </div>
                             </div>
@@ -86,30 +83,31 @@
                                 <label for="mobile">휴대폰 번호
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" class="form-control" id="mobile" name="mobile"
-                                       value="01066491441" placeholder="하이픈(-) 없이 입력" maxlength="11" required>
+                                <input type="text" class="form-control" id="mobile" name="mobile" maxlength="11" required>
                             </div>
                             <div class="form-group">
                                 <label for="fax">팩스 번호</label>
-                                <input type="text" class="form-control" id="fax" name="fax"
-                                       placeholder="하이픈(-) 없이 입력">
+                                <input type="text" class="form-control" id="fax" name="fax">
                             </div>
                             <div class="form-group">
                                 <label for="email">이메일
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                       placeholder="example@gmail.com" value="timo@gmail.com" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" required>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="grade">직급 및 직책
+                                    <label for="grade">직급
                                         <span class="text-danger">*</span>
                                     </label>
                                     <select class="custom-select" id="grade" name="grade" required>
                                         <option value="">선택</option>
-                                        <option value="1">사원</option>
-                                        <option value="2" selected>대리</option>
+                                        <option value="사원">사원</option>
+                                        <option value="대리">대리</option>
+                                        <option value="과장">과장</option>
+                                        <option value="차장">차장</option>
+                                        <option value="부장">부장</option>
+                                        <option value="이사">이사</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
@@ -118,8 +116,14 @@
                                     </label>
                                     <select class="custom-select" id="workingArea" name="workingArea" required>
                                         <option value="">선택</option>
-                                        <option value="1">서울</option>
-                                        <option value="2" selected>인천</option>
+                                        <option value="서울">서울</option>
+                                        <option value="인천">인천</option>
+                                        <option value="경기도">경기도</option>
+                                        <option value="강원도">강원도</option>
+                                        <option value="충청도">충청도</option>
+                                        <option value="경상도">경상도</option>
+                                        <option value="전라도">전라도</option>
+                                        <option value="제주">제주</option>
                                     </select>
                                 </div>
                             </div>

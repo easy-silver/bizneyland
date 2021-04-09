@@ -2,7 +2,6 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
-import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -36,14 +35,4 @@ public class IndexController {
         return "admin";
     }
 
-    @GetMapping("/mypage")
-    public String mypage(Model model) {
-        return "member/mypage";
-    }
-
-    @GetMapping("/member")
-    public String member(Model model) {
-        model.addAttribute("members", memberService.findAllDesc());
-        return "member/member";
-    }
 }

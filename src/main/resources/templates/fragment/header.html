@@ -173,15 +173,14 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <!-- 세션 정보 주석처리 -->
-                        <!--<span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${session.user.name}">User Name</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:text="${session.user.name}">User Name</span>
                         <img class="img-profile rounded-circle"
-                             th:src="${session.user.picture}">-->
+                             th:src="${session.user.picture}">
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                          aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="/mypage">
+                        <a class="dropdown-item" href="/member/mypage">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>

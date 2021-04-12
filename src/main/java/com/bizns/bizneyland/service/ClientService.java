@@ -27,6 +27,22 @@ public class ClientService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 업체가 없습니다. seq=" + clientSeq));
     }
 
+    public boolean isExist(String name) {
+        Client entity = repository.findByCompanyName(name);
+
+        return entity != null ? true: false;
+    }
+
+    /**
+     * 이름으로 조회 후 수정
+     */
+    public Client updateByName(String name, ClientRequestDto dto) {
+        Client entity = repository.findByCompanyName(name);
+        entity.update(dto);
+
+        return entity;
+    }
+
     public List<Client> findAll() {
         return repository.findAllDesc();
     }

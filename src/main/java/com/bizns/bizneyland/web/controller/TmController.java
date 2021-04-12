@@ -39,15 +39,18 @@ public class TmController {
     @PostMapping("registerClient")
     public String registerClient(ClientRequestDto clientDto, OwnerRequestDto ownerDto, RedirectAttributes redirectAttributes) {
 
-        // INSERT CLIENT
-        Client client = clientService.save(clientDto);
+        Client client;
+
+        // 고객 회사명으로 조회 후 있으면 UPDATE, 없으면 INSERT
+        if (clientService.isExist(clientDto.getCompanyName())) {
+            client = clientService.updateByName(clientDto.getCompanyName(), clientDto);
+        } else {
+            client = clientService.save(clientDto);
+        }
 
         // INSERT OWNER
         ownerDto.updateClient(client);
-        Long ownerSeq = ownerService.save(ownerDto);
-
-        System.out.println("clientSeq = " + client.getClientSeq());
-        System.out.println("ownerSeq = " + ownerSeq);
+        ownerService.save(ownerDto);
 
         redirectAttributes.addAttribute("clientSeq", client.getClientSeq());
 

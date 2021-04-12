@@ -1,6 +1,8 @@
 package com.bizns.bizneyland.domain.client;
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
+import com.bizns.bizneyland.web.dto.ClientRequestDto;
+import com.bizns.bizneyland.web.dto.ClientResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,5 +55,14 @@ public class Client extends BaseTimeEntity {
     }
 
     public Client(Long clientSeq) {
+    }
+
+    public void update(ClientRequestDto dto) {
+        this.type = dto.getType();
+        this.establishDate = dto.getEstablishDate();
+        this.sector = dto.getSector();
+        this.address = dto.getAddress();
+        this.tel = dto.getTel();
+        this.keyItem = dto.getKeyItem();
     }
 }

@@ -6,11 +6,9 @@
 
     <div layout:fragment="content">
 
-        <!-- Begin Page Content -->
         <div class="container-fluid">
-
-            <!-- Page Heading -->
             <h1 class="h3 mb-1 text-gray-800 mb-4">My Page</h1>
+
             <!-- 부연 설명이 필요할 경우 사용하기 -->
             <!--
             <p class="mb-4">Bootstrap's default utility classes can be found on the official <a
@@ -19,31 +17,26 @@
                 framework.</p>
             -->
 
-            <div class="row">
-                
-
-            </div>
-
             <div class="text-center">
                 <div class="card shadow mb-4">
                     <div class="card-header">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            Profile
-                        </h6>
+                        <h6 class="m-0 font-weight-bold text-primary">프로필</h6>
                     </div>
+
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col text-center">
-                                <img th:src="@{/img/profile_01.jpg}" alt="프로필 사진">
+                                <img class="rounded-circle" th:src="${session.user.picture}">
                             </div>
                             <div class="col">
                                 <table class="table">
                                     <tr>
                                         <th>이름</th>
-                                        <td th:text="${member.name}">이티모</td>
+                                        <td th:text="${member.name}"/>
                                     </tr>
                                     <tr>
                                         <th>소속</th>
+                                        <!--<td th:text="${member.company.name}"></td>-->
                                         <td></td>
                                     </tr>
                                     <tr>

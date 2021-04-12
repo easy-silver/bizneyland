@@ -61,4 +61,16 @@ public class ClientRepositoryTest {
         assertThat(findClient.getCompanyName()).isEqualTo(client.getCompanyName());
     }
 
+    @Test
+    public void 회사명으로_고객조회() {
+        //given
+        Client client = repository.save(create());
+
+        //when
+        Client findClient = repository.findByCompanyName(client.getCompanyName());
+
+        //then
+        assertThat(findClient).isEqualTo(client);
+    }
+
 }

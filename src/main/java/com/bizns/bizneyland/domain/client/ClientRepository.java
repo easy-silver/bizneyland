@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    @Query("SELECT c FROM Client c ORDER BY c.id DESC")
+    @Query("SELECT c FROM Client c ORDER BY c.clientSeq DESC")
     List<Client> findAllDesc();
 }

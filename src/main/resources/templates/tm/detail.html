@@ -42,11 +42,11 @@
                             <table class="table">
                                 <tr>
                                     <th>회사명</th>
-                                    <td colspan="3" th:text="${client.getCompanyName()}">쿠팡</td>
+                                    <td colspan="3" th:text="${client.companyName}">쿠팡</td>
                                 </tr>
                                 <tr>
                                     <th>업체 구분</th>
-                                    <td th:text="${ (client.getType() == 'P') ? '개인' : (client.getType() == 'C' ? '법인' : '기타')}">법인</td>
+                                    <td th:text="${ (client.type == 'P') ? '개인' : (client.type == 'C' ? '법인' : '기타')}">법인</td>
                                     <th>설립일</th>
                                     <td th:text="${client.getEstablishDate()}">1990.01.14</td>
                                 </tr>
@@ -107,7 +107,7 @@
                                     <th>희망 통화 시간</th>
                                     <td th:text="${tm.getHopeCallTime()}">10시~11시 사이</td>
                                     <th>상담사</th>
-                                    <td th:text="${tm.getCallerName()}">이지은</td>
+                                    <td th:text="${tm.caller.name}">이지은</td>
                                 </tr>
                                 <tr>
                                     <th>대출 희망액</th>
@@ -157,11 +157,11 @@
                                     <div th:each="owner : ${owners}">
                                         <tr>
                                             <th>대표자명</th>
-                                            <td th:text="${owner.getOwnerName()}">이지은</td>
+                                            <td th:text="${owner.name}">이지은</td>
                                         </tr>
                                         <tr>
                                             <th>연락처</th>
-                                            <td th:text="${owner.getOwnerMobile()}">010-1234-1234</td>
+                                            <td th:text="${owner.mobile}">010-1234-1234</td>
                                         </tr>
                                     </div>
                                 </tbody>

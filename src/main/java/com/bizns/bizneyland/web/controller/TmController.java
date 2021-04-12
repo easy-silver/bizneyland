@@ -9,16 +9,11 @@ import com.bizns.bizneyland.service.ClientService;
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.service.OwnerService;
 import com.bizns.bizneyland.service.TmService;
-import com.bizns.bizneyland.web.dto.ClientRequestDto;
-import com.bizns.bizneyland.web.dto.OwnerRequestDto;
-import com.bizns.bizneyland.web.dto.TmRequestDto;
+import com.bizns.bizneyland.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequiredArgsConstructor
@@ -90,5 +85,15 @@ public class TmController {
     @PostMapping("registerSales")
     public String registerSales() {
         return "redirect:/tm/list";
+    }
+
+    @GetMapping("detail/{tmNo}")
+    public String tmDetail(Model model, @PathVariable Long tmNo) {
+        TmResponseDto tm = tmService.findById(tmNo);
+        Long clientNo = tm.getClientSeq();
+        model.addAttribute("tm", tm);
+        model.addAttribute("client", new ClientResponseDto(new Client()));
+        model.addAttribute("owners", ownerService.findAllByClientSeq(clientNo));
+        return "tm/detail";
     }
 }

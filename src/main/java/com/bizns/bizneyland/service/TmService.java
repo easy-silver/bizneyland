@@ -1,5 +1,6 @@
 package com.bizns.bizneyland.service;
 
+import com.bizns.bizneyland.domain.tm.Tm;
 import com.bizns.bizneyland.domain.tm.TmRepository;
 import com.bizns.bizneyland.web.dto.TmRequestDto;
 import com.bizns.bizneyland.web.dto.TmResponseDto;
@@ -25,5 +26,11 @@ public class TmService {
                 .stream()
                 .map(TmResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public TmResponseDto findById(Long tmSeq) {
+        Tm entity = repository.findById(tmSeq)
+                .orElseThrow(() -> new IllegalArgumentException("해당 상담 건이 없습니다. tmSeq=" + tmSeq));
+        return new TmResponseDto(entity);
     }
 }

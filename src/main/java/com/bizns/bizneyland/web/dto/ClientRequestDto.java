@@ -15,44 +15,36 @@ public class ClientRequestDto {
 
     @NotEmpty(message = "회사명은 필수입니다.")
     private String companyName;
-    // 전화번호
-    private String tel;
-    // 업체 구분 개인(P) 법인(C)
-    private Character type;
-    // 설립일
-    private LocalDate establishDate;
-    // 업종
-    private String sector;
-    // 주요 품목
-    private String keyItem;
-    // 주소
+    private String contact;
+    private String owner;
     private String address;
-
-    // 대표자명
-    //private String ownerName;
-    // 대표자 연락처
-    //private String ownerMobile;
+    private Character type;
+    private LocalDate establishDate;
+    private String sector;
+    private String keyItem;
 
     @Builder
-    public ClientRequestDto(String companyName, Character type, LocalDate establishDate,
-                            String sector, String address, String tel, String keyItem) {
+    public ClientRequestDto(String companyName, String contact, String owner, String address,
+                            Character type, LocalDate establishDate, String sector, String keyItem) {
         this.companyName = companyName;
+        this.contact = contact;
+        this.owner = owner;
+        this.address = address;
         this.type = type;
         this.establishDate = establishDate;
         this.sector = sector;
-        this.address = address;
-        this.tel = tel;
         this.keyItem = keyItem;
     }
 
     public Client toEntity() {
         return Client.builder()
                 .companyName(companyName)
+                .contact(contact)
+                .owner(owner)
                 .type(type)
                 .establishDate(establishDate)
                 .sector(sector)
                 .address(address)
-                .tel(tel)
                 .keyItem(keyItem)
                 .build();
     }

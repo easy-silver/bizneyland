@@ -30,6 +30,7 @@
                                     <th class="text-center">TM 번호</th>
                                     <th class="text-center">고객 번호</th>
                                     <th>업체 이름</th>
+                                    <th>대표자</th>
                                     <th>상담일시</th>
                                     <th>상담사</th>
                                     <th>희망 통화 시간</th>
@@ -44,6 +45,7 @@
                                     <td>
                                         <a th:href="@{detail/{tmSeq}(tmSeq=${tm.tmSeq})}" th:text="${tm.client.companyName}" />
                                     </td>
+                                    <td th:text="${tm.client.owner}"/>
                                     <td th:text="${tm.callDate}"/>
                                     <td th:text="${tm.caller.name}"/>
                                     <td th:text="${tm.hopeCallTime}"/>

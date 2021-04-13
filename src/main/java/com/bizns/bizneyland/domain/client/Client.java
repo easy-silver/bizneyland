@@ -2,7 +2,6 @@ package com.bizns.bizneyland.domain.client;
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
 import com.bizns.bizneyland.web.dto.ClientRequestDto;
-import com.bizns.bizneyland.web.dto.ClientResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +23,13 @@ public class Client extends BaseTimeEntity {
     @Column(nullable = false)
     private String companyName;
 
+    // 전화번호
+    @Column(nullable = false)
+    private String contact;
+
+    // 대표자
+    private String owner;
+
     // 업체 구분 개인(P) 법인(C)
     private Character type;
 
@@ -36,25 +42,20 @@ public class Client extends BaseTimeEntity {
     // 주소
     private String address;
 
-    // 전화번호
-    private String tel;
-
     // 주요 품목
     private String keyItem;
 
     @Builder
-    public Client(String companyName, Character type, LocalDate establishDate, String sector,
-                  String address, String tel, String keyItem) {
+    public Client(String companyName, String contact, String owner, Character type,
+                  LocalDate establishDate, String sector, String address, String keyItem) {
         this.companyName = companyName;
+        this.contact = contact;
+        this.owner = owner;
         this.type = type;
         this.establishDate = establishDate;
         this.sector = sector;
         this.address = address;
-        this.tel = tel;
         this.keyItem = keyItem;
-    }
-
-    public Client(Long clientSeq) {
     }
 
     public void update(ClientRequestDto dto) {
@@ -62,7 +63,7 @@ public class Client extends BaseTimeEntity {
         this.establishDate = dto.getEstablishDate();
         this.sector = dto.getSector();
         this.address = dto.getAddress();
-        this.tel = dto.getTel();
+        this.contact = dto.getContact();
         this.keyItem = dto.getKeyItem();
     }
 }

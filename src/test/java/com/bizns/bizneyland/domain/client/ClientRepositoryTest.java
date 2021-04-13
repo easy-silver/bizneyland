@@ -23,6 +23,7 @@ public class ClientRepositoryTest {
     public Client create() {
         return Client.builder()
                 .companyName("Timo Company")
+                .contact("032-815-4553")
                 .establishDate(LocalDate.of(2020, 8, 27))
                 .build();
     }
@@ -40,7 +41,6 @@ public class ClientRepositoryTest {
     public void 고객업체_전체조회() {
         //given
         Client client = repository.save(create());
-
 
         //when
         List<Client> clients = repository.findAllDesc();

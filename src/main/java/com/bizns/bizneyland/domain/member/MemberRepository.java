@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    @Query("SELECT m FROM Member m ORDER BY m.id DESC")
+    @Query("SELECT m FROM Member m WHERE m.id > 0 ORDER BY m.id DESC")
     List<Member> findAllDesc();
 
     @Query("SELECT m FROM Member m WHERE m.userSeq = ?1")

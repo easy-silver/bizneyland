@@ -3,10 +3,10 @@ package com.bizns.bizneyland.web.controller;
 import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
 import com.bizns.bizneyland.domain.client.Client;
+import com.bizns.bizneyland.domain.client.ClientRepository;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.service.ClientService;
-import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.service.OwnerService;
 import com.bizns.bizneyland.service.TmService;
 import com.bizns.bizneyland.web.dto.*;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TmController {
 
     private final ClientService clientService;
+    private final ClientRepository clientRepository;
     private final OwnerService ownerService;
     private final TmService tmService;
     private final MemberRepository memberRepository;
@@ -72,7 +73,8 @@ public class TmController {
         requestDto.updateCaller(caller);
 
         Long clientSeq = requestDto.getClientSeq();
-        Client client = clientService.findById(clientSeq);
+        Client client = clientRepository.findById(clientSeq)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다."));
         requestDto.updateClient(client);
 
         tmService.save(requestDto);
@@ -94,8 +96,9 @@ public class TmController {
     public String tmDetail(Model model, @PathVariable Long tmNo) {
         TmResponseDto tm = tmService.findById(tmNo);
         Long clientNo = tm.getClientSeq();
+        clientService.findById(clientNo);
         model.addAttribute("tm", tm);
-        model.addAttribute("client", new ClientResponseDto(new Client()));
+        model.addAttribute("client", clientService.findById(clientNo));
         model.addAttribute("owners", ownerService.findAllByClientSeq(clientNo));
         return "tm/detail";
     }

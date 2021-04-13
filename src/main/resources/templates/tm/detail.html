@@ -15,13 +15,10 @@
 
                 <!-- 좌측열 카드 목록 -->
                 <div class="col-lg-6">
-
-                    <!-- 첫 번째 카드 -->
+                    <!-- 좌측열 첫 번째 카드 -->
                     <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div
-                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Company Info</h6>
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">고객(업체) 정보</h6>
                             <div class="dropdown no-arrow">
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,7 +34,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Card Body -->
                         <div class="card-body">
                             <table class="table">
                                 <tr>
@@ -48,33 +44,67 @@
                                     <th>업체 구분</th>
                                     <td th:text="${ (client.type == 'P') ? '개인' : (client.type == 'C' ? '법인' : '기타')}">법인</td>
                                     <th>설립일</th>
-                                    <td th:text="${client.getEstablishDate()}">1990.01.14</td>
+                                    <td th:text="${client.establishDate}">1990.01.14</td>
                                 </tr>
                                 <tr>
                                     <th>업종</th>
-                                    <td th:text="${client.getSector()}">제조업</td>
+                                    <td th:text="${client.sector}">제조업</td>
                                     <th>주요 품목</th>
-                                    <td th:text="${client.getKeyItem()}">로켓</td>
+                                    <td th:text="${client.keyItem}">로켓</td>
+                                </tr>
+                                <tr>
+                                    <th>대표자</th>
+                                    <td colspan="3" th:text="${client.owner}"/>
                                 </tr>
                                 <tr>
                                     <th>전화번호</th>
-                                    <td colspan="3" th:text="${client.getTel()}">02)1234-1234</td>
+                                    <td colspan="3" th:text="${client.contact}">02)1234-1234</td>
                                 </tr>
                                 <tr>
                                     <th>주소</th>
-                                    <td colspan="3" th:text="${client.getAddress()}">서울시 강남구 서초대로 123, 1202호</td>
+                                    <td colspan="3" th:text="${client.address}">서울시 강남구 서초대로 123, 1202호</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                    <!-- 첫 번째 카드 종료 -->
+                    <!-- 좌측 첫 번째 카드 종료 -->
 
-                    <!-- 세 번째 카드 -->
+                    <!-- 좌측 두 번째 카드 -->
                     <div class="card shadow mb-4">
-                        <!-- Card Header - Dropdown -->
-                        <div
-                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">TM Info</h6>
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Sales Info</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <th>2021년</th>
+                                    <td>30,000 원</td>
+                                </tr>
+                                <tr>
+                                    <th>2020년</th>
+                                    <td>50,000 만원</td>
+                                </tr>
+                                <tr>
+                                    <th>2019년</th>
+                                    <td>45,000 만원</td>
+                                </tr>
+                                <tr>
+                                    <th>2018년</th>
+                                    <td>40,000 만원</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- 좌측 두 번째 카드 종료 -->
+
+                <!-- 우측열 카드 목록 -->
+                <div class="col-lg-6">
+
+                    <!-- 우측 첫 번째 카드 -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">상담 정보</h6>
                             <div class="dropdown no-arrow">
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -90,7 +120,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Card Body -->
                         <div class="card-body">
                             <table class="table">
                                 <colgroup>
@@ -140,63 +169,8 @@
                             </table>
                         </div>
                     </div>
-                    <!-- 세 번째 카드 종료 -->
+                    <!-- 우측 첫번째 카드 종료 -->
 
-                </div>
-
-                <!-- 우측열 카드 목록 -->
-                <div class="col-lg-6">
-                    <!-- 두 번째 카드 -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Owner Info</h6>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <tbody>
-                                    <div th:each="owner : ${owners}">
-                                        <tr>
-                                            <th>대표자명</th>
-                                            <td th:text="${owner.name}">이지은</td>
-                                        </tr>
-                                        <tr>
-                                            <th>연락처</th>
-                                            <td th:text="${owner.mobile}">010-1234-1234</td>
-                                        </tr>
-                                    </div>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- 두 번째 카드 종료 -->
-
-                    <!-- 네 번째 카드 -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Sales Info</h6>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <tr>
-                                    <th>2021년</th>
-                                    <td>30,000 원</td>
-                                </tr>
-                                <tr>
-                                    <th>2020년</th>
-                                    <td>50,000 만원</td>
-                                </tr>
-                                <tr>
-                                    <th>2019년</th>
-                                    <td>45,000 만원</td>
-                                </tr>
-                                <tr>
-                                    <th>2018년</th>
-                                    <td>40,000 만원</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- 네 번째 카드 종료 -->
                 </div>
                 <!-- 우측열 카드 목록 종료 -->
 

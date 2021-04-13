@@ -62,6 +62,32 @@ public class MemberRepositoryTest {
     }
 
     @Test
+    public void 회사번호로_멤버찾기() {
+        //given
+        Company company = createCompany();
+
+        repository.save(Member.builder()
+                .userSeq(11L)
+                .company(company)
+                .name("tester1")
+                .build());
+
+        repository.save(Member.builder()
+                .userSeq(12L)
+                .company(company)
+                .name("tester2")
+                .build());
+
+        //when
+        List<Member> findMembers = repository.findByCompanySeq(company.getId());
+
+        //then
+        assertThat(findMembers.size()).isEqualTo(2);
+        assertThat(findMembers.get(0).getName()).isEqualTo("tester1");
+
+    }
+
+    @Test
     public void BaseTimeEntity_등록() {
         //given
         LocalDateTime now = LocalDateTime.of(2021, 3, 22, 0,0,0);

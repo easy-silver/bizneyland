@@ -17,6 +17,7 @@ public class MemberResponseDto {
     private String email;
     private String fax;
     private Long profileFileSeq;
+    private Character ceoYn;
 
     public MemberResponseDto(Member entity) {
         this.id = entity.getId();
@@ -30,5 +31,6 @@ public class MemberResponseDto {
         this.email = entity.getEmail();
         this.fax = entity.getFax();
         this.profileFileSeq = entity.getProfileFileSeq();
+        this.ceoYn = entity.getCeoYn();
     }
 }

@@ -58,4 +58,11 @@ public class MemberService {
                 .map(MemberResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    public List<MemberResponseDto> findByCompanySeq(Long companySeq) {
+        return memberRepository.findByCompanySeq(companySeq)
+                .stream()
+                .map(MemberResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }

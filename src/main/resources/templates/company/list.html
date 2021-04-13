@@ -34,7 +34,7 @@
                                 <tr th:each="company : ${companies}">
                                     <td th:text="${company.id}"/>
                                     <td>
-                                        <a th:href="${company.id}" th:text="${company.name}"/>
+                                        <a th:href="@{/company/detail/{companySeq}(companySeq=${company.id})}" th:text="${company.name}"/>
                                     </td>
                                     <td/>
                                     <td th:text="${company.address}"/>

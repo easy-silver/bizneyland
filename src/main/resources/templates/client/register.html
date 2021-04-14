@@ -7,13 +7,15 @@
         <div class="container-fluid">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">고객 업체 등록</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">고객(업체) 등록</h6>
                 </div>
                 <div class="card-body">
                     <form action="/client/register" method="post">
                         <div class="form-group">
-                            <label for="companyName">회사명</label>
-                            <input class="form-control" id="companyName" name="companyName">
+                            <label for="companyName">회사명
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input class="form-control" id="companyName" name="companyName" required>
                         </div>
                         <div class="form-group">
                             <label for="contact">연락처

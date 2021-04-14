@@ -21,6 +21,9 @@ public class TmService {
         return repository.save(requestDto.toEntity()).getTmSeq();
     }
 
+    /**
+     * 전체 상담건 조회
+     */
     public List<TmResponseDto> findAllDesc() {
         return repository.findAllDesc()
                 .stream()
@@ -28,6 +31,21 @@ public class TmService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 고객번호로 상담건 조회
+     * @param clientSeq
+     * @return tmList
+     */
+    public List<TmResponseDto> findByClient(Long clientSeq) {
+        return repository.findByClient(clientSeq)
+                .stream()
+                .map(TmResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 상담번호로 한 건 조회
+     */
     public TmResponseDto findById(Long tmSeq) {
         Tm entity = repository.findById(tmSeq)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상담 건이 없습니다. tmSeq=" + tmSeq));

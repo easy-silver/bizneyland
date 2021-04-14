@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+    <div layout:fragment="content">
+        <div class="container-fluid">
+
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">고객 상세 정보</h1>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div
+                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">업체 정보</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                             aria-labelledby="dropdownMenuLink2">
+                            <div class="dropdown-header">Dropdown Header:</div>
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>회사명</th>
+                            <td th:text="${client.companyName}"/>
+                        </tr>
+                        <tr>
+                            <th>대표자</th>
+                            <td th:text="${client.owner}"/>
+                        </tr>
+                        <tr>
+                            <th>주소</th>
+                            <td th:text="${client.address}"/>
+                        </tr>
+                        <tr>
+                            <th>전화번호</th>
+                            <td th:text="${client.contact}"/>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- 첫 번째 카드 종료 -->
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">상담 내역</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>상담번호</th>
+                                <th>상담일시</th>
+                                <th>상담사</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="tm : ${tms}">
+                                <td th:text="${tm.tmSeq}"></td>
+                                <td th:text="${tm.callDate}"/>
+                                <td th:text="${tm.caller.name}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</html>

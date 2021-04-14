@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,6 +31,7 @@ public class TmRepositoryTest {
     private Client registerClient() {
         return clientRepository.save(Client.builder()
                 .companyName("Client Company")
+                .contact("02-123-1234")
                 .build());
     }
 
@@ -46,6 +48,25 @@ public class TmRepositoryTest {
                 .businessNo("12-345-789")
                 .name("Member Company")
                 .build());
+    }
+
+    @Test
+    public void 고객번호로_TM목록_조회() {
+        //given
+        Tm tm = repository.save(Tm.builder()
+                .caller(registerCaller())
+                .client(registerClient())
+                .callDate(LocalDateTime.now())
+                .build());
+
+        Long clientSeq = tm.getClient().getClientSeq();
+
+        //when
+        List<Tm> tms = repository.findByClient(clientSeq);
+
+        //then
+        assertThat(tms.size()).isEqualTo(1);
+        assertThat(tms.get(0).getClient().getCompanyName()).isEqualTo("Client Company");
     }
 
     @Test

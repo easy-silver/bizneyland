@@ -7,13 +7,9 @@
     <div layout:fragment="content">
         <div class="container-fluid">
 
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">고객 상세 정보</h1>
-            </div>
-
+            <!-- 업체 정보 카드 -->
             <div class="card shadow mb-4">
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">업체 정보</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
@@ -41,6 +37,14 @@
                             <td th:text="${client.owner}"/>
                         </tr>
                         <tr>
+                            <th>업체 구분</th>
+                            <td th:text="${client.type} == 'C' ? '법인' : '개인'"/>
+                        </tr>
+                        <tr>
+                            <th>설립일</th>
+                            <td th:text="${client.establishDate}"/>
+                        </tr>
+                        <tr>
                             <th>주소</th>
                             <td th:text="${client.address}"/>
                         </tr>
@@ -48,11 +52,20 @@
                             <th>전화번호</th>
                             <td th:text="${client.contact}"/>
                         </tr>
+                        <tr>
+                            <th>업종</th>
+                            <td th:text="${client.sector}"/>
+                        </tr>
+                        <tr>
+                            <th>주요 품목</th>
+                            <td th:text="${client.keyItem}"/>
+                        </tr>
                     </table>
                 </div>
             </div>
-            <!-- 첫 번째 카드 종료 -->
+            <!-- //업체 정보 카드 -->
 
+            <!-- 상담 내역 -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">상담 내역</h6>
@@ -76,6 +89,7 @@
                     </table>
                 </div>
             </div>
+            <!-- //상담 내역 -->
 
         </div>
     </div>

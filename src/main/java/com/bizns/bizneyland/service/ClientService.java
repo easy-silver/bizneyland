@@ -2,6 +2,7 @@ package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.domain.client.ClientRepository;
+import com.bizns.bizneyland.util.FormatUtil;
 import com.bizns.bizneyland.web.dto.ClientRequestDto;
 import com.bizns.bizneyland.web.dto.ClientResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,9 @@ public class ClientService {
 
     @Transactional
     public Client save(ClientRequestDto requestDto) {
+        // 연락처 하이픈 제거
+        requestDto.setContact(FormatUtil.removeHyphen(requestDto.getContact()));
+
         return repository.save(requestDto.toEntity());
     }
 

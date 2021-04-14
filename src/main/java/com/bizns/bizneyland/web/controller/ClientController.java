@@ -61,12 +61,7 @@ public class ClientController {
     @PostMapping("register")
     public String registerClient(ClientRequestDto clientDto) {
 
-        // INSERT CLIENT
         service.save(clientDto);
-
-        // INSERT OWNER
-        //ownerDto.updateClient(client);
-        //ownerService.save(ownerDto);
 
         return "redirect:/client/list";
     }

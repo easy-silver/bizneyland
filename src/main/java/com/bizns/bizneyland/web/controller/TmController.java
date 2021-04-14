@@ -52,7 +52,7 @@ public class TmController {
     /**
      * TM 등록(업체) 양식
      */
-    @GetMapping("register/client")
+    @GetMapping("register")
     public String registerClient() {
         return "tm/register/client";
     }
@@ -74,7 +74,7 @@ public class TmController {
 
         redirectAttributes.addAttribute("clientSeq", client.getClientSeq());
 
-        return "redirect:/tm/form/tmInfo";
+        return "redirect:/tm/register/tmInfo";
     }
 
     /**

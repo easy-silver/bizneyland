@@ -59,7 +59,7 @@ public class ClientController {
      * 고객 등록
      * */
     @PostMapping("register")
-    public String registerClient(ClientRequestDto clientDto) {
+    public String register(ClientRequestDto clientDto) {
 
         service.save(clientDto);
 

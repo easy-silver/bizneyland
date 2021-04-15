@@ -19,6 +19,7 @@ public class MemberResponseDto {
     private String fax;
     private Long profileFileSeq;
     private Character ceoYn;
+    private String joinDt;
 
     public MemberResponseDto(Member entity) {
         this.id = entity.getId();
@@ -33,5 +34,6 @@ public class MemberResponseDto {
         this.fax = FormatUtil.addHyphenPhoneNumber(entity.getFax());
         this.profileFileSeq = entity.getProfileFileSeq();
         this.ceoYn = entity.getCeoYn();
+        this.joinDt = FormatUtil.localDateTimeToYmd(entity.getCreatedDate());
     }
 }

@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.util;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FormatUtil {
@@ -10,6 +11,13 @@ public class FormatUtil {
      * */
     public static LocalDate parseToDate(String target) {
         return (target == null || target == "") ? null : LocalDate.parse(target, DateTimeFormatter.ISO_DATE);
+    }
+
+    /**
+     * LocalDateTime -> 날짜 형식(yyyy/mm/dd)으로 변환
+     * */
+    public static String localDateTimeToYmd(LocalDateTime dateTime) {
+        return dateTime == null ? null : dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
 
 
@@ -43,14 +51,6 @@ public class FormatUtil {
         }
 
         return formatNumber;
-    }
-
-    public static void main(String[] args) {
-
-        String str = "2021-01-01";
-        //LocalDate localDate = LocalDate.parse(str, DateTimeFormatter.ISO_DATE);
-        LocalDate localDate = LocalDate.parse("", DateTimeFormatter.ISO_DATE);
-        System.out.println(localDate);
     }
 
 }

@@ -65,4 +65,15 @@ public class ClientController {
 
         return "redirect:/client/list";
     }
+
+    /**
+     * 고객 삭제
+     * */
+    @GetMapping("delete/{clientSeq}")
+    public String delete(@PathVariable Long clientSeq) {
+
+        service.deleteById(clientSeq);
+
+        return "redirect:/client/list";
+    }
 }

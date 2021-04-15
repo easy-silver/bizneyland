@@ -6,8 +6,8 @@
 
     <div layout:fragment="content">
         <div class="container-fluid">
-            <div class="card shadow mb-4">
 
+            <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">고객 업체 목록</h6>
                 </div>
@@ -40,6 +40,13 @@
                     </div>
                 </div>
             </div>
+            <!-- TODO : 관리자만 노출되게 처리 -->
+            <div th:if="${session.user.role.key == 'ROLE_ADMIN'}" class="float-right">
+                <a href="/client/register" class="btn btn-primary">
+                    <span class="text">고객 등록</span>
+                </a>
+            </div>
+
         </div>
     </div>
 </html>

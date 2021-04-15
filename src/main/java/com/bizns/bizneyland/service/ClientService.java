@@ -19,6 +19,29 @@ public class ClientService {
 
     private final ClientRepository repository;
 
+    /**
+     * 모든 고객 조회
+     * */
+    public List<ClientResponseDto> findAll() {
+        return repository.findAllDesc()
+                .stream()
+                .map(ClientResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 기본키로 단일 고객 조회
+     * */
+    public ClientResponseDto findById(Long clientSeq) {
+        Client entity = repository.findById(clientSeq)
+                .orElseThrow(() -> new IllegalArgumentException("해당 업체가 없습니다. seq=" + clientSeq));
+
+        return new ClientResponseDto(entity);
+    }
+
+    /**
+     * 고객 등록
+     * */
     @Transactional
     public Client save(ClientRequestDto requestDto) {
         // 연락처 하이픈 제거
@@ -27,11 +50,13 @@ public class ClientService {
         return repository.save(requestDto.toEntity());
     }
 
-    public ClientResponseDto findById(Long clientSeq) {
-        Client entity = repository.findById(clientSeq)
-                .orElseThrow(() -> new IllegalArgumentException("해당 업체가 없습니다. seq=" + clientSeq));
-
-        return new ClientResponseDto(entity);
+    /**
+     * 기본키로 고객 삭제
+     * @param clientSeq
+     */
+    @Transactional
+    public void deleteById(Long clientSeq) {
+        repository.deleteById(clientSeq);
     }
 
     /**
@@ -52,10 +77,4 @@ public class ClientService {
         return entity;
     }
 
-    public List<ClientResponseDto> findAll() {
-        return repository.findAllDesc()
-                .stream()
-                .map(ClientResponseDto::new)
-                .collect(Collectors.toList());
-    }
 }

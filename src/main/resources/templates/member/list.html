@@ -30,7 +30,7 @@
                                     <!--<td th:text="${member.company?.name}"/>-->
                                     <td></td>
                                     <td>
-                                        <a th:text="${member.name}" th:href="${member.id}"/>
+                                        <a th:text="${member.name}" th:href="@{detail/{seq}(seq=${member.id})}"/>
                                     </td>
                                     <td th:text="${member.nickname}"></td>
                                     <td th:text="${member.mobile}"></td>

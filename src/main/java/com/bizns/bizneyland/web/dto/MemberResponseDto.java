@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.web.dto;
 
 import com.bizns.bizneyland.domain.member.Member;
+import com.bizns.bizneyland.util.FormatUtil;
 import lombok.Getter;
 
 @Getter
@@ -25,11 +26,11 @@ public class MemberResponseDto {
         this.nickname = entity.getNickname();
         this.birth = entity.getBirth();
         this.gender = entity.getGender();
-        this.mobile = entity.getMobile();
+        this.mobile = FormatUtil.addHyphenPhoneNumber(entity.getMobile());
         this.grade = entity.getGrade();
         this.workingArea = entity.getWorkingArea();
         this.email = entity.getEmail();
-        this.fax = entity.getFax();
+        this.fax = FormatUtil.addHyphenPhoneNumber(entity.getFax());
         this.profileFileSeq = entity.getProfileFileSeq();
         this.ceoYn = entity.getCeoYn();
     }

@@ -2,6 +2,7 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
+import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.web.dto.MemberRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
@@ -9,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
     private final MemberService service;
+    private final CompanyService companyService;
 
     /**
      * 회원 목록
@@ -25,6 +28,17 @@ public class MemberController {
     @GetMapping("list")
     public void member(Model model) {
         model.addAttribute("members", service.findAllDesc());
+    }
+
+    /**
+     * 회원 상세
+     * */
+    @GetMapping("detail/{memberSeq}")
+    public String detail(@PathVariable Long memberSeq, Model model) {
+        MemberResponseDto member = service.findById(memberSeq);
+        model.addAttribute("member", member);
+
+        return "member/detail";
     }
 
     /**

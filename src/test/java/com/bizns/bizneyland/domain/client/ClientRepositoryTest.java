@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +25,7 @@ public class ClientRepositoryTest {
         return Client.builder()
                 .companyName("Timo Company")
                 .contact("032-815-4553")
-                .establishDate(LocalDate.of(2020, 8, 27))
+                .establishDate(LocalDate.parse("2020-04-14", DateTimeFormatter.ISO_DATE))
                 .build();
     }
 
@@ -71,6 +72,20 @@ public class ClientRepositoryTest {
 
         //then
         assertThat(findClient).isEqualTo(client);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 고객_삭제() {
+        //given
+        Client client = repository.save(create());
+
+        //when
+        repository.deleteById(client.getClientSeq());
+
+        repository.findById(client.getClientSeq())
+                .orElseThrow(() -> new IllegalArgumentException("해당 고객이 존재하지 않습니다."));
+
+        //then
     }
 
 }

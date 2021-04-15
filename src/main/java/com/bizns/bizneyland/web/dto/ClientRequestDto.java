@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.web.dto;
 
 import com.bizns.bizneyland.domain.client.Client;
+import com.bizns.bizneyland.util.FormatUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -19,13 +21,13 @@ public class ClientRequestDto {
     private String owner;
     private String address;
     private Character type;
-    private LocalDate establishDate;
+    private String establishDate;
     private String sector;
     private String keyItem;
 
     @Builder
     public ClientRequestDto(String companyName, String contact, String owner, String address,
-                            Character type, LocalDate establishDate, String sector, String keyItem) {
+                            Character type, String establishDate, String sector, String keyItem) {
         this.companyName = companyName;
         this.contact = contact;
         this.owner = owner;
@@ -42,7 +44,7 @@ public class ClientRequestDto {
                 .contact(contact)
                 .owner(owner)
                 .type(type)
-                .establishDate(establishDate)
+                .establishDate(FormatUtil.parseToDate(establishDate))
                 .sector(sector)
                 .address(address)
                 .keyItem(keyItem)

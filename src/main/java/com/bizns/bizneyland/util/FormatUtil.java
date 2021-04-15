@@ -1,6 +1,17 @@
 package com.bizns.bizneyland.util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class FormatUtil {
+
+    /**
+     * 문자열 -> 날짜 변환
+     * */
+    public static LocalDate parseToDate(String target) {
+        return (target == null || target == "") ? null : LocalDate.parse(target, DateTimeFormatter.ISO_DATE);
+    }
+
 
     /**
      * 하이픈 제거
@@ -32,6 +43,14 @@ public class FormatUtil {
         }
 
         return formatNumber;
+    }
+
+    public static void main(String[] args) {
+
+        String str = "2021-01-01";
+        //LocalDate localDate = LocalDate.parse(str, DateTimeFormatter.ISO_DATE);
+        LocalDate localDate = LocalDate.parse("", DateTimeFormatter.ISO_DATE);
+        System.out.println(localDate);
     }
 
 }

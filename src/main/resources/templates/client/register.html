@@ -37,7 +37,8 @@
                         </div>
                         <div class="form-group">
                             <label for="establishDate">설립일</label>
-                            <input class="form-control" id="establishDate" name="establishDate">
+                            <input class="form-control" id="establishDate" name="establishDate" maxlength="10"
+                                placeholder="날짜형식 숫자 8자리만 입력 (ex. 20210301)">
                         </div>
                         <div class="form-group">
                             <label for="sector">업종</label>
@@ -57,5 +58,25 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(function () {
+                    /** 설립일 하이픈(-) 표시 이벤트 */
+                    $('#establishDate').keydown(function (event) {
+                        const key = event.charCode || event.keyCode || 0;
+                        const $text = $(this);
+                        if (key !== 8 && key !== 9) {
+                            if ($text.val().length === 4) {
+                                $text.val($text.val() + '-');
+                            }
+                            if ($text.val().length === 7) {
+                                $text.val($text.val() + '-');
+                            }
+                        }
+                        return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+                    })
+                });
+            });
+        </script>
     </div>
 </html>

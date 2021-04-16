@@ -13,9 +13,18 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <colgroup>
+                                <col width="81px">
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
                             <thead>
                                 <tr>
-                                    <th>SEQ</th>
+                                    <th>회원번호</th>
                                     <th>소속 회사</th>
                                     <th>이름</th>
                                     <th>닉네임</th>
@@ -26,7 +35,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each="member : ${members}">
-                                    <td th:text="${member.id}"/>
+                                    <td class="text-center" th:text="${member.id}"/>
                                     <!--<td th:text="${member.company?.name}"/>-->
                                     <td></td>
                                     <td>
@@ -42,7 +51,12 @@
                     </div>
                 </div>
             </div>
-
+            <!-- TODO : 상수 값으로 관리자 확인해야 함 -->
+            <div th:if="${session.user.role.key == 'ROLE_ADMIN'}" class="float-right">
+                <a href="/member/register" class="btn btn-primary">
+                    <span class="text">회원 등록</span>
+                </a>
+            </div>
         </div>
         <!-- /.container-fluid -->
     </div>

@@ -24,31 +24,34 @@
             </div>
             <div class="card-body">
                 <!-- 버튼 -->
-                <a href="/company/register" class="btn btn-primary btn-icon-split">
+                <a href="/company/register" class="btn btn-info">
                     <span class="text">회사 등록</span>
                 </a>
-                <div class="my-2"></div>
-                <a href="/member/register" class="btn btn-success">
-                    <span class="text">회원 등록</span>
-                </a>
-                <div class="my-2"></div>
-                <a href="/company/list" class="btn btn-info btn-icon-split">
+                <a href="/company/list" class="btn btn-info">
                     <span class="text">회사 목록</span>
                 </a>
                 <div class="my-2"></div>
-                <a href="/member/list" class="btn btn-warning btn-icon-split">
+                <a href="/member/register" class="btn btn-warning">
+                    <span class="text">회원 등록</span>
+                </a>
+                <a href="/member/list" class="btn btn-warning">
                     <span class="text">회원 목록</span>
                 </a>
-
-                <hr>
                 <div class="my-2"></div>
                 <a href="/client/register" class="btn btn-success">
                     <span class="text">고객 등록</span>
                 </a>
-
-
+                <a href="/client/list" class="btn btn-success">
+                    <span class="text">고객 목록</span>
+                </a>
                 <div class="my-2"></div>
-
+                <a href="/tm/register" class="btn btn-primary">
+                    <span class="text">TM &nbsp;등록</span>
+                </a>
+                <a href="/tm/list" class="btn btn-primary">
+                    <span class="text">TM &nbsp;목록</span>
+                </a>
+                <div class="my-2"></div>
                 <hr>
 
                 <a th:if="${user == null}" href="/oauth2/authorization/google" class="btn btn-danger">

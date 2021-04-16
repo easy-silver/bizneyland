@@ -14,6 +14,14 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <colgroup>
+                                <col width="81px" />
+                                <col width="85px">
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
                             <thead>
                                 <tr>
                                     <th>고객번호</th>
@@ -26,8 +34,8 @@
                             </thead>
                             <tbody>
                                 <tr th:each="client : ${clients}">
-                                    <td th:text="${client.clientSeq}"></td>
-                                    <td th:text="${client.type == '{P}' ? '개인' : '법인'}"></td>
+                                    <td class="text-center" th:text="${client.clientSeq}"></td>
+                                    <td class="text-center" th:text="${client.type == '{P}' ? '개인' : '법인'}"></td>
                                     <td>
                                         <a th:text="${client.companyName}" th:href="@{detail/{clientSeq}(clientSeq=${client.clientSeq})}"/>
                                     </td>
@@ -40,13 +48,12 @@
                     </div>
                 </div>
             </div>
-            <!-- TODO : 관리자만 노출되게 처리 -->
+            <!-- TODO : 상수 값으로 관리자 확인해야 함 -->
             <div th:if="${session.user.role.key == 'ROLE_ADMIN'}" class="float-right">
                 <a href="/client/register" class="btn btn-primary">
                     <span class="text">고객 등록</span>
                 </a>
             </div>
-
         </div>
     </div>
 </html>

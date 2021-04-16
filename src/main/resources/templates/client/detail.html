@@ -81,7 +81,9 @@
                         <tbody>
                             <tr th:each="tm : ${tms}">
                                 <td th:text="${tm.tmSeq}"></td>
-                                <td th:text="${tm.callDate}"/>
+                                <td>
+                                    <a th:href="@{/tm/detail/{seq}(seq=${tm.tmSeq})}" th:text="${tm.callDate}"/>
+                                </td>
                                 <td th:text="${tm.caller.name}"></td>
                             </tr>
                         </tbody>

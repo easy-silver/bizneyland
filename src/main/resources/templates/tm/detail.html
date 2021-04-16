@@ -158,7 +158,9 @@
                                 </tr>
                                 <tr>
                                     <th>체납 여부</th>
-                                    <td th:text="${tm.arrearsYn} == 'Y' ? '체납' : '완납'"/>
+                                    <td>
+                                        <span th:if="${tm.arrearsYn}" th:text="${tm.arrearsYn} == 'Y' ? '체납' : '완납'"/>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>주택 종류</th>
@@ -166,7 +168,9 @@
                                 </tr>
                                 <tr>
                                     <th>대출 여부</th>
-                                    <td th:text="${tm.loanYn} == 'Y' ? '있음' : '없음'"/>
+                                    <td>
+                                        <span th:if="${tm.loanYn}" th:text="${tm.loanYn} == 'Y' ? '있음' : '없음'"/>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>대출 총액</th>

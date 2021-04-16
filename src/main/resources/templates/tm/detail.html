@@ -7,10 +7,6 @@
     <div layout:fragment="content">
         <div class="container-fluid">
 
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">TM 상세 내역</h1>
-            </div>
-
             <div class="row">
 
                 <!-- 좌측열 카드 목록 -->
@@ -38,31 +34,35 @@
                             <table class="table">
                                 <tr>
                                     <th>회사명</th>
-                                    <td colspan="3" th:text="${client.companyName}">쿠팡</td>
+                                    <td th:text="${client.companyName}">쿠팡</td>
                                 </tr>
                                 <tr>
                                     <th>업체 구분</th>
                                     <td th:text="${ (client.type == 'P') ? '개인' : (client.type == 'C' ? '법인' : '기타')}">법인</td>
+                                </tr>
+                                <tr>
                                     <th>설립일</th>
                                     <td th:text="${client.establishDate}">1990.01.14</td>
                                 </tr>
                                 <tr>
                                     <th>업종</th>
                                     <td th:text="${client.sector}">제조업</td>
+                                </tr>
+                                <tr>
                                     <th>주요 품목</th>
                                     <td th:text="${client.keyItem}">로켓</td>
                                 </tr>
                                 <tr>
                                     <th>대표자</th>
-                                    <td colspan="3" th:text="${client.owner}"/>
+                                    <td th:text="${client.owner}"/>
                                 </tr>
                                 <tr>
                                     <th>전화번호</th>
-                                    <td colspan="3" th:text="${client.contact}">02)1234-1234</td>
+                                    <td th:text="${client.contact}">02)1234-1234</td>
                                 </tr>
                                 <tr>
                                     <th>주소</th>
-                                    <td colspan="3" th:text="${client.address}">서울시 강남구 서초대로 123, 1202호</td>
+                                    <td th:text="${client.address}">서울시 강남구 서초대로 123, 1202호</td>
                                 </tr>
                             </table>
                         </div>
@@ -70,6 +70,7 @@
                     <!-- 좌측 첫 번째 카드 종료 -->
 
                     <!-- 좌측 두 번째 카드 -->
+                    <!--
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Sales Info</h6>
@@ -94,9 +95,10 @@
                                 </tr>
                             </table>
                         </div>
-                    </div>
+                    </div>-->
+                    <!-- 좌측 두 번째 카드 종료 -->
                 </div>
-                <!-- 좌측 두 번째 카드 종료 -->
+                <!-- 좌측열 카드 목록 종료 -->
 
                 <!-- 우측열 카드 목록 -->
                 <div class="col-lg-6">
@@ -122,49 +124,57 @@
                         </div>
                         <div class="card-body">
                             <table class="table">
-                                <colgroup>
-                                    <col width="25%">
-                                    <col>
-                                    <col width="20%">
-                                    <col>
-                                </colgroup>
                                 <tr>
                                     <th>상담일시</th>
-                                    <td colspan="3" th:text="${tm.getCallDate()}">2021.03.08</td>
+                                    <td th:text="${tm.callDate}"/>
                                 </tr>
                                 <tr>
                                     <th>희망 통화 시간</th>
-                                    <td th:text="${tm.getHopeCallTime()}">10시~11시 사이</td>
+                                    <td th:text="${tm.hopeCallTime}"/>
+                                </tr>
+                                <tr>
                                     <th>상담사</th>
-                                    <td th:text="${tm.caller.name}">이지은</td>
+                                    <td th:text="${tm.caller.name}"/>
                                 </tr>
                                 <tr>
                                     <th>대출 희망액</th>
-                                    <td><span th:text="${#numbers.formatInteger(tm.getHopeAmount(), 3, 'COMMA')}">3,000</span>원</td>
+                                    <td>
+                                        <span th:if="${tm.hopeAmount}">
+                                            <span th:text="${#numbers.formatInteger(tm.getHopeAmount(), 3, 'COMMA')}">3,000</span>원
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>자금 용도</th>
-                                    <td th:text="${tm.getPurpose()}">운영자금</td>
+                                    <td th:text="${tm.purpose}"/>
                                 </tr>
                                 <tr>
                                     <th>신용 상태</th>
-                                    <td th:text="${tm.getCreditStatus()}"></td>
+                                    <td th:text="${tm.creditStatus}"/>
+                                </tr>
+                                <tr>
                                     <th>주거래 은행</th>
-                                    <td th:text="${tm.getMainBank()}"></td>
+                                    <td th:text="${tm.mainBank}"/>
                                 </tr>
                                 <tr>
                                     <th>체납 여부</th>
-                                    <td th:text="${tm.getArrearsYn() == 'Y' ? '체납' : '완납'}"></td>
+                                    <td th:text="${tm.arrearsYn} == 'Y' ? '체납' : '완납'"/>
+                                </tr>
+                                <tr>
                                     <th>주택 종류</th>
-                                    <td th:text="${tm.getHouseType()}"></td>
+                                    <td th:text="${tm.houseType}"/>
                                 </tr>
                                 <tr>
                                     <th>대출 여부</th>
-                                    <td th:text="${tm.getLoanYn() == 'Y' ? '있음' : '없음'}"></td>
+                                    <td th:text="${tm.loanYn} == 'Y' ? '있음' : '없음'"/>
+                                </tr>
+                                <tr>
                                     <th>대출 총액</th>
-                                    <td th:text="${tm.getLoanAmount()}"></td>
+                                    <td th:text="${tm.loanAmount}"/>
                                 </tr>
                                 <tr>
                                     <th>특이사항</th>
-                                    <td colspan="3" th:text="${tm.getMemo()}"></td>
+                                    <td th:text="${tm.memo}"/>
                                 </tr>
                             </table>
                         </div>
@@ -173,8 +183,9 @@
 
                 </div>
                 <!-- 우측열 카드 목록 종료 -->
-
             </div>
+
         </div>
+
     </div>
 </html>

@@ -20,6 +20,13 @@ public class FormatUtil {
         return dateTime == null ? null : dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
 
+    /**
+     * LocalDateTime -> 날짜/시간 형식(yyyy/mm/dd HH:MI:SS)으로 변환
+     * */
+    public static String localDateTimeToYmdHms(LocalDateTime dateTime) {
+        return dateTime == null ? null : dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+    }
+
 
     /**
      * 하이픈 제거
@@ -51,6 +58,10 @@ public class FormatUtil {
         }
 
         return formatNumber;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(localDateTimeToYmdHms(LocalDateTime.now()));
     }
 
 }

@@ -72,14 +72,14 @@
                         </thead>
                         <tbody>
                             <tr th:each="member : ${members}">
-                                <td th:text="${member.id}"></td>
-                                <td th:text="${member.name}"></td>
-                                <td th:text="${member.nickname}"></td>
-                                <td th:text="${member.mobile}"/>
-                                <td th:text="${member.email}"/>
-                                <td th:text="${member.workingArea}"/>
+                                <td class="text-center" th:text="${member.id}"></td>
+                                <td class="text-center" th:text="${member.name}"></td>
+                                <td class="text-center" th:text="${member.nickname}"></td>
+                                <td class="text-center" th:text="${member.mobile}"/>
+                                <td class="text-center" th:text="${member.email}"/>
+                                <td class="text-center" th:text="${member.workingArea}"/>
                                 <!-- 3항 연산자 -->
-                                <td th:text="${member.ceoYn} == 'Y' ? '대표자' : ''"/>
+                                <td class="text-center" th:text="${member.ceoYn} == 'Y' ? '대표자' : ''"/>
                             </tr>
                         </tbody>
                     </table>

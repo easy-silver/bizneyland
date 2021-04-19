@@ -26,12 +26,16 @@
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" th:href="@{/company/delete/{id}(id=${company.id})}">회사 삭제</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <table class="table">
+                        <tr>
+                            <th>회사번호</th>
+                            <td th:text="${company.id}"/>
+                        </tr>
                         <tr>
                             <th>사업자 번호</th>
                             <td th:text="${company.businessNo}"/>

@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 public class CompanyController {
 
-    private final CompanyService companyService;
+    private final CompanyService service;
     private final MemberService memberService;
 
     /**
@@ -30,7 +30,7 @@ public class CompanyController {
      * */
     @GetMapping("/list")
     public void list(Model model) {
-        model.addAttribute("companies", companyService.findAllDesc());
+        model.addAttribute("companies", service.findAllDesc());
     }
 
     /**
@@ -39,7 +39,7 @@ public class CompanyController {
     @GetMapping("/detail/{companySeq}")
     public String detail(Model model, @PathVariable Long companySeq) {
 
-        CompanyResponseDto company = companyService.findById(companySeq);
+        CompanyResponseDto company = service.findById(companySeq);
         model.addAttribute("company", company);
 
         List<MemberResponseDto> members = memberService.findByCompanySeq(companySeq);
@@ -64,8 +64,17 @@ public class CompanyController {
         if (result.hasErrors())
             return "company/register";
 
-        companyService.save(requestDto);
+        service.save(requestDto);
 
+        return "redirect:/company/list";
+    }
+
+    /**
+     * 회사 등록
+     * */
+    @GetMapping("delete/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
         return "redirect:/company/list";
     }
 

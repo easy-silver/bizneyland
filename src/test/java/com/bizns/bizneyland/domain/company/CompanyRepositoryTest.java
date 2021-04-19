@@ -59,4 +59,17 @@ public class CompanyRepositoryTest {
         assertThat(company.getModifiedDate()).isAfter(now);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void 회사_삭제() {
+        //given
+        Company company = repository.save(Company.builder()
+                .name("테스트")
+                .businessNo("123-456-789")
+                .build());
+        //when
+        repository.deleteById(company.getId());
+        repository.findById(company.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 회사가 존재하지 않습니다."));
+    }
+
 }

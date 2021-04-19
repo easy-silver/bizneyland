@@ -20,7 +20,7 @@ public class CompanyService {
     private final CompanyRepository repository;
 
     /**
-     * 고객 등록
+     * 회사 등록
      * */
     @Transactional
     public Long save(CompanyRequestDto requestDto) {
@@ -51,5 +51,14 @@ public class CompanyService {
                 .stream()
                 .map(CompanyResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 회사 삭제
+     * */
+    public void delete(Long id) {
+        Company company = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다. id=" + id));
+        repository.delete(company);
     }
 }

@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.web.dto;
 
 import com.bizns.bizneyland.domain.company.Company;
+import com.bizns.bizneyland.util.FormatUtil;
 import lombok.Getter;
 
 @Getter
@@ -17,7 +18,7 @@ public class CompanyResponseDto {
         this.id = entity.getId();
         this.name = entity.getName();
         this.address = entity.getAddress();
-        this.tel = entity.getTel();
+        this.tel = FormatUtil.addHyphenPhoneNumber(entity.getTel());
         this.logoFileSeq = entity.getLogoFileSeq();
         this.businessNo = entity.getBusinessNo();
     }

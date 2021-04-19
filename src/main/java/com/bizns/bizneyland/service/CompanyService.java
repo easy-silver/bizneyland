@@ -2,6 +2,7 @@ package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
+import com.bizns.bizneyland.util.FormatUtil;
 import com.bizns.bizneyland.web.dto.CompanyRequestDto;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -19,8 +19,14 @@ public class CompanyService {
 
     private final CompanyRepository repository;
 
+    /**
+     * 고객 등록
+     * */
     @Transactional
     public Long save(CompanyRequestDto requestDto) {
+        // 전화번호 하이픈 제거
+        requestDto.setTel(FormatUtil.removeHyphen(requestDto.getTel()));
+
         return repository.save(requestDto.toEntity()).getId();
     }
 

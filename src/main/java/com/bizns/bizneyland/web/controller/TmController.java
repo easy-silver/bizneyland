@@ -94,7 +94,8 @@ public class TmController {
     public String registerTmInfo(TmRequestDto requestDto, @LoginUser SessionUser user) {
 
         // 세션에 있는 USER_SEQ로 Member 찾기
-        Member caller = memberRepository.findByUserSeq(user.getUserSeq());
+        Member caller = memberRepository.findByUserSeq(user.getUserSeq())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다. USER_SEQ=" + user.getUserSeq()));
         requestDto.updateCaller(caller);
 
         Long clientSeq = requestDto.getClientSeq();

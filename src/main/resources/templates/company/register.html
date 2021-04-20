@@ -115,6 +115,8 @@
                  */
                 $('#businessNo').blur(function () {
                     const businessNo = $('#businessNo').val();
+                    if(businessNo.length < 12) return;
+
                     $.ajax({
                         url: "/company/find/" + businessNo,
                         type: "GET",

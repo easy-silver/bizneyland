@@ -40,7 +40,8 @@
                                 </label>
                                 <input type="text" class="form-control" th:field="*{businessNo}"
                                        placeholder="" maxlength="12" aria-describedby="businessNoHelp" required>
-                                <small id="businessNoHelp" class="form-text text-muted" th:errors="*{businessNo}"/>
+                                <small class="text-danger" id="existMessage"></small>
+                                <small id="businessNoHelp" class="text-danger form-text text-muted" th:errors="*{businessNo}"/>
                             </div>
                             <div class="form-group">
                                 <label th:for="name">회사명
@@ -48,7 +49,7 @@
                                 </label>
                                 <input type="text" class="form-control" th:field="*{name}"
                                        placeholder="" value="비지니어스" aria-describedby="nameHelp" required>
-                                <small id="nameHelp" class="form-text text-muted" th:errors="*{name}"/>
+                                <small id="nameHelp" class="text-danger form-text text-muted" th:errors="*{name}"/>
                             </div>
                             <div class="form-group">
                                 <label th:for="address">주소
@@ -56,7 +57,7 @@
                                 </label>
                                 <input type="text" class="form-control" th:field="*{address}"
                                        placeholder="" required>
-                                <small id="addressHelp" class="form-text text-muted" th:errors="*{address}"/>
+                                <small id="addressHelp" class="text-danger form-text text-muted" th:errors="*{address}"/>
                             </div>
                             <div class="form-group">
                                 <label th:for="tel">전화번호
@@ -64,7 +65,7 @@
                                 </label>
                                 <input type="text" class="form-control" th:field="*{tel}"
                                        placeholder="" required>
-                                <small id="telHelp" class="form-text text-muted" th:errors="*{tel}"/>
+                                <small id="telHelp" class="text-danger form-text text-muted" th:errors="*{tel}"/>
                             </div>
 
                             <!-- TODO : 파일 처리 추후 진행
@@ -108,9 +109,35 @@
                         return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
                     })
                 });
-            });
 
-            // TODO : 비동기로 중복되는 사업자 번호 존재하는지 검색해야 함
+                /**
+                 * 사업자 번호 블러 이벤트
+                 */
+                $('#businessNo').blur(function () {
+                    const businessNo = $('#businessNo').val();
+                    $.ajax({
+                        url: "/company/find/" + businessNo,
+                        type: "GET",
+                        dataType: "json"
+
+                    }).done(function (response) {
+                        console.log(response);
+                        const isExist = Boolean(response.isExist);
+
+                        if (isExist) {
+                            $('#existMessage').text('이미 가입된 회사입니다.');
+                            $('.btn-primary').attr('disabled', true);
+                        } else {
+                            $('.btn-primary').attr('disabled', false);
+                            $('#existMessage').text('');
+                        }
+
+                    }).fail(function (error) {
+                        alert('error!!!');
+                        console.log(error);
+                    });
+                });
+            });
         </script>
     </body>
 </html>

@@ -72,4 +72,21 @@ public class CompanyRepositoryTest {
                 .orElseThrow(() -> new IllegalArgumentException("해당 회사가 존재하지 않습니다."));
     }
 
+    @Test
+    public void 사업자번호로_조회() {
+        //given
+        Company company = repository.save(Company.builder()
+                .name("테스트")
+                .businessNo("123-45-78900")
+                .build());
+
+        //when
+        Company findCompany = repository.findByBusinessNo(company.getBusinessNo());
+        //Company findCompany = repository.findByBusinessNo("123");
+
+        //then
+        assertThat(company).isEqualTo(findCompany);
+        //assertThat(findCompany).isNull();
+    }
+
 }

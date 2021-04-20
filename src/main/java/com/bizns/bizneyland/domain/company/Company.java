@@ -19,7 +19,7 @@ public class Company extends BaseTimeEntity {
     private Long id;
 
     // 사업자 번호
-    @Column(nullable = false, length = 12)
+    @Column(unique = true, nullable = false, length = 12)
     private String businessNo;
 
     // 회사명

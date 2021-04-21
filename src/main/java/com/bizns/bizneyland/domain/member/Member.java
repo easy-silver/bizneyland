@@ -26,6 +26,10 @@ public class Member extends BaseTimeEntity {
     @Column(nullable = false)
     private String name;
 
+    // 사용자 번호
+    @Column(nullable = false)
+    private Long userSeq;
+
     // 닉네임
     @Column
     private String nickname;
@@ -61,9 +65,6 @@ public class Member extends BaseTimeEntity {
     // 프로필 사진
     @Column
     private Long profileFileSeq;
-
-    @Column(nullable = false)
-    private Long userSeq;
 
     // 대표자 여부
     @Column

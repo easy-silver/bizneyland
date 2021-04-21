@@ -20,6 +20,7 @@ public class MemberResponseDto {
     private Long profileFileSeq;
     private Character ceoYn;
     private String joinDt;
+    private CompanyResponseDto company;
 
     public MemberResponseDto(Member entity) {
         this.id = entity.getId();
@@ -35,5 +36,6 @@ public class MemberResponseDto {
         this.profileFileSeq = entity.getProfileFileSeq();
         this.ceoYn = entity.getCeoYn();
         this.joinDt = FormatUtil.localDateTimeToYmd(entity.getCreatedDate());
+        this.company = new CompanyResponseDto(entity.getCompany());
     }
 }

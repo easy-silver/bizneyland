@@ -6,9 +6,10 @@
 
     <div layout:fragment="content">
         <div class="container-fluid">
+
+            <!-- 회원 상세 정보 -->
             <div class="card shadow mb-4">
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">회원 정보</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
@@ -17,11 +18,10 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                              aria-labelledby="dropdownMenuLink2">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-header">회원 관리</div>
+                            <a class="dropdown-item" href="#">회원 수정</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item text-danger" href="#">회원 삭제</a>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,6 @@
             </div>
             <!-- 첫 번째 카드 종료 -->
 
-            <!-- 소속 회사 정보
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">소속 회사 정보</h6>
@@ -85,27 +84,23 @@
                         </tr>
                         <tr>
                             <th>회사명</th>
-                            <td></td>
+                            <td th:text="${member.company.name}"/>
                         </tr>
                         <tr>
                             <th>대표자</th>
-                            <td></td>
+                            <td/>
                         </tr>
                         <tr>
                             <th>주소</th>
-                            <td></td>
+                            <td th:text="${member.company.address}" />
                         </tr>
                         <tr>
                             <th>전화번호</th>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th>소속 회원 수</th>
-                            <td></td>
+                            <td th:text="${member.company.tel}" />
                         </tr>
                     </table>
                 </div>
-            </div>-->
+            </div>
 
         </div>
     </div>

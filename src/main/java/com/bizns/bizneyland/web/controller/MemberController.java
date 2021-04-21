@@ -33,7 +33,7 @@ public class MemberController {
      * */
     @GetMapping("detail/{memberSeq}")
     public String detail(@PathVariable Long memberSeq, Model model) {
-        MemberResponseDto member = service.findById(memberSeq);
+        MemberResponseDto member = service.findOne(memberSeq);
         model.addAttribute("member", member);
 
         return "member/detail";
@@ -75,6 +75,6 @@ public class MemberController {
     public void mypage(@LoginUser SessionUser user, Model model) {
         MemberResponseDto member = service.findByUserSeq(user.getUserSeq());
 
-        model.addAttribute("member", service.findById(member.getId()));
+        model.addAttribute("member", service.findOne(member.getId()));
     }
 }

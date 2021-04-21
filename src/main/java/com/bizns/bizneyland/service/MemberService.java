@@ -22,22 +22,24 @@ public class MemberService {
     private final CompanyRepository companyRepository;
 
     /**
-     * 전체 회원 조회
+     * 전체 회원 목록
      * @return 전체 회원 리스트
      */
     public List<MemberResponseDto> findAllDesc() {
-        return repository.findAllDesc()
+        return repository.findAllWithCompany()
                 .stream()
+                // 회원번호 0보다 큰 데이터만 변환
+                .filter((m) -> m.getId() > 0)
                 .map(MemberResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     /**
-     * 회원 단건 조회(PK)
+     * 회원 상세
      * @return 단일 회원
      */
-    public MemberResponseDto findById(Long id) {
-        Member entity = repository.findById(id)
+    public MemberResponseDto findOne(Long id) {
+        Member entity = repository.findOneWithCompany(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id=" + id));
 
         return new MemberResponseDto(entity);

@@ -36,8 +36,7 @@
                             <tbody>
                                 <tr th:each="member : ${members}">
                                     <td class="text-center" th:text="${member.id}"/>
-                                    <!--<td th:text="${member.company?.name}"/>-->
-                                    <td></td>
+                                    <td th:text="${member.company.name}"/>
                                     <td>
                                         <a th:text="${member.name}" th:href="@{detail/{seq}(seq=${member.id})}"/>
                                     </td>

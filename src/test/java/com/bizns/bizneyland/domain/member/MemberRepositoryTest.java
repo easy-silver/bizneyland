@@ -108,4 +108,23 @@ public class MemberRepositoryTest {
         assertThat(member.getCreatedDate()).isAfter(now);
         assertThat(member.getModifiedDate()).isAfter(now);
     }
+
+    @Test
+    public void 회사정보_함께_조회() {
+        //given
+        Company company = createCompany();
+        Member member = repository.save(Member.builder()
+                .userSeq(9L)
+                .name("테스트")
+                .company(company)
+                .build());
+
+        //when
+        Member findMember = repository.findOneWithCompany(member.getId())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원"));
+
+        //then
+        assertThat(findMember.getCompany()).isEqualTo(company);
+        assertThat(findMember.getCompany().getName()).isEqualTo("메디치");
+    }
 }

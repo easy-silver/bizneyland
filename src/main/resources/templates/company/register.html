@@ -26,20 +26,13 @@
                         </div>
 
                         <form class="user" name="companyForm" method="post" action="/company/register" th:object="${companyRequestDto}">
-                        <!-- Sample.
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                            </div>
-                        -->
                             <!-- 회사 정보 -->
                             <div class="form-group">
                                 <label th:for="businessNo">사업자 번호
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" class="form-control" th:field="*{businessNo}"
-                                       placeholder="" maxlength="12" aria-describedby="businessNoHelp" required>
+                                       maxlength="12" aria-describedby="businessNoHelp" required>
                                 <small class="text-danger" id="existMessage"></small>
                                 <small id="businessNoHelp" class="text-danger form-text text-muted" th:errors="*{businessNo}"/>
                             </div>
@@ -48,7 +41,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" class="form-control" th:field="*{name}"
-                                       placeholder="" value="비지니어스" aria-describedby="nameHelp" required>
+                                       maxlength="200" value="비지니어스" aria-describedby="nameHelp" required>
                                 <small id="nameHelp" class="text-danger form-text text-muted" th:errors="*{name}"/>
                             </div>
                             <div class="form-group">
@@ -56,7 +49,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" class="form-control" th:field="*{address}"
-                                       placeholder="" required>
+                                       maxlength="200" required>
                                 <small id="addressHelp" class="text-danger form-text text-muted" th:errors="*{address}"/>
                             </div>
                             <div class="form-group">
@@ -64,7 +57,7 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" class="form-control" th:field="*{tel}"
-                                       placeholder="" required>
+                                       placeholder="지역번호 포함 하이픈(-) 없이 입력" maxlength="15" required>
                                 <small id="telHelp" class="text-danger form-text text-muted" th:errors="*{tel}"/>
                             </div>
 
@@ -86,6 +79,7 @@
             </div>
         </div>
 
+        <!-- TODO : Jquery 의존하지 않을 방법 생각해보기 -->
         <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
         <script type="text/javascript">
             $(document).ready(function () {

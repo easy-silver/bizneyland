@@ -21,7 +21,8 @@
                             <div class="dropdown-header">회원 관리</div>
                             <a class="dropdown-item" href="#">회원 수정</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" th:href="@{/member/delete/{id}(id=${member.id})}">회원 삭제</a>
+                            <a class="dropdown-item text-danger"
+                               th:href="|javascript:deleteMember('${member.id}')|">회원 삭제</a>
                         </div>
                     </div>
                 </div>
@@ -101,7 +102,13 @@
                     </table>
                 </div>
             </div>
-
         </div>
+        <script>
+            /** 회원 삭제 확인 이벤트 */
+            const deleteMember = function (memberId) {
+                if (confirm('정말 삭제하시겠습니까?'))
+                    window.location.href = '/member/delete/' + memberId;
+            };
+        </script>
     </div>
 </html>

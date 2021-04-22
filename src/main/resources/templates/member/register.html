@@ -26,52 +26,42 @@
                             <h1 class="h4 text-gray-900 mb-4">회원 가입 양식</h1>
                         </div>
 
-                        <form class="user" method="post" action="register">
-                            <div class="form-group">
-                                <label for="ceoYn">대표 여부</label>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="ceoYn" name="ceoYn" value="Y">
-                                    <label class="form-check-label" for="ceoYn">대표자입니다</label>
-                                </div>
-                            </div>
+                        <form class="user" method="post" action="register" th:object="${memberRequestDto}">
+                            <input type="hidden" th:field="*{companySeq}">
                             <div class="form-group row">
-                                <div class="col">
-                                    <label for="companyId">회사 일련번호
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="form-control" id="companyId" name="companyId" required>
-                                </div>
                                 <div class="col">
                                     <label>회사명</label>
-                                    <input type="text" class="form-control" readonly>
+                                    <input type="text" class="form-control" th:field="*{companyName}" readonly>
+                                </div>
+                                <div class="col">
+                                    <label for="ceoYn">대표 여부</label>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="ceoYn" name="ceoYn" value="Y">
+                                        <label class="form-check-label" for="ceoYn">대표자입니다</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col">
-                                    <label for="nickname">이름
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <label for="nickname">이름 <span class="text-danger align-middle">*</span></label>
+                                    <input type="text" class="form-control" id="name" name="name" required maxlength="100">
                                 </div>
                                 <div class="col">
-                                    <label for="nickname">닉네임
-                                        <span class="text-danger">*</span>
+                                    <label for="nickname">닉네임 <span class="text-danger align-middle">*</span>
                                     </label>
-                                    <input type="text" class="form-control" id="nickname" name="nickname" required>
+                                    <input type="text" class="form-control" id="nickname" name="nickname" required
+                                           maxlength="200" placeholder="2~10자리">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="birth">생년월일
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" class="form-control" id="birth" name="birth" required placeholder="6자리로 입력(ex.900114)" maxlength="8">
+                                    <label for="birth">생년월일 <span class="text-danger align-middle">*</span></label>
+                                    <input type="text" class="form-control" id="birth" name="birth" required
+                                           placeholder="8자리로 입력 (ex. 19900114)" maxlength="8">
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="gender">성별
-                                        <span class="text-danger">*</span>
-                                    </label>
+                                    <label for="gender">성별 <span class="text-danger align-middle">*</span></label>
                                     <select class="custom-select" id="gender" name="gender" required>
                                         <option value="">선택</option>
                                         <option value="M">남성</option>
@@ -80,26 +70,22 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="mobile">휴대폰 번호
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input type="text" class="form-control" id="mobile" name="mobile" maxlength="11" required>
+                                <label for="email">이메일 <span class="text-danger align-middle">*</span></label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile">휴대폰 번호 <span class="text-danger align-middle">*</span></label>
+                                <input type="text" class="form-control" id="mobile" name="mobile" required
+                                       maxlength="13" placeholder="하이픈(-) 없이 입력">
                             </div>
                             <div class="form-group">
                                 <label for="fax">팩스 번호</label>
-                                <input type="text" class="form-control" id="fax" name="fax">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">이메일
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" required>
+                                <input type="text" class="form-control" id="fax" name="fax"
+                                       maxlength="15" placeholder="하이픈(-) 없이 입력">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <label for="grade">직급
-                                        <span class="text-danger">*</span>
-                                    </label>
+                                    <label for="grade">직급 <span class="text-danger align-middle">*</span></label>
                                     <select class="custom-select" id="grade" name="grade" required>
                                         <option value="">선택</option>
                                         <option value="사원">사원</option>
@@ -111,9 +97,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="workingArea">활동 지역
-                                        <span class="text-danger">*</span>
-                                    </label>
+                                    <label for="workingArea">활동 지역 <span class="text-danger align-middle">*</span></label>
                                     <select class="custom-select" id="workingArea" name="workingArea" required>
                                         <option value="">선택</option>
                                         <option value="서울">서울</option>
@@ -127,14 +111,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <!-- TODO : 프로필 사진 파일 처리 -->
-                            <!--<div class="form-group">
-                                <label for="profileFile">프로필 사진</label>
-                                <div class="custom-file mb-3">
-                                    <input type="file" class="custom-file-input" id="profileFile">
-                                    <label class="custom-file-label" for="profileFile">Choose file...</label>
-                                </div>
-                            </div>-->
                             <button type="submit" class="btn btn-primary btn-user btn-block">등록</button>
                         </form>
                     </div>

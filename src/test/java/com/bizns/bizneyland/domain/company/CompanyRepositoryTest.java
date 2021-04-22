@@ -1,7 +1,6 @@
 package com.bizns.bizneyland.domain.company;
 
 import org.assertj.core.api.Assertions;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,32 +20,33 @@ public class CompanyRepositoryTest {
 
     @Autowired CompanyRepository repository;
 
+    private Company createCompany() {
+        return repository.save(Company
+                .builder()
+                .name("테스트")
+                .businessNo("123-45-78900")
+                .build());
+    }
+
     @Test
     public void 회사저장_불러오기() {
         //given
-        String name = "애플";
-
-        repository.save(Company.builder()
-                .businessNo("123-45-67890")
-                .name(name)
-                .build());
+        Company company = createCompany();
 
         //when
         List<Company> companies = repository.findAll();
 
         //then
-        Company company = companies.get(0);
-        Assertions.assertThat(company.getName()).isEqualTo(name);
+        Company findCompany = companies.get(0);
+        Assertions.assertThat(findCompany).isEqualTo(company);
     }
 
     @Test
     public void BaseTimeEntity_등록() {
         //given
         LocalDateTime now = LocalDateTime.of(2021, 3, 22, 0,0,0);
-        repository.save(Company.builder()
-                .businessNo("123-45-67890")
-                .name("애플")
-                .build());
+        createCompany();
+
         //when
         List<Company> companies = repository.findAll();
 
@@ -62,10 +62,8 @@ public class CompanyRepositoryTest {
     @Test(expected = IllegalArgumentException.class)
     public void 회사_삭제() {
         //given
-        Company company = repository.save(Company.builder()
-                .name("테스트")
-                .businessNo("123-456-789")
-                .build());
+        Company company = createCompany();
+
         //when
         repository.deleteById(company.getId());
         repository.findById(company.getId())
@@ -74,11 +72,7 @@ public class CompanyRepositoryTest {
 
     @Test
     public void 사업자번호로_조회() {
-        //given
-        Company company = repository.save(Company.builder()
-                .name("테스트")
-                .businessNo("123-45-78900")
-                .build());
+        Company company = createCompany();
 
         //when
         Company findCompany = repository.findByBusinessNo(company.getBusinessNo());
@@ -87,6 +81,25 @@ public class CompanyRepositoryTest {
         //then
         assertThat(company).isEqualTo(findCompany);
         //assertThat(findCompany).isNull();
+    }
+
+    @Test
+    public void 회사번호_사업자번호로_조회() {
+        //given
+        Company company = createCompany();
+        Long seq = company.getId();
+        String businessNo = company.getBusinessNo().substring(0, 3);
+
+        System.out.println("seq = " + seq);
+        System.out.println("businessNo = " + businessNo);
+
+        //when
+        boolean isExist = repository.checkValidCompany(seq, businessNo);
+
+        System.out.println("isExist = " + isExist);
+
+        //then
+        assertThat(isExist).isTrue();
     }
 
 }

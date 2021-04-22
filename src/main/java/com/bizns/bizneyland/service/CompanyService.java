@@ -86,4 +86,14 @@ public class CompanyService {
         Company entity = repository.findByBusinessNo(businessNo);
         return entity != null;
     }
+
+    /**
+     * 회원가입 시 유효한 회사인지 확인
+     * @param 회사번호
+     * @param 사업자번호 앞 3자리
+     * @return 존재 여부
+     */
+    public boolean isValidCompany(Long id, String businessNo) {
+        return repository.checkValidCompany(id, businessNo);
+    }
 }

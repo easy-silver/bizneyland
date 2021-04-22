@@ -4,6 +4,7 @@ import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
+import com.bizns.bizneyland.web.dto.MemberCreateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -51,10 +52,10 @@ public class MemberService {
      * @return 회원번호
      */
     @Transactional
-    public Long save(MemberRequestDto requestDto) {
+    public Long save(MemberCreateRequestDto requestDto) {
         // 회사 조회
-        Company company = companyRepository.findById(requestDto.getCompanyId())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회사입니다. 회사번호: " + requestDto.getCompanyId()));
+        Company company = companyRepository.findById(requestDto.getCompanySeq())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회사입니다. 회사번호: " + requestDto.getCompanySeq()));
         // DTO > Entity 변환
         Member member = requestDto.toEntity();
         // 연관 엔티티(회사) 등록

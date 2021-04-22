@@ -49,7 +49,7 @@ public class CompanyController {
     }
 
     /**
-     * 회사 등록 양식
+     * 회사 등록 화면
      * */
     @GetMapping("register")
     public void register(Model model) {
@@ -70,7 +70,7 @@ public class CompanyController {
     }
 
     /**
-     * 회사 등록
+     * 회사 삭제
      * */
     @GetMapping("delete/{id}")
     public String delete(@PathVariable Long id) {

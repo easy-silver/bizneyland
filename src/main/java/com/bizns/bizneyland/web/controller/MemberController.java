@@ -2,16 +2,18 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
+import com.bizns.bizneyland.domain.user.Role;
+import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
-import com.bizns.bizneyland.web.dto.MemberRequestDto;
-import com.bizns.bizneyland.web.dto.MemberResponseDto;
+import com.bizns.bizneyland.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RequestMapping("/member")
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
     private final MemberService service;
+    private final CompanyService companyService;
 
     /**
      * 회원 목록
@@ -40,21 +43,63 @@ public class MemberController {
     }
 
     /**
+     * 가입 코드 확인 화면
+     */
+    @GetMapping("checkCode")
+    public String checkCode() {
+        return "member/checkCode";
+    }
+
+    /**
+     * 가입 코드 확인
+     */
+    @PostMapping("checkValid")
+    @ResponseBody
+    public Map<String, Object> isValidCompany(@RequestBody Map<String, String> paramMap) {
+
+        String comSeq = paramMap.get("companySeq");
+        String businessNo = paramMap.get("businessNo");
+
+        Map<String, Object> returnMap = new HashMap<>();
+        returnMap.put("isValid", companyService.isValidCompany(Long.parseLong(comSeq), businessNo));
+
+        return returnMap;
+    }
+
+    /**
+     * 가입 코드 확인
+     */
+    @PostMapping("checkCode")
+    public String checkCode(Model model) {
+
+        return "redirect:/member/register";
+    }
+
+    /**
      * 회원 등록 화면
      * */
     @GetMapping("register")
-    public void memberForm() {}
+    public void memberForm(MemberCreateRequestDto requestDto, Model model) {
+        CompanyResponseDto company = companyService.findById(requestDto.getCompanySeq());
+        requestDto.setCompanyName(company.getName());
+
+        model.addAttribute("memberRequestDto", requestDto);
+    }
 
     /**
      * 회원 등록
      * */
     @PostMapping("register")
-    public String registerMember(MemberRequestDto requestDto, @LoginUser SessionUser user) {
+    public String registerMember(@Valid MemberCreateRequestDto requestDto, @LoginUser SessionUser user) {
 
         requestDto.setUserSeq(user.getUserSeq());
         service.save(requestDto);
 
-        return "redirect:/member/list";
+        if (user.getRole() == Role.ADMIN) {
+            return "redirect:/member/list";
+        }
+
+        return "redirect:/member/mypage";
     }
 
     /**

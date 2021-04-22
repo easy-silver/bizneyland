@@ -1,8 +1,6 @@
 package com.bizns.bizneyland.domain.member;
 
 import com.bizns.bizneyland.domain.company.Company;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ public class MemberRepositoryTest {
     public Company createCompany() {
         Company company = Company.builder()
                 .businessNo("123-45-67890")
-                .name("메디치")
+                .name("test company")
                 .build();
 
         em.persist(company);
@@ -43,14 +41,8 @@ public class MemberRepositoryTest {
     public void 회원저장_불러오기() {
         //given
         String name = "테스터";
-
         Company company = createCompany();
-
-        repository.save(Member.builder()
-                .userSeq(1L)
-                .company(company)
-                .name(name)
-                .build());
+        createMember(999L, name, company);
 
         //when
         List<Member> members = repository.findAll();
@@ -61,22 +53,21 @@ public class MemberRepositoryTest {
         assertThat(member.getCompany().getId()).isEqualTo(company.getId());
     }
 
+    private Member createMember(Long userSeq, String name, Company company) {
+        return repository.save(Member.builder()
+                .userSeq(userSeq)
+                .name(name)
+                .company(company)
+                .build());
+    }
+
     @Test
     public void 회사번호로_멤버찾기() {
         //given
         Company company = createCompany();
 
-        repository.save(Member.builder()
-                .userSeq(11L)
-                .company(company)
-                .name("tester1")
-                .build());
-
-        repository.save(Member.builder()
-                .userSeq(12L)
-                .company(company)
-                .name("tester2")
-                .build());
+        createMember(11L, "tester1", company);
+        createMember(12L, "tester2", company);
 
         //when
         List<Member> findMembers = repository.findByCompanySeq(company.getId());
@@ -91,12 +82,8 @@ public class MemberRepositoryTest {
     public void BaseTimeEntity_등록() {
         //given
         LocalDateTime now = LocalDateTime.of(2021, 3, 22, 0,0,0);
-        repository.save(Member.builder()
-                .userSeq(1L)
-                .company(createCompany())
-                .name("이지은")
-                .nickname("티모")
-                .build());
+        createMember(999L, "이지은", createCompany());
+
         //when
         List<Member> members = repository.findAll();
 
@@ -113,11 +100,7 @@ public class MemberRepositoryTest {
     public void 회사정보_함께_조회() {
         //given
         Company company = createCompany();
-        Member member = repository.save(Member.builder()
-                .userSeq(9L)
-                .name("테스트")
-                .company(company)
-                .build());
+        Member member = createMember(999L, "테스터", company);
 
         //when
         Member findMember = repository.findOneWithCompany(member.getId())
@@ -125,6 +108,20 @@ public class MemberRepositoryTest {
 
         //then
         assertThat(findMember.getCompany()).isEqualTo(company);
-        assertThat(findMember.getCompany().getName()).isEqualTo("메디치");
+        assertThat(findMember.getCompany().getName()).isEqualTo("test company");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void 회원_삭제() {
+        //given
+        Member member = createMember(999L, "테스터", createCompany());
+        Long id = member.getId();
+
+        //when
+        repository.deleteById(id);
+
+        //then
+        Member findMember = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원"));
     }
 }

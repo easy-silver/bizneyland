@@ -4,9 +4,8 @@ import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
-import com.bizns.bizneyland.web.dto.MemberRequestDto;
+import com.bizns.bizneyland.web.dto.MemberCreateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,9 +62,9 @@ public class MemberApiControllerTest {
 
         Long companyId = createCompany().getId();
 
-        MemberRequestDto requestDto = MemberRequestDto.builder()
+        MemberCreateRequestDto requestDto = MemberCreateRequestDto.builder()
                 .userSeq(1L)
-                .companyId(companyId)
+                .companySeq(companyId)
                 .name(name)
                 .nickname(nickname)
                 .build();
@@ -106,7 +105,7 @@ public class MemberApiControllerTest {
         Long updateId = savedMember.getId();
         String expectedNickname = "모티";
 
-        MemberRequestDto requestDto = MemberRequestDto.builder()
+        MemberCreateRequestDto requestDto = MemberCreateRequestDto.builder()
                 .nickname(expectedNickname)
                 .build();
 

@@ -27,7 +27,7 @@ public class Member extends BaseTimeEntity {
     private String name;
 
     // 사용자 번호
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Long userSeq;
 
     // 닉네임

@@ -7,92 +7,104 @@
     <div layout:fragment="content">
 
         <div class="container-fluid">
-            <h1 class="h3 mb-1 text-gray-800 mb-4">My Page</h1>
+            <div class="card shadow mb-4">
+                <div class="card-header">
+                    <h6 class="m-0 font-weight-bold text-primary">내 프로필</h6>
+                </div>
 
-            <!-- 부연 설명이 필요할 경우 사용하기 -->
-            <!--
-            <p class="mb-4">Bootstrap's default utility classes can be found on the official <a
-                    href="https://getbootstrap.com/docs">Bootstrap Documentation</a> page. The custom utilities
-                below were created to extend this theme past the default utility classes built into Bootstrap's
-                framework.</p>
-            -->
-
-            <div class="text-center">
-                <div class="card shadow mb-4">
-                    <div class="card-header">
-                        <h6 class="m-0 font-weight-bold text-primary">프로필</h6>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col text-center">
-                                <img class="rounded-circle" th:src="${session.user.picture}">
-                            </div>
-                            <div class="col">
-                                <table class="table">
-                                    <tr>
-                                        <th>이름</th>
-                                        <td th:text="${member.name}"/>
-                                    </tr>
-                                    <tr>
-                                        <th>소속</th>
-                                        <!--<td th:text="${member.company.name}"></td>-->
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>직업</th>
-                                        <td>개발자</td>
-                                    </tr>
-                                    <tr>
-                                        <th>지역</th>
-                                        <td th:text="${member.workingArea}">인천 남동구</td>
-                                    </tr>
-                                </table>
-                            </div>
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col text-center">
+                            <img class="rounded-circle" th:src="${session.user.picture}">
+                        </div>
+                        <div class="col">
+                            <table class="table">
+                                <tr>
+                                    <th>이름</th>
+                                    <td th:text="${member.name}"/>
+                                </tr>
+                                <tr>
+                                    <th>닉네임</th>
+                                    <td th:text="${member.nickname}"/>
+                                </tr>
+                                <tr>
+                                    <th>생년월일</th>
+                                    <td th:text="${member.birth}"/>
+                                </tr>
+                                <tr>
+                                    <th>성별</th>
+                                    <td th:text="${member.gender} == 'F' ? '여성' : '남성'"/>
+                                </tr>
+                                <tr>
+                                    <th>직급 및 직책</th>
+                                    <td th:text="${member.grade}"/>
+                                </tr>
+                                <tr>
+                                    <th>활동 지역</th>
+                                    <td th:text="${member.workingArea}"/>
+                                </tr>
+                                <tr>
+                                    <th>가입일</th>
+                                    <td th:text="${member.joinDt}"/>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card shadow mb-2">
-                                <div class="card-header">
-                                    <h6 class="m-0 font-weight-bold text-primary">
-                                        등급
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    1등급
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card shadow mb-2">
-                                <div class="card-header">
-                                    <h6 class="m-0 font-weight-bold text-primary">
-                                        레벨
-                                    </h6>
-                                </div>
-                                <div class="card-body">
-                                    LV. 827
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-6">
+                <div class="col">
                     <div class="card shadow mb-2">
                         <div class="card-header">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                                행동력
-                            </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">연락처</h6>
                         </div>
                         <div class="card-body">
-                            ???
+                            <table class="table">
+                                <tr>
+                                    <th>가입 계정</th>
+                                    <td th:text="${session.user.email}"/>
+                                </tr>
+                                <tr>
+                                    <th>이메일</th>
+                                    <td th:text="${member.email}"/>
+                                </tr>
+                                <tr>
+                                    <th>휴대폰 번호</th>
+                                    <td th:text="${member.mobile}"/>
+                                </tr>
+                                <tr>
+                                    <th>팩스 번호</th>
+                                    <td th:text="${member.fax}"/>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card shadow mb-2">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">소속 회사</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <th>회사명</th>
+                                    <td th:text="${member.company.name}" />
+                                </tr>
+                                <tr>
+                                    <th>대표자</th>
+                                    <td/>
+                                </tr>
+                                <tr>
+                                    <th>주소</th>
+                                    <td th:text="${member.company.address}"/>
+                                </tr>
+                                <tr>
+                                    <th>전화번호</th>
+                                    <td th:text="${member.company.tel}"/>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -100,5 +112,6 @@
 
         </div>
         <!-- /.container-fluid -->
+
     </div>
 </html>

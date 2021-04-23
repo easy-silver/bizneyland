@@ -35,7 +35,7 @@
                             <tbody>
                                 <tr th:each="client : ${clients}">
                                     <td class="text-center" th:text="${client.clientSeq}"></td>
-                                    <td class="text-center" th:text="${client.type == '{P}' ? '개인' : '법인'}"></td>
+                                    <td class="text-center" th:text="${client.type} == 'P' ? '개인' : '법인'"></td>
                                     <td>
                                         <a th:text="${client.companyName}" th:href="@{detail/{clientSeq}(clientSeq=${client.clientSeq})}"/>
                                     </td>

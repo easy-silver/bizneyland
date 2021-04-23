@@ -5,12 +5,7 @@
       layout:decorator="layout/default">
 
     <div layout:fragment="content">
-        <div class="container-fluid">
-
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">회사 상세 정보</h1>
-            </div>
-
+        <div class="container">
             <div class="card shadow mb-4">
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -23,9 +18,9 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                              aria-labelledby="dropdownMenuLink2">
                             <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" th:href="@{/company/update/{id}(id=${company.id})}">회사 수정</a>
+                            <a class="dropdown-item" th:href="@{/company/update/{id}(id=${company.id})}">수정</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" th:href="@{/company/delete/{id}(id=${company.id})}">회사 삭제</a>
+                            <a class="dropdown-item text-danger" th:href="|javascript:deleteCompany('${company.id}')|">삭제</a>
                         </div>
                     </div>
                 </div>
@@ -88,7 +83,13 @@
                     </table>
                 </div>
             </div>
-
         </div>
+        <script>
+            /** 삭제 확인 이벤트 */
+            const deleteCompany = function (id) {
+                if (confirm('정말 삭제하시겠습니까?'))
+                    window.location.href = '/company/delete/' + id;
+            };
+        </script>
     </div>
 </html>

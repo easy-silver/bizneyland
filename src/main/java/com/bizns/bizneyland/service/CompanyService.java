@@ -5,6 +5,7 @@ import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.util.FormatUtil;
 import com.bizns.bizneyland.web.dto.CompanyRequestDto;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
+import com.bizns.bizneyland.web.dto.CompanyUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,7 +61,7 @@ public class CompanyService {
      * @return
      */
     @Transactional
-    public Long update(Long id, CompanyRequestDto requestDto) {
+    public Long update(Long id, CompanyUpdateRequestDto requestDto) {
         Company company = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다. id=" + id));
         company.update(requestDto.getAddress(), requestDto.getTel(), requestDto.getLogoFileSeq());

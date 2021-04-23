@@ -4,6 +4,7 @@ import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.web.dto.CompanyRequestDto;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
+import com.bizns.bizneyland.web.dto.CompanyUpdateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -67,6 +68,28 @@ public class CompanyController {
         service.save(requestDto);
 
         return "redirect:/company/list";
+    }
+
+    /**
+     * 회사 수정 화면
+     */
+    @GetMapping("update/{companySeq}")
+    public String update(@PathVariable Long companySeq, Model model) {
+
+        CompanyResponseDto company = service.findById(companySeq);
+        model.addAttribute("company", company);
+        model.addAttribute("companyUpdateRequestDto", company);
+
+        return "company/update";
+    }
+
+    @PostMapping("update")
+    public String update(@Valid CompanyUpdateRequestDto requestDto) {
+        service.update(requestDto.getId(), requestDto);
+
+        System.out.println("requestDto.id = " + requestDto.getId());
+        return "redirect:/company/list";
+
     }
 
     /**

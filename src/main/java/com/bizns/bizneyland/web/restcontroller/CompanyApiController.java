@@ -3,9 +3,9 @@ package com.bizns.bizneyland.web.restcontroller;
 import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.service.CompanyService;
-import com.bizns.bizneyland.web.dto.ClientResponseDto;
 import com.bizns.bizneyland.web.dto.CompanyRequestDto;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
+import com.bizns.bizneyland.web.dto.CompanyUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +25,7 @@ public class CompanyApiController {
     }
 
     @PutMapping("/company/{id}")
-    public Long update(@PathVariable Long id, @RequestBody CompanyRequestDto requestDto) {
+    public Long update(@PathVariable Long id, @RequestBody CompanyUpdateRequestDto requestDto) {
         return service.update(id, requestDto);
     }
 

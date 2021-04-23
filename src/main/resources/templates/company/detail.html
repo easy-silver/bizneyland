@@ -23,8 +23,7 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                              aria-labelledby="dropdownMenuLink2">
                             <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" th:href="@{/company/update/{id}(id=${company.id})}">회사 수정</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" th:href="@{/company/delete/{id}(id=${company.id})}">회사 삭제</a>
                         </div>

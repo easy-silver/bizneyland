@@ -90,16 +90,25 @@ public class CompanyRepositoryTest {
         Long seq = company.getId();
         String businessNo = company.getBusinessNo().substring(0, 3);
 
-        System.out.println("seq = " + seq);
-        System.out.println("businessNo = " + businessNo);
-
         //when
         boolean isExist = repository.checkValidCompany(seq, businessNo);
 
-        System.out.println("isExist = " + isExist);
-
         //then
         assertThat(isExist).isTrue();
+    }
+
+    @Test
+    public void 회사_수정() {
+        //given
+        Company company = createCompany();
+        String modifiedAddress = "제주도 제주시 제주도 가고싶다면";
+
+        //when
+        company.update(modifiedAddress, company.getTel(), company.getLogoFileSeq());
+
+        //then
+        Company modifiedCompany = repository.findById(company.getId()).get();
+        assertThat(modifiedCompany.getAddress()).isEqualTo(modifiedAddress);
     }
 
 }

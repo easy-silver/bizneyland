@@ -8,8 +8,7 @@ import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.service.ClientService;
 import com.bizns.bizneyland.service.TmService;
-import com.bizns.bizneyland.web.dto.ClientRequestDto;
-import com.bizns.bizneyland.web.dto.OwnerRequestDto;
+import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.TmRequestDto;
 import com.bizns.bizneyland.web.dto.TmResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -61,7 +60,7 @@ public class TmController {
      * TM 등록 - 업체 등록
      */
     @PostMapping("register/client")
-    public String registerClient(ClientRequestDto clientDto, RedirectAttributes redirectAttributes) {
+    public String registerClient(ClientCreateRequestDto clientDto, RedirectAttributes redirectAttributes) {
 
         Client client;
 

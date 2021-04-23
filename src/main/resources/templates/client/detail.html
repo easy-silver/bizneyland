@@ -17,11 +17,10 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                              aria-labelledby="dropdownMenuLink2">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-header">고객 관리</div>
+                            <a class="dropdown-item" th:href="@{/client/update/{seq}(seq=${client.clientSeq})}">수정</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" th:href="@{/client/delete/{seq}(seq=${client.clientSeq})}">고객 삭제</a>
+                            <a class="dropdown-item text-danger" th:href="@{/client/delete/{seq}(seq=${client.clientSeq})}">삭제</a>
                         </div>
                     </div>
                 </div>

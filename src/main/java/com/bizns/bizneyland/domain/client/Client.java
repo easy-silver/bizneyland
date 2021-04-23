@@ -2,7 +2,8 @@ package com.bizns.bizneyland.domain.client;
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
 import com.bizns.bizneyland.util.FormatUtil;
-import com.bizns.bizneyland.web.dto.ClientRequestDto;
+import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
+import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -59,7 +60,7 @@ public class Client extends BaseTimeEntity {
         this.keyItem = keyItem;
     }
 
-    public void update(ClientRequestDto dto) {
+    public void update(ClientUpdateRequestDto dto) {
         this.type = dto.getType();
         this.establishDate = FormatUtil.parseToDate(dto.getEstablishDate());
         this.sector = dto.getSector();

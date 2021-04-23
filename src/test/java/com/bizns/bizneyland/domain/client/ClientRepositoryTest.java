@@ -85,7 +85,11 @@ public class ClientRepositoryTest {
         repository.findById(client.getClientSeq())
                 .orElseThrow(() -> new IllegalArgumentException("해당 고객이 존재하지 않습니다."));
 
-        //then
+    }
+
+    @Test
+    public void 고객_수정() {
+
     }
 
 }

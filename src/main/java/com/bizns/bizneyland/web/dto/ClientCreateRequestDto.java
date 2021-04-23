@@ -8,12 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Getter @Setter
 @NoArgsConstructor
-public class ClientRequestDto {
+public class ClientCreateRequestDto {
 
     @NotEmpty(message = "회사명은 필수입니다.")
     private String companyName;
@@ -26,8 +24,8 @@ public class ClientRequestDto {
     private String keyItem;
 
     @Builder
-    public ClientRequestDto(String companyName, String contact, String owner, String address,
-                            Character type, String establishDate, String sector, String keyItem) {
+    public ClientCreateRequestDto(String companyName, String contact, String owner, String address,
+                                  Character type, String establishDate, String sector, String keyItem) {
         this.companyName = companyName;
         this.contact = contact;
         this.owner = owner;

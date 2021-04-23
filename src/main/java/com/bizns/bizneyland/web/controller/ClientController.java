@@ -2,8 +2,9 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.service.ClientService;
 import com.bizns.bizneyland.service.TmService;
-import com.bizns.bizneyland.web.dto.ClientRequestDto;
+import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.ClientResponseDto;
+import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
 import com.bizns.bizneyland.web.dto.TmResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -51,7 +53,7 @@ public class ClientController {
      * */
     @GetMapping("register")
     public String register(Model model) {
-        model.addAttribute("clientRequestDto", new ClientRequestDto());
+        model.addAttribute("clientRequestDto", new ClientCreateRequestDto());
         return "client/register";
     }
 
@@ -59,9 +61,30 @@ public class ClientController {
      * 고객 등록
      * */
     @PostMapping("register")
-    public String register(ClientRequestDto clientDto) {
+    public String register(ClientCreateRequestDto clientDto) {
 
         service.save(clientDto);
+
+        return "redirect:/client/list";
+    }
+
+    /**
+     * 고객 수정 화면
+     */
+    @GetMapping("update/{seq}")
+    public String update(@PathVariable Long seq, Model model) {
+        ClientResponseDto client = service.findById(seq);
+        model.addAttribute("client", client);
+
+        return "client/update";
+    }
+
+    /**
+     * 고객 수정
+     */
+    @PostMapping("update")
+    public String update(@Valid ClientUpdateRequestDto requestDto) {
+        service.update(requestDto.getClientSeq(), requestDto);
 
         return "redirect:/client/list";
     }

@@ -3,8 +3,9 @@ package com.bizns.bizneyland.service;
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.domain.client.ClientRepository;
 import com.bizns.bizneyland.util.FormatUtil;
-import com.bizns.bizneyland.web.dto.ClientRequestDto;
+import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.ClientResponseDto;
+import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +44,7 @@ public class ClientService {
      * 고객 등록
      * */
     @Transactional
-    public Client save(ClientRequestDto requestDto) {
+    public Client save(ClientCreateRequestDto requestDto) {
         // 연락처 하이픈 제거
         requestDto.setContact(FormatUtil.removeHyphen(requestDto.getContact()));
 
@@ -70,11 +71,24 @@ public class ClientService {
     /**
      * 이름으로 조회 후 수정
      */
-    public Client updateByName(String name, ClientRequestDto dto) {
+    public Client updateByName(String name, ClientCreateRequestDto dto) {
         Client entity = repository.findByCompanyName(name);
-        entity.update(dto);
+        //entity.update(dto);
 
         return entity;
+    }
+
+    /**
+     * 고객 정보 수정
+     * @return 고객번호
+     */
+    public Long update(Long seq, ClientUpdateRequestDto dto) {
+        Client client = repository.findById(seq)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 고객입니다. seq=" + seq));
+
+        client.update(dto);
+
+        return client.getClientSeq();
     }
 
 }

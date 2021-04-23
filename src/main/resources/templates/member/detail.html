@@ -19,10 +19,10 @@
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                              aria-labelledby="dropdownMenuLink2">
                             <div class="dropdown-header">회원 관리</div>
-                            <a class="dropdown-item" href="#">회원 수정</a>
+                            <a class="dropdown-item" th:href="@{/member/update/{id}(id=${member.id})}">수정</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger"
-                               th:href="|javascript:deleteMember('${member.id}')|">회원 삭제</a>
+                               th:href="|javascript:deleteMember('${member.id}')|">삭제</a>
                         </div>
                     </div>
                 </div>
@@ -104,10 +104,10 @@
             </div>
         </div>
         <script>
-            /** 회원 삭제 확인 이벤트 */
-            const deleteMember = function (memberId) {
+            /** 삭제 확인 이벤트 */
+            const deleteMember = function (id) {
                 if (confirm('정말 삭제하시겠습니까?'))
-                    window.location.href = '/member/delete/' + memberId;
+                    window.location.href = '/member/delete/' + id;
             };
         </script>
     </div>

@@ -73,21 +73,22 @@ public class CompanyController {
     /**
      * 회사 수정 화면
      */
-    @GetMapping("update/{companySeq}")
-    public String update(@PathVariable Long companySeq, Model model) {
+    @GetMapping("update/{id}")
+    public String update(@PathVariable Long id, Model model) {
 
-        CompanyResponseDto company = service.findById(companySeq);
-        model.addAttribute("company", company);
+        CompanyResponseDto company = service.findById(id);
         model.addAttribute("companyUpdateRequestDto", company);
 
         return "company/update";
     }
 
+    /**
+     * 회사 수정
+     */
     @PostMapping("update")
     public String update(@Valid CompanyUpdateRequestDto requestDto) {
         service.update(requestDto.getId(), requestDto);
 
-        System.out.println("requestDto.id = " + requestDto.getId());
         return "redirect:/company/list";
 
     }

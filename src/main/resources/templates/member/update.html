@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/default">
+
+    <div layout:fragment="content">
+        <div class="container">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">회원 정보 수정</h6>
+                </div>
+                <div class="card-body">
+                    <form action="/member/update" method="post" th:object="${member}">
+                        <input type="hidden" th:field="*{id}">
+                        <div class="form-group">
+                            <label th:for="name">이름</label>
+                            <input type="text" class="form-control" th:field="*{name}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="birth">생년월일</label>
+                            <input type="text" class="form-control" th:field="*{birth}" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="nickname">닉네임 <span class="text-danger align-middle">*</span>
+                            </label>
+                            <input type="text" class="form-control" th:field="*{nickname}" required
+                                   maxlength="200" placeholder="2~10자리">
+                        </div>
+                        <div class="form-group">
+                            <label th:for="gender">성별 <span class="text-danger align-middle">*</span></label>
+                            <select class="custom-select" th:field="*{gender}" required>
+                                <option value="">선택</option>
+                                <option value="M">남성</option>
+                                <option value="F">여성</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="email">이메일 <span class="text-danger align-middle">*</span></label>
+                            <input type="email" class="form-control" th:field="*{email}" placeholder="example@gmail.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label th:for="mobile">휴대폰 번호 <span class="text-danger align-middle">*</span></label>
+                            <input type="text" class="form-control" th:field="*{mobile}" required
+                                   maxlength="13" placeholder="하이픈(-) 없이 입력">
+                        </div>
+                        <div class="form-group">
+                            <label th:for="fax">팩스 번호</label>
+                            <input type="text" class="form-control" th:field="*{fax}"
+                                   maxlength="15" placeholder="하이픈(-) 없이 입력">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label th:for="grade">직급 <span class="text-danger align-middle">*</span></label>
+                                <select class="custom-select" th:field="*{grade}" required>
+                                    <option value="">선택</option>
+                                    <option value="사원">사원</option>
+                                    <option value="대리">대리</option>
+                                    <option value="과장">과장</option>
+                                    <option value="차장">차장</option>
+                                    <option value="부장">부장</option>
+                                    <option value="이사">이사</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label th:for="workingArea">활동 지역 <span class="text-danger align-middle">*</span></label>
+                                <select class="custom-select" th:field="*{workingArea}" required>
+                                    <option value="">선택</option>
+                                    <option value="서울">서울</option>
+                                    <option value="인천">인천</option>
+                                    <option value="경기도">경기도</option>
+                                    <option value="강원도">강원도</option>
+                                    <option value="충청도">충청도</option>
+                                    <option value="경상도">경상도</option>
+                                    <option value="전라도">전라도</option>
+                                    <option value="제주">제주</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="mt-5 mb-2 btn btn-primary btn-block">저장</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

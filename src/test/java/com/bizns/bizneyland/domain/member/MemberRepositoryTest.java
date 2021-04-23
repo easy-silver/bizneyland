@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.domain.member;
 
 import com.bizns.bizneyland.domain.company.Company;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,5 +124,22 @@ public class MemberRepositoryTest {
         //then
         Member findMember = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원"));
+    }
+
+    @Test
+    public void 회원_수정() {
+        //given
+        Member member = createMember(999L, "테스터", createCompany());
+        Member findMember = repository.findById(member.getId()).get();
+
+        //when
+        String modifiedName = "new Tester";
+        findMember.update(modifiedName, findMember.getBirth(), findMember.getGender(),
+                findMember.getMobile(), findMember.getGrade(), findMember.getWorkingArea(),
+                findMember.getEmail(), findMember.getFax(), findMember.getProfileFileSeq());
+
+        //then
+        Member modifiedMember = repository.findById(member.getId()).get();
+        assertThat(modifiedMember.getNickname()).isEqualTo(modifiedName);
     }
 }

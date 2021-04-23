@@ -5,7 +5,7 @@ import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.web.dto.MemberCreateRequestDto;
-import com.bizns.bizneyland.web.dto.MemberRequestDto;
+import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -70,7 +70,7 @@ public class MemberService {
      * @return 회원번호
      */
     @Transactional
-    public Long update(Long id, MemberRequestDto requestDto) {
+    public Long update(Long id, MemberUpdateRequestDto requestDto) {
         Member member = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id=" + id));
 

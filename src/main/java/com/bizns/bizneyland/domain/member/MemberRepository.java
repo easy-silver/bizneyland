@@ -24,5 +24,4 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("SELECT m FROM Member m join fetch m.company where m.id = :id")
     Optional<Member> findOneWithCompany(@Param("id") Long memberSeq);
 
-
 }

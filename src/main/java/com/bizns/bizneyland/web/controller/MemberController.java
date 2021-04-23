@@ -103,6 +103,27 @@ public class MemberController {
     }
 
     /**
+     * 회원 수정 화면
+     * @param id
+     */
+    @GetMapping("update/{id}")
+    public String update(@PathVariable Long id, Model model) {
+
+        MemberResponseDto member = service.findOne(id);
+        model.addAttribute("member", member);
+
+        return "member/update";
+    }
+
+    @PostMapping("update")
+    public String update(@Valid MemberUpdateRequestDto requestDto) {
+
+        service.update(requestDto.getId(), requestDto);
+
+        return "redirect:/member/list";
+    }
+
+    /**
      * 회원 삭제(PK)
      * @param id
      */

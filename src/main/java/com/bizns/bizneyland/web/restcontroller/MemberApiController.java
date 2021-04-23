@@ -2,7 +2,7 @@ package com.bizns.bizneyland.web.restcontroller;
 
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.web.dto.MemberCreateRequestDto;
-import com.bizns.bizneyland.web.dto.MemberRequestDto;
+import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class MemberApiController {
     }
 
     @PutMapping("/member/{id}")
-    public Long update(@PathVariable Long id, @RequestBody MemberRequestDto requestDto) {
+    public Long update(@PathVariable Long id, @RequestBody MemberUpdateRequestDto requestDto) {
         return memberService.update(id, requestDto);
     }
 

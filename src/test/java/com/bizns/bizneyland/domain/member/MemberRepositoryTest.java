@@ -1,7 +1,6 @@
 package com.bizns.bizneyland.domain.member;
 
 import com.bizns.bizneyland.domain.company.Company;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +37,14 @@ public class MemberRepositoryTest {
         return company;
     }
 
+    private Member createMember(Long userSeq, String name, Company company) {
+        return repository.save(Member.builder()
+                .userSeq(userSeq)
+                .name(name)
+                .company(company)
+                .build());
+    }
+
     @Test
     public void 회원저장_불러오기() {
         //given
@@ -52,14 +59,6 @@ public class MemberRepositoryTest {
         Member member = members.get(0);
         assertThat(member.getName()).isEqualTo(name);
         assertThat(member.getCompany().getId()).isEqualTo(company.getId());
-    }
-
-    private Member createMember(Long userSeq, String name, Company company) {
-        return repository.save(Member.builder()
-                .userSeq(userSeq)
-                .name(name)
-                .company(company)
-                .build());
     }
 
     @Test

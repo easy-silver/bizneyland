@@ -1,5 +1,9 @@
 package com.bizns.bizneyland.domain.company;
 
+import com.bizns.bizneyland.domain.member.Member;
+import com.bizns.bizneyland.domain.member.MemberRepository;
+import com.bizns.bizneyland.domain.owner.Owner;
+import com.bizns.bizneyland.domain.owner.OwnerRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,12 +24,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CompanyRepositoryTest {
 
     @Autowired CompanyRepository repository;
+    @Autowired MemberRepository memberRepository;
+    @Autowired OwnerRepository ownerRepository;
+    @Autowired EntityManager em;
 
     private Company createCompany() {
         return repository.save(Company
                 .builder()
                 .name("테스트")
                 .businessNo("123-45-78900")
+                .build());
+    }
+
+    private Member createMember(Company company) {
+        return memberRepository.save(Member.builder()
+                .userSeq(999L)
+                .name("테스트 멤버")
+                .company(company)
+                .build());
+    }
+
+    private Owner createOwner(Company company, Member member) {
+        return ownerRepository.save(Owner.builder()
+                .company(company)
+                .member(member)
+                .name("나대표")
                 .build());
     }
 
@@ -109,6 +133,25 @@ public class CompanyRepositoryTest {
         //then
         Company modifiedCompany = repository.findById(company.getId()).get();
         assertThat(modifiedCompany.getAddress()).isEqualTo(modifiedAddress);
+    }
+
+    @Test
+    public void 대표자_정보_포함_회사_목록() {
+        //given
+        Company company = createCompany();
+        Member member = createMember(company);
+        Owner owner = createOwner(company, member);
+
+        // DB INSERT 위해 flush
+        em.flush();
+        em.clear();
+
+        //when
+        List<Company> companies = repository.findAllWithOwner();
+
+        //then
+        assertThat(companies.size()).isEqualTo(1);
+        assertThat(companies.get(0).getOwner().getName()).isEqualTo(owner.getName());
     }
 
 }

@@ -2,21 +2,28 @@ package com.bizns.bizneyland.domain.company;
 
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
+import com.bizns.bizneyland.domain.owner.Owner;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.*;
+
 @Getter
 @NoArgsConstructor
 @Entity
 public class Company extends BaseTimeEntity {
 
-    // 회사 일련번호(PK)
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    /* 회사 일련번호(PK) */
+    @Id @GeneratedValue(strategy = IDENTITY)
     @Column(name = "company_seq")
     private Long id;
+
+    /* 대표자 일련번호(FK) */
+    @OneToOne(mappedBy = "company")
+    private Owner owner;
 
     // 사업자 번호
     @Column(unique = true, nullable = false, length = 12)

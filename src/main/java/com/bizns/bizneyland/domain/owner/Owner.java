@@ -22,12 +22,12 @@ public class Owner {
     private Long id;
 
     /* 회사 번호 */
-    @OneToOne(fetch = LAZY)
+    @OneToOne
     @JoinColumn(name = "company_seq", nullable = false)
     private Company company;
 
     /* 회원 번호 */
-    @OneToOne(fetch = LAZY)
+    @OneToOne
     @JoinColumn(name = "member_seq", nullable = false)
     private Member member;
 

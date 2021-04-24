@@ -23,12 +23,12 @@ public class Owner {
 
     /* 회사 번호 */
     @OneToOne
-    @JoinColumn(name = "company_seq", nullable = false)
+    @JoinColumn(name = "company_seq", nullable = false, unique = true)
     private Company company;
 
     /* 회원 번호 */
     @OneToOne
-    @JoinColumn(name = "member_seq", nullable = false)
+    @JoinColumn(name = "member_seq", nullable = false, unique = true)
     private Member member;
 
     /* 대표자 이름 */

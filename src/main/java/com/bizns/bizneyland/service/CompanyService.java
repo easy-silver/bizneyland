@@ -2,6 +2,7 @@ package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
+import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.util.FormatUtil;
 import com.bizns.bizneyland.web.dto.CompanyRequestDto;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class CompanyService {
 
     private final CompanyRepository repository;
+    private final MemberRepository memberRepository;
 
     /**
      * 전체 회사 조회
@@ -29,6 +31,8 @@ public class CompanyService {
                 .stream()
                 .filter(company -> company.getId() > 0)
                 .map(CompanyResponseDto::new)
+                // FIXME :  반복하는 횟수만큼 쿼리가 나가서 수정할 필요가 있음
+                .map(c -> {c.setMemberCount(memberRepository.memberCount(c.getId())); return c;})
                 .collect(Collectors.toList());
     }
 

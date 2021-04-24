@@ -14,6 +14,7 @@ public class CompanyResponseDto {
     private Long logoFileSeq;
     private String businessNo;
     private String ownerName;
+    private int memberCount;
 
     public CompanyResponseDto(Company entity) {
         this.id = entity.getId();
@@ -23,5 +24,9 @@ public class CompanyResponseDto {
         this.logoFileSeq = entity.getLogoFileSeq();
         this.businessNo = entity.getBusinessNo();
         this.ownerName = entity.getOwner() == null ? null : entity.getOwner().getName();
+    }
+
+    public void setMemberCount(int memberCount) {
+        this.memberCount = memberCount;
     }
 }

@@ -23,7 +23,7 @@
                                     <th>대표자</th>
                                     <th>주소</th>
                                     <th>전화번호</th>
-                                    <th>소속 회원 수</th>
+                                    <th>회원 수</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,8 +35,7 @@
                                     <td class="text-center" th:text="${company.ownerName}"/>
                                     <td th:text="${company.address}"/>
                                     <td th:text="${company.tel}"/>
-                                    <!--<td th:text="${company.memberCount}"/>-->
-                                    <td></td>
+                                    <td class="text-center" th:text="${company.memberCount}"/>
                                 </tr>
                             </tbody>
                         </table>

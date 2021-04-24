@@ -39,6 +39,15 @@
                                             <input class="form-control" id="businessNo" name="businessNo" required maxlength="3">
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <th>가입 유형</th>
+                                        <td>
+                                            <div class="form-check form-check-inline" th:each="type, idx : ${T(com.bizns.bizneyland.domain.member.MemberType).values()}">
+                                                <input class="form-check-input" type="radio" name="memberType" th:id="inlineRadio + ${idx.count}" th:value="${type}">
+                                                <label class="form-check-label" th:for="inlineRadio + ${idx.count}" th:text="${type.title}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <button id="submitBtn" type="button" class="btn btn-primary btn-user btn-block">제출</button>
@@ -53,10 +62,32 @@
 
             /** 제출 버튼 이벤트 핸들러 */
             $('#submitBtn').on('click', function () {
-                const data = {
-                    companySeq : $('#companySeq').val(),
-                    businessNo : $('#businessNo').val(),
+
+                const companySeq = $('#companySeq').val();
+                const businessNo = $('#businessNo').val();
+                const memberType = $('input[name="memberType"]:checked').val();
+
+                if (!companySeq) {
+                    alert('회사번호를 입력해주세요.');
+                    $('#companySeq').focus();
+                    return false;
                 }
+
+                if (!businessNo) {
+                    alert('사업자번호를 입력해주세요.');
+                    $('#businessNo').focus()
+                    return false;
+                }
+
+                if (!memberType) {
+                    alert('회원 유형을 선택해주세요.');
+                    return false;
+                }
+
+                const data = {
+                    companySeq : companySeq,
+                    businessNo : businessNo
+                };
 
                 $.ajax({
                     url: "/member/checkValid",
@@ -71,7 +102,6 @@
 
                     if (result.isValid) {
                         alert('소속 회사가 확인되었습니다.');
-                        // TODO : FORM SUBMIT
                         $('#checkForm').submit();
 
                     } else {

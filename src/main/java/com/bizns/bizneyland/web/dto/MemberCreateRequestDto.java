@@ -2,6 +2,7 @@ package com.bizns.bizneyland.web.dto;
 
 import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.member.Member;
+import com.bizns.bizneyland.domain.member.MemberType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MemberCreateRequestDto {
 
+    private MemberType memberType;
     private String name;
     private String nickname;
     private String birth;

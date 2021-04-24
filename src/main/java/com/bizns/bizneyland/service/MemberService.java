@@ -4,6 +4,9 @@ import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
+import com.bizns.bizneyland.domain.member.MemberType;
+import com.bizns.bizneyland.domain.owner.Owner;
+import com.bizns.bizneyland.domain.owner.OwnerRepository;
 import com.bizns.bizneyland.web.dto.MemberCreateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
@@ -21,6 +24,7 @@ public class MemberService {
 
     private final MemberRepository repository;
     private final CompanyRepository companyRepository;
+    private final OwnerRepository ownerRepository;
 
     /**
      * 전체 회원 목록
@@ -60,8 +64,19 @@ public class MemberService {
         Member member = requestDto.toEntity();
         // 연관 엔티티(회사) 등록
         member.changeCompany(company);
-        // 회원 등록 후 회원번호 반환
-        return repository.save(member).getId();
+        // 회원 등록
+        Member registeredMember = repository.save(member);
+
+        // 대표자일 경우 대표자 정보 등록
+        if (requestDto.getMemberType() == MemberType.OWNER) {
+            ownerRepository.save(Owner.builder()
+                    .company(company)
+                    .member(member)
+                    .name(requestDto.getName())
+                    .build());
+        }
+
+        return registeredMember.getId();
     }
 
     /**

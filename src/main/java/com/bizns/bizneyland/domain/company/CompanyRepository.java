@@ -11,7 +11,7 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @Query("SELECT c FROM Company c WHERE c.id > 0 ORDER BY c.id DESC")
     List<Company> findAllDesc();
 
-    @Query("SELECT c FROM Company c JOIN FETCH c.owner ORDER BY c.id DESC")
+    @Query("SELECT c FROM Company c LEFT JOIN FETCH c.owner ORDER BY c.id DESC")
     List<Company> findAllWithOwner();
 
     Company findByBusinessNo(String businessNo);

@@ -13,6 +13,7 @@ public class CompanyResponseDto {
     private String tel;
     private Long logoFileSeq;
     private String businessNo;
+    private String ownerName;
 
     public CompanyResponseDto(Company entity) {
         this.id = entity.getId();
@@ -21,5 +22,6 @@ public class CompanyResponseDto {
         this.tel = FormatUtil.addHyphenPhoneNumber(entity.getTel());
         this.logoFileSeq = entity.getLogoFileSeq();
         this.businessNo = entity.getBusinessNo();
+        this.ownerName = entity.getOwner() == null ? null : entity.getOwner().getName();
     }
 }

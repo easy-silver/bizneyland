@@ -25,8 +25,9 @@ public class CompanyService {
      * @return 회사 리스트
      */
     public List<CompanyResponseDto> findAllDesc() {
-        return repository.findAllDesc()
+        return repository.findAllWithOwner()
                 .stream()
+                .filter(company -> company.getId() > 0)
                 .map(CompanyResponseDto::new)
                 .collect(Collectors.toList());
     }
@@ -90,8 +91,6 @@ public class CompanyService {
 
     /**
      * 회원가입 시 유효한 회사인지 확인
-     * @param 회사번호
-     * @param 사업자번호 앞 3자리
      * @return 존재 여부
      */
     public boolean isValidCompany(Long id, String businessNo) {

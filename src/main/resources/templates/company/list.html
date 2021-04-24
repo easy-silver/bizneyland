@@ -32,7 +32,7 @@
                                     <td>
                                         <a th:href="@{/company/detail/{companySeq}(companySeq=${company.id})}" th:text="${company.name}"/>
                                     </td>
-                                    <td/>
+                                    <td class="text-center" th:text="${company.ownerName}"/>
                                     <td th:text="${company.address}"/>
                                     <td th:text="${company.tel}"/>
                                     <!--<td th:text="${company.memberCount}"/>-->

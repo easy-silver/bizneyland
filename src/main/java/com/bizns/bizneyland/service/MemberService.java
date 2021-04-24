@@ -7,6 +7,9 @@ import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.domain.member.MemberType;
 import com.bizns.bizneyland.domain.owner.Owner;
 import com.bizns.bizneyland.domain.owner.OwnerRepository;
+import com.bizns.bizneyland.domain.user.Role;
+import com.bizns.bizneyland.domain.user.User;
+import com.bizns.bizneyland.domain.user.UserRepository;
 import com.bizns.bizneyland.web.dto.MemberCreateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
@@ -25,6 +28,7 @@ public class MemberService {
     private final MemberRepository repository;
     private final CompanyRepository companyRepository;
     private final OwnerRepository ownerRepository;
+    private final UserRepository userRepository;
 
     /**
      * 전체 회원 목록
@@ -67,6 +71,7 @@ public class MemberService {
         // 회원 등록
         Member registeredMember = repository.save(member);
 
+        // FIXME : 메서드 분리할 것!
         // 대표자일 경우 대표자 정보 등록
         if (requestDto.getMemberType() == MemberType.OWNER) {
             ownerRepository.save(Owner.builder()
@@ -74,6 +79,10 @@ public class MemberService {
                     .member(member)
                     .name(requestDto.getName())
                     .build());
+
+            // USER 권한 변경
+            User user = userRepository.findById(requestDto.getUserSeq()).get();
+            userRepository.save(user.updateRole(Role.OWNER));
         }
 
         return registeredMember.getId();

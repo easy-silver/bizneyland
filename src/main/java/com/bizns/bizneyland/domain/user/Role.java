@@ -9,6 +9,7 @@ public enum Role {
 
     GUEST("ROLE_GUEST", "손님"),
     USER("ROLE_USER", "일반 사용자"),
+    OWNER("ROLE_OWNER", "회사 대표"),
     ADMIN("ROLE_ADMIN", "관리자");
 
 

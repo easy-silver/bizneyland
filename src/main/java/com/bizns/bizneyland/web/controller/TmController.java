@@ -52,8 +52,7 @@ public class TmController {
      * TM 등록(업체) 양식
      */
     @GetMapping("register")
-    public String registerClient() {
-        return "tm/register/client";
+    public void registerClient() {
     }
 
     /**

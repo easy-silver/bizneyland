@@ -11,72 +11,62 @@
                 </div>
                 <div class="card-body">
                     <form action="/client/register" method="post">
-                        <div class="form-group">
-                            <label for="companyName">회사명
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input class="form-control" id="companyName" name="companyName" required>
+                        <div class="form-group row">
+                            <div class="col">
+                                <label for="contact">연락처
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" id="contact" name="contact" maxlength="14" required>
+                            </div>
+                            <div class="col">
+                                <label for="caller">상담사</label>
+                                <input class="form-control" id="caller" name="caller" maxlength="14" readonly2>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="contact">연락처
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input class="form-control" id="contact" name="contact" maxlength="14" required>
+                        <div class="form-group row">
+                            <div class="col">
+                                <label for="companyName">회사명
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" id="companyName" name="companyName" required>
+                            </div>
+                            <div class="col">
+                                <label for="type">업체 구분</label>
+                                <select class="form-control" id="type" name="type">
+                                    <option value="">선택하세요</option>
+                                    <option value="P">개인</option>
+                                    <option value="C">법인</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="owner">대표자 이름</label>
-                            <input class="form-control" id="owner" name="owner">
+                        <div class="form-group row">
+                            <div class="col">
+                                <label for="owner">대표자</label>
+                                <input class="form-control" id="owner" name="owner">
+                            </div>
+                            <div class="col">
+                                <label for="establishDate">설립일</label>
+                                <input class="form-control" id="establishDate" name="establishDate" maxlength="20">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="type">업체 구분</label>
-                            <select class="form-control" id="type" name="type">
-                                <option value="">선택하세요</option>
-                                <option value="P">개인</option>
-                                <option value="C">법인</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="establishDate">설립일</label>
-                            <input class="form-control" id="establishDate" name="establishDate" maxlength="10"
-                                placeholder="날짜형식 숫자 8자리만 입력 (ex. 20210301)">
-                        </div>
-                        <div class="form-group">
-                            <label for="sector">업종</label>
-                            <input class="form-control" id="sector" name="sector">
-                        </div>
-                        <div class="form-group">
-                            <label for="keyItem">주요 품목</label>
-                            <input class="form-control" id="keyItem" name="keyItem">
+                        <div class="form-group row">
+                            <div class="col">
+                                <label for="sector">업종</label>
+                                <input class="form-control" id="sector" name="sector">
+                            </div>
+                            <div class="col">
+                                <label for="keyItem">주요 품목</label>
+                                <input class="form-control" id="keyItem" name="keyItem">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="address">사업장 주소</label>
                             <input class="form-control" id="address" name="address">
                         </div>
-
                         <button type="submit" class="mt-4 btn btn-primary btn-block">저장</button>
                     </form>
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $(function () {
-                    /** 설립일 하이픈(-) 표시 이벤트 */
-                    $('#establishDate').keydown(function (event) {
-                        const key = event.charCode || event.keyCode || 0;
-                        const $text = $(this);
-                        if (key !== 8 && key !== 9) {
-                            if ($text.val().length === 4) {
-                                $text.val($text.val() + '-');
-                            }
-                            if ($text.val().length === 7) {
-                                $text.val($text.val() + '-');
-                            }
-                        }
-                        return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
-                    })
-                });
-            });
-        </script>
     </div>
 </html>

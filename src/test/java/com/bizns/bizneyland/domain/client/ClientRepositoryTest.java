@@ -25,7 +25,6 @@ public class ClientRepositoryTest {
         return Client.builder()
                 .companyName("Timo Company")
                 .contact("032-815-4553")
-                .establishDate(LocalDate.parse("2020-04-14", DateTimeFormatter.ISO_DATE))
                 .build();
     }
 

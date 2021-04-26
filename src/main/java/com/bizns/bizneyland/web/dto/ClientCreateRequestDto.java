@@ -1,7 +1,6 @@
 package com.bizns.bizneyland.web.dto;
 
 import com.bizns.bizneyland.domain.client.Client;
-import com.bizns.bizneyland.util.FormatUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,7 +41,7 @@ public class ClientCreateRequestDto {
                 .contact(contact)
                 .owner(owner)
                 .type(type)
-                .establishDate(FormatUtil.parseToDate(establishDate))
+                .establishDate(establishDate)
                 .sector(sector)
                 .address(address)
                 .keyItem(keyItem)

@@ -1,15 +1,12 @@
 package com.bizns.bizneyland.domain.client;
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
-import com.bizns.bizneyland.util.FormatUtil;
-import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 
 @Getter
@@ -36,7 +33,7 @@ public class Client extends BaseTimeEntity {
     private Character type;
 
     // 설립일
-    private LocalDate establishDate;
+    private String establishDate;
 
     // 업종
     private String sector;
@@ -49,7 +46,7 @@ public class Client extends BaseTimeEntity {
 
     @Builder
     public Client(String companyName, String contact, String owner, Character type,
-                  LocalDate establishDate, String sector, String address, String keyItem) {
+                  String establishDate, String sector, String address, String keyItem) {
         this.companyName = companyName;
         this.contact = contact;
         this.owner = owner;
@@ -62,7 +59,7 @@ public class Client extends BaseTimeEntity {
 
     public void update(ClientUpdateRequestDto dto) {
         this.type = dto.getType();
-        this.establishDate = FormatUtil.parseToDate(dto.getEstablishDate());
+        this.establishDate = dto.getEstablishDate();
         this.sector = dto.getSector();
         this.address = dto.getAddress();
         this.contact = dto.getContact();

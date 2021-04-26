@@ -4,8 +4,6 @@ import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.util.FormatUtil;
 import lombok.Getter;
 
-import java.time.LocalDate;
-
 @Getter
 public class ClientResponseDto {
 
@@ -14,7 +12,7 @@ public class ClientResponseDto {
     private String contact;
     private String owner;
     private Character type;
-    private LocalDate establishDate;
+    private String establishDate;
     private String sector;
     private String address;
     private String keyItem;

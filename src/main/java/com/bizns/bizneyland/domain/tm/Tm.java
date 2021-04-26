@@ -10,74 +10,73 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
+
 @Getter
 @NoArgsConstructor
 @Entity
 public class Tm extends BaseTimeEntity {
 
-    // TM 일련번호(PK)
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    /* TM 일련번호(PK) */
+    @Id @GeneratedValue(strategy = IDENTITY)
     private Long tmSeq;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /* 고객 번호(FK) */
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "client_seq", nullable = false)
     private Client client;
+
+    /* TM 담당자(FK) */
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "caller_seq", referencedColumnName = "member_seq", nullable = false)
+    private Member caller;
 
     // 상담일시
     @Column(nullable = false)
     private LocalDateTime callDate = LocalDateTime.now();
 
-    // TM 담당자
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "caller_seq", referencedColumnName = "member_seq", nullable = false)
-    private Member caller;
-
-    // 희망 통화 시간
-    private String hopeCallTime;
-
-    // 자금 용도
-    private String purpose;
-
+    // 수신인
+    private String recipient;
+    // 직원 수
+    private String headcount;
     // 대출 희망 금액
     private Integer hopeAmount;
-
-    // 신용 상태
-    private String creditStatus;
-
-    // 주거래 은행
-    private String mainBank;
-
     // 체납 여부
     private Character arrearsYn;
-
-    // 대출 여부
-    private Character loanYn;
-
-    // 대출 총액
-    private Integer loanAmount;
-
-    // 주택 종류
-    private String houseType;
-
-    // 특이사항
+    // 체납 상세 내역
+    private String arrearsDetail;
+    // 신용 상태
+    private String creditStatus;
+    // 희망 통화 시간
+    private String hopeCallTime;
+    // 메모
     private String memo;
 
     @Builder
-    public Tm(Client client, LocalDateTime callDate, Member caller, String hopeCallTime, String purpose,
-              Integer hopeAmount, String creditStatus, String mainBank, Character arrearsYn,
-              Character loanYn, Integer loanAmount, String houseType, String memo) {
+    public Tm(Client client, Member caller, LocalDateTime callDate, String recipient,
+              String headcount, Integer hopeAmount, Character arrearsYn, String arrearsDetail,
+              String creditStatus, String hopeCallTime, String memo) {
         this.client = client;
-        this.callDate = callDate;
         this.caller = caller;
-        this.hopeCallTime = hopeCallTime;
-        this.purpose = purpose;
+        this.callDate = callDate;
+        this.recipient = recipient;
+        this.headcount = headcount;
         this.hopeAmount = hopeAmount;
-        this.creditStatus = creditStatus;
-        this.mainBank = mainBank;
         this.arrearsYn = arrearsYn;
-        this.loanYn = loanYn;
-        this.loanAmount = loanAmount;
-        this.houseType = houseType;
+        this.arrearsDetail = arrearsDetail;
+        this.creditStatus = creditStatus;
+        this.hopeCallTime = hopeCallTime;
         this.memo = memo;
+    }
+
+    public Tm updateClient(Client client) {
+        this.client = client;
+        return this;
+    }
+
+    public Tm updateCaller(Member member) {
+        this.caller = member;
+        return this;
     }
 }

@@ -37,20 +37,16 @@ public class SalesServiceTest {
 
     @Test
     public void 매출정보_등록() {
-        //given
-        String[] year = {"2020", "2019"};
-        Integer[] amount = {1000, 10000};
-
         //when
         service.register(SalesRequestDto.builder()
                 .clientSeq(1L)
-                .salesYears(year)
-                .salesAmount(amount)
+                .salesYear("2020")
+                .salesAmount(1000)
                 .build());
 
         //then
         List<Sales> salesList = repository.findByClient(clientRepository.findById(1L).get());
-        assertThat(salesList.size()).isEqualTo(2);
+        assertThat(salesList.size()).isEqualTo(1);
         assertThat(salesList.get(0).getSalesYear()).isEqualTo("2020");
     }
 }

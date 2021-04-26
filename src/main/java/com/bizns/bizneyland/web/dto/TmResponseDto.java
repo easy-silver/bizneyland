@@ -15,14 +15,9 @@ public class TmResponseDto {
     private String callDate;
     private Member caller;
     private String hopeCallTime;
-    private String purpose;
     private Integer hopeAmount;
     private String creditStatus;
-    private String mainBank;
     private Character arrearsYn;
-    private Character loanYn;
-    private Integer loanAmount;
-    private String houseType;
     private String memo;
 
     public TmResponseDto(Tm entity) {
@@ -32,14 +27,9 @@ public class TmResponseDto {
         this.callDate = FormatUtil.localDateTimeToYmdHms(entity.getCallDate());
         this.caller = entity.getCaller();
         this.hopeCallTime = entity.getHopeCallTime();
-        this.purpose = entity.getPurpose();
         this.hopeAmount = entity.getHopeAmount();
         this.creditStatus = entity.getCreditStatus();
-        this.mainBank = entity.getMainBank();
         this.arrearsYn = entity.getArrearsYn();
-        this.loanYn = entity.getLoanYn();
-        this.loanAmount = entity.getLoanAmount();
-        this.houseType = entity.getHouseType();
         this.memo = entity.getMemo();
     }
 }

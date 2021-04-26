@@ -2,6 +2,7 @@ package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.domain.client.ClientRepository;
+import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.ClientResponseDto;
 import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
 import org.junit.Test;
@@ -63,5 +64,14 @@ public class ClientServiceTest {
 
         //then
         assertThat(service.findById(seq).getAddress()).isEqualTo(modifiedAddress);
+    }
+
+    @Test
+    public void 고객_등록_매출_포함() {
+        service.save(ClientCreateRequestDto.builder()
+                .companyName("테스트 클라이언트")
+                .contact("010-1234-1234")
+                .salesYears(new String[] {"2012"})
+                .build());
     }
 }

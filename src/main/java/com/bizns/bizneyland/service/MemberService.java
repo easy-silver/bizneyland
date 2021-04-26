@@ -125,7 +125,8 @@ public class MemberService {
      * @return 단일 회원
      */
     public MemberResponseDto findByUserSeq(Long userSeq) {
-        Member entity = repository.findByUserSeq(userSeq);
+        Member entity = repository.findByUserSeq(userSeq)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다. id=" + userSeq));
 
         return entity == null ? null : new MemberResponseDto(entity);
     }

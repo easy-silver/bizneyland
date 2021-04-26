@@ -7,13 +7,13 @@ import lombok.Setter;
 @Setter @Getter
 public class SalesRequestDto {
     private Long clientSeq;
-    private Integer[] salesAmount;
-    private String[] salesYears;
+    private String salesYear;
+    private Integer salesAmount;
 
     @Builder
-    public SalesRequestDto(Long clientSeq, Integer[] salesAmount, String[] salesYears) {
+    public SalesRequestDto(Long clientSeq, Integer salesAmount, String salesYear) {
         this.clientSeq = clientSeq;
         this.salesAmount = salesAmount;
-        this.salesYears = salesYears;
+        this.salesYear = salesYear;
     }
 }

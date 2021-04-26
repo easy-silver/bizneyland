@@ -3,9 +3,6 @@ package com.bizns.bizneyland.web.controller;
 import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
 import com.bizns.bizneyland.domain.client.Client;
-import com.bizns.bizneyland.domain.client.ClientRepository;
-import com.bizns.bizneyland.domain.member.Member;
-import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.service.ClientService;
 import com.bizns.bizneyland.service.TmService;
 import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
@@ -23,9 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TmController {
 
     private final ClientService clientService;
-    private final ClientRepository clientRepository;
     private final TmService tmService;
-    private final MemberRepository memberRepository;
 
     /**
      * TM 상담 목록
@@ -49,11 +44,21 @@ public class TmController {
     }
 
     /**
-     * TM 등록(업체) 양식
+     * TM 등록 양식
      */
     @GetMapping("register")
-    public void registerClient() {
+    public void register() {
     }
+
+    /**
+     * TM 등록
+     */
+    @PostMapping("register")
+    public String register(ClientCreateRequestDto clientDto, TmRequestDto tmDto) {
+
+        return "redirect:/tm/list";
+    }
+
 
     /**
      * TM 등록 - 업체 등록
@@ -91,15 +96,7 @@ public class TmController {
     @PostMapping("register/tmInfo")
     public String registerTmInfo(TmRequestDto requestDto, @LoginUser SessionUser user) {
 
-        // 세션에 있는 USER_SEQ로 Member 찾기
-        Member caller = memberRepository.findByUserSeq(user.getUserSeq());
-        requestDto.updateCaller(caller);
-
-        Long clientSeq = requestDto.getClientSeq();
-        Client client = clientRepository.findById(clientSeq)
-                .orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다."));
-        requestDto.updateClient(client);
-
+        requestDto.setUserSeq(user.getUserSeq());
         tmService.save(requestDto);
 
         return "redirect:/tm/list";

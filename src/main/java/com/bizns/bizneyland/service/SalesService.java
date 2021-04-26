@@ -20,6 +20,25 @@ public class SalesService {
     private final SalesRepository repository;
     private final ClientRepository clientRepository;
 
+
+    /**
+     * 매출 정보 등록
+     * @param salesList 리스트
+     */
+    public void register(List<SalesRequestDto> salesList, Long clientSeq) {
+
+        Client findClient = clientRepository.findById(clientSeq)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 업체입니다. id=" + clientSeq));
+
+        for (SalesRequestDto sales : salesList) {
+            repository.save(Sales.builder()
+                    .client(findClient)
+                    .salesYear(sales.getSalesYear())
+                    .amount(sales.getSalesAmount())
+                    .build());
+        }
+    }
+
     /**
      * 매출 정보 등록
      * @param requestDto
@@ -28,13 +47,12 @@ public class SalesService {
         Client client = clientRepository.findById(requestDto.getClientSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 업체입니다. id=" + requestDto.getClientSeq()));
 
-        for (int i = 0; i < requestDto.getSalesYears().length; i++) {
-            repository.save(Sales.builder()
-                    .client(client)
-                    .salesYear(requestDto.getSalesYears()[i])
-                    .amount(requestDto.getSalesAmount()[i])
-                    .build());
-        }
+        repository.save(Sales.builder()
+                .client(client)
+                .salesYear(requestDto.getSalesYear())
+                .amount(requestDto.getSalesAmount())
+                .build());
+
     }
 
     /**

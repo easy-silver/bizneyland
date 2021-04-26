@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.web.dto;
 
 import com.bizns.bizneyland.domain.client.Client;
+import com.bizns.bizneyland.util.FormatUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,9 +23,13 @@ public class ClientCreateRequestDto {
     private String sector;
     private String keyItem;
 
+    private String[] salesYears;
+    private Integer[] salesAmount;
+
     @Builder
     public ClientCreateRequestDto(String companyName, String contact, String owner, String address,
-                                  Character type, String establishDate, String sector, String keyItem) {
+                                  Character type, String establishDate, String sector, String keyItem,
+                                  String[] salesYears, Integer[] salesAmount) {
         this.companyName = companyName;
         this.contact = contact;
         this.owner = owner;
@@ -33,6 +38,8 @@ public class ClientCreateRequestDto {
         this.establishDate = establishDate;
         this.sector = sector;
         this.keyItem = keyItem;
+        this.salesYears = salesYears;
+        this.salesAmount = salesAmount;
     }
 
     public Client toEntity() {
@@ -46,5 +53,10 @@ public class ClientCreateRequestDto {
                 .address(address)
                 .keyItem(keyItem)
                 .build();
+    }
+
+    // 연락처는 하이픈 제거된 형태로 받아오기
+    public void setContact(String contact) {
+        this.contact = FormatUtil.removeHyphen(contact);
     }
 }

@@ -16,7 +16,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findAllWithCompany();
 
     @Query("SELECT m FROM Member m WHERE m.userSeq = :userSeq")
-    Member findByUserSeq(@Param("userSeq") Long userSeq);
+    Optional<Member> findByUserSeq(@Param("userSeq") Long userSeq);
 
     @Query("SELECT m FROM Member m WHERE m.company.id = :companySeq")
     List<Member> findByCompanySeq(@Param("companySeq") Long companySeq);

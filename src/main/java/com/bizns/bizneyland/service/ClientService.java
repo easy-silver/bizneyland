@@ -2,14 +2,15 @@ package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.domain.client.ClientRepository;
-import com.bizns.bizneyland.util.FormatUtil;
 import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.ClientResponseDto;
 import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
+import com.bizns.bizneyland.web.dto.SalesRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,45 @@ import java.util.stream.Collectors;
 public class ClientService {
 
     private final ClientRepository repository;
+    private final SalesService salesService;
+
+    /**
+     * 고객 등록
+     * @param requestDto
+     * @return
+     */
+    @Transactional
+    public Long save(ClientCreateRequestDto requestDto) {
+        // 업체 등록
+        Client savedClient = repository.save(requestDto.toEntity());
+
+        // 매출 정보 만들기
+        List<SalesRequestDto> salesList = createSalesList(requestDto.getSalesYears(), requestDto.getSalesAmount());
+
+        // 업체 매출 정보 등록
+        salesService.register(salesList, savedClient.getClientSeq());
+
+        return savedClient.getClientSeq();
+    }
+
+    private List<SalesRequestDto> createSalesList(String[] salesYears, Integer[] salesAmounts) {
+        List<SalesRequestDto> salesList = new ArrayList<>();
+
+        if (salesYears != null && salesAmounts != null) {
+            for (int i = 0; i < salesYears.length; i++) {
+                if (salesYears[i] == null || salesAmounts[i] == null) {
+                    continue;
+                }
+                salesList.add(SalesRequestDto.builder()
+                        .salesYear(salesYears[i])
+                        .salesAmount(salesAmounts[i])
+                        .build());
+            }
+
+        }
+
+        return salesList;
+    }
 
     /**
      * 모든 고객 조회
@@ -38,17 +78,6 @@ public class ClientService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 업체가 없습니다. seq=" + clientSeq));
 
         return new ClientResponseDto(entity);
-    }
-
-    /**
-     * 고객 등록
-     * */
-    @Transactional
-    public Long save(ClientCreateRequestDto requestDto) {
-        // 연락처 하이픈 제거
-        requestDto.setContact(FormatUtil.removeHyphen(requestDto.getContact()));
-
-        return repository.save(requestDto.toEntity()).getClientSeq();
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.service.ClientService;
+import com.bizns.bizneyland.service.SalesService;
 import com.bizns.bizneyland.service.TmService;
 import com.bizns.bizneyland.web.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.List;
 public class ClientController {
 
     private final ClientService service;
+    private final SalesService salesService;
     private final TmService tmService;
 
     /**
@@ -42,6 +44,8 @@ public class ClientController {
         List<TmResponseDto> tms = tmService.findByClient(client.getClientSeq());
         model.addAttribute("tms", tms);
 
+        model.addAttribute("salesList", salesService.findAllByClient(clientSeq));
+
         return "client/detail";
     }
 
@@ -60,7 +64,9 @@ public class ClientController {
     @PostMapping("register")
     public String register(ClientCreateRequestDto clientDto, SalesRequestDto salesDto) {
 
-        service.save(clientDto);
+        Long clientSeq = service.save(clientDto);
+        salesDto.setClientSeq(clientSeq);
+        salesService.register(salesDto);
 
         return "redirect:/client/list";
     }

@@ -44,11 +44,11 @@ public class ClientService {
      * 고객 등록
      * */
     @Transactional
-    public Client save(ClientCreateRequestDto requestDto) {
+    public Long save(ClientCreateRequestDto requestDto) {
         // 연락처 하이픈 제거
         requestDto.setContact(FormatUtil.removeHyphen(requestDto.getContact()));
 
-        return repository.save(requestDto.toEntity());
+        return repository.save(requestDto.toEntity()).getClientSeq();
     }
 
     /**

@@ -7,61 +7,97 @@
     <div layout:fragment="content">
         <div class="container-fluid">
             <!-- 업체 정보 카드 -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">업체 정보</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                             aria-labelledby="dropdownMenuLink2">
-                            <div class="dropdown-header">고객 관리</div>
-                            <a class="dropdown-item" th:href="@{/client/update/{seq}(seq=${client.clientSeq})}">수정</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" th:href="@{/client/delete/{seq}(seq=${client.clientSeq})}">삭제</a>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">업체 정보</h6>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                     aria-labelledby="dropdownMenuLink2">
+                                    <div class="dropdown-header">고객 관리</div>
+                                    <a class="dropdown-item" th:href="@{/client/update/{seq}(seq=${client.clientSeq})}">수정</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" th:href="@{/client/delete/{seq}(seq=${client.clientSeq})}">삭제</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <th>회사명</th>
+                                    <td th:text="${client.companyName}"/>
+                                </tr>
+                                <tr>
+                                    <th>대표자</th>
+                                    <td th:text="${client.owner}"/>
+                                </tr>
+                                <tr>
+                                    <th>업체 구분</th>
+                                    <td th:text="${client.type} == 'C' ? '법인' : '개인'"/>
+                                </tr>
+                                <tr>
+                                    <th>설립일</th>
+                                    <td th:text="${client.establishDate}"/>
+                                </tr>
+                                <tr>
+                                    <th>주소</th>
+                                    <td th:text="${client.address}"/>
+                                </tr>
+                                <tr>
+                                    <th>전화번호</th>
+                                    <td th:text="${client.contact}"/>
+                                </tr>
+                                <tr>
+                                    <th>업종</th>
+                                    <td th:text="${client.sector}"/>
+                                </tr>
+                                <tr>
+                                    <th>주요 품목</th>
+                                    <td th:text="${client.keyItem}"/>
+                                </tr>
+                            </table>
                         </div>
                     </div>
+                    <!-- //업체 정보 카드 -->
                 </div>
-                <div class="card-body">
-                    <table class="table">
-                        <tr>
-                            <th>회사명</th>
-                            <td th:text="${client.companyName}"/>
-                        </tr>
-                        <tr>
-                            <th>대표자</th>
-                            <td th:text="${client.owner}"/>
-                        </tr>
-                        <tr>
-                            <th>업체 구분</th>
-                            <td th:text="${client.type} == 'C' ? '법인' : '개인'"/>
-                        </tr>
-                        <tr>
-                            <th>설립일</th>
-                            <td th:text="${client.establishDate}"/>
-                        </tr>
-                        <tr>
-                            <th>주소</th>
-                            <td th:text="${client.address}"/>
-                        </tr>
-                        <tr>
-                            <th>전화번호</th>
-                            <td th:text="${client.contact}"/>
-                        </tr>
-                        <tr>
-                            <th>업종</th>
-                            <td th:text="${client.sector}"/>
-                        </tr>
-                        <tr>
-                            <th>주요 품목</th>
-                            <td th:text="${client.keyItem}"/>
-                        </tr>
-                    </table>
+                <div class="col">
+                    <!-- 매출 정보 -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">매출 정보</h6>
+                            <div class="dropdown no-arrow">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                     aria-labelledby="dropdownMenuLink1">
+                                    <div class="dropdown-header">고객 관리</div>
+                                    <a class="dropdown-item" th:href="@{/client/update/{seq}(seq=${client.clientSeq})}">수정</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" th:href="@{/client/delete/{seq}(seq=${client.clientSeq})}">삭제</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr th:each="sales : ${salesList}">
+                                    <th th:text="${sales.salesYear}"></th>
+                                    <td th:text="${sales.salesAmount}"/>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- //매출 정보 카드 -->
+
                 </div>
             </div>
-            <!-- //업체 정보 카드 -->
+
 
             <!-- 상담 내역 -->
             <div class="card shadow mb-4">

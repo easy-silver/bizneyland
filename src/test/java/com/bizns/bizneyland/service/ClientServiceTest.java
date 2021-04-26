@@ -1,7 +1,7 @@
 package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.client.Client;
-import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
+import com.bizns.bizneyland.domain.client.ClientRepository;
 import com.bizns.bizneyland.web.dto.ClientResponseDto;
 import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
 import org.junit.Test;
@@ -19,9 +19,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ClientServiceTest {
 
     @Autowired ClientService service;
+    @Autowired ClientRepository repository;
 
     private Client createClient() {
-        return service.save(ClientCreateRequestDto.builder()
+        return repository.save(Client.builder()
                 .companyName("테스트 클라이언트")
                 .contact("010-1234-1234")
                 .build());

@@ -64,13 +64,13 @@ public class TmController {
         Client client;
 
         // 고객 회사명으로 조회 후 있으면 UPDATE, 없으면 INSERT
-        if (clientService.isExist(clientDto.getCompanyName())) {
+        /*if (clientService.isExist(clientDto.getCompanyName())) {
             client = clientService.updateByName(clientDto.getCompanyName(), clientDto);
         } else {
             client = clientService.save(clientDto);
-        }
+        }*/
 
-        redirectAttributes.addAttribute("clientSeq", client.getClientSeq());
+        //redirectAttributes.addAttribute("clientSeq", client.getClientSeq());
 
         return "redirect:/tm/register/tmInfo";
     }

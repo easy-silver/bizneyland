@@ -65,4 +65,8 @@ public class Client extends BaseTimeEntity {
         this.contact = dto.getContact();
         this.keyItem = dto.getKeyItem();
     }
+
+    public Client(Long clientSeq) {
+        this.clientSeq = clientSeq;
+    }
 }

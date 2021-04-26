@@ -2,10 +2,7 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.service.ClientService;
 import com.bizns.bizneyland.service.TmService;
-import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
-import com.bizns.bizneyland.web.dto.ClientResponseDto;
-import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
-import com.bizns.bizneyland.web.dto.TmResponseDto;
+import com.bizns.bizneyland.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +58,7 @@ public class ClientController {
      * 고객 등록
      * */
     @PostMapping("register")
-    public String register(ClientCreateRequestDto clientDto) {
+    public String register(ClientCreateRequestDto clientDto, SalesRequestDto salesDto) {
 
         service.save(clientDto);
 

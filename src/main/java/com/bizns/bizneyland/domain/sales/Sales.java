@@ -35,4 +35,8 @@ public class Sales {
         this.salesYear = salesYear;
         this.amount = amount;
     }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 
@@ -63,10 +64,58 @@
                             <label for="address">사업장 주소</label>
                             <input class="form-control" id="address" name="address">
                         </div>
+
+                        <h4 class="mt-4">매출 정보</h4>
+                        <table class="table" id="salesTable">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col width="100px">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>발생 연도</th>
+                                    <th>금액</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input class="form-control" name="salesYears">
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control" name="salesAmount">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" id="addSalesBtn" class="mb-4 btn btn-secondary">추가</button>
+
                         <button type="submit" class="mt-4 btn btn-primary btn-block">저장</button>
                     </form>
                 </div>
             </div>
         </div>
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script>
+
+            /** 매출 정보 추가 버튼 */
+            $('#addSalesBtn').on('click', function () {
+                const addElement = '<tr><td><input class="form-control" name="salesYears"></td>' +
+                    '<td><input type="number" class="form-control" name="salesAmount"></td>' +
+                    '<td class="text-center">' +
+                    '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button>' +
+                    '</td></tr>';
+
+                $("#salesTable>tbody").append(addElement);
+            });
+
+            /** 삭제 버튼 클릭 시 행 삭제 */
+            const removeRow = function (element) {
+                $(element).parents("tr").remove();
+            };
+        </script>
     </div>
 </html>

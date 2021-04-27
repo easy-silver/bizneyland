@@ -132,33 +132,45 @@
 
                         <!-- 대출 관련 -->
                         <h4 class="mt-4">대출현황</h4>
-                        <table class="table">
+                        <table class="table" id="loanInfoTable">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col width="100px">
+                            </colgroup>
                             <thead>
                                 <tr>
                                     <th>해당 기관명</th>
                                     <th>용도</th>
                                     <th>금액</th>
                                     <th>메모 및 특이사항</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <input class="form-control">
+                                        <input class="form-control" name="loan.creditors">
                                     </td>
                                     <td>
-                                        <input class="form-control">
+                                        <input class="form-control" name="loan.purposes" value="">
                                     </td>
                                     <td>
-                                        <input class="form-control">
+                                        <input class="form-control" name="loan.amounts">
                                     </td>
                                     <td>
-                                        <input class="form-control">
+                                        <input class="form-control" name="loan.memos" value="">
                                     </td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <button type="button" id="addLoanInfoBtn" class="mb-4 btn btn-secondary">추가</button>
+
                         <hr>
+
                         <div class="form-group">
                             <label for="hopeCallTime">희망 통화시간</label>
                             <input class="form-control" id="hopeCallTime" name="hopeCallTime">
@@ -193,6 +205,20 @@
             const removeRow = function (element) {
                 $(element).parents("tr").remove();
             };
+
+            /** 대출 정보 추가 버튼 */
+            $('#addLoanInfoBtn').on('click', function () {
+                const addElement =
+                    '<tr>' +
+                    '<td><input class="form-control" name="creditor" required></td>' +
+                    '<td><input class="form-control" name="purpose" value=""></td>' +
+                    '<td><input class="form-control" type="number" name="amount" required></td>' +
+                    '<td><input class="form-control" name="memo" value=""></td>' +
+                    '<td><button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button></td>' +
+                    '</tr>';
+
+                $("#loanInfoTable>tbody").append(addElement);
+            });
         </script>
     </div>
 </html>

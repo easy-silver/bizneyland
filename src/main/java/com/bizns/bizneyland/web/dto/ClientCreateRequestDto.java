@@ -23,8 +23,14 @@ public class ClientCreateRequestDto {
     private String sector;
     private String keyItem;
 
+    /* 매출 정보 */
     private String[] salesYears;
     private Integer[] salesAmount;
+
+    // 연락처는 하이픈 제거된 형태로 받아오기
+    public void setContact(String contact) {
+        this.contact = FormatUtil.removeHyphen(contact);
+    }
 
     @Builder
     public ClientCreateRequestDto(String companyName, String contact, String owner, String address,
@@ -42,6 +48,7 @@ public class ClientCreateRequestDto {
         this.salesAmount = salesAmount;
     }
 
+    /** Client 엔티티로 변환 */
     public Client toEntity() {
         return Client.builder()
                 .companyName(companyName)
@@ -55,8 +62,4 @@ public class ClientCreateRequestDto {
                 .build();
     }
 
-    // 연락처는 하이픈 제거된 형태로 받아오기
-    public void setContact(String contact) {
-        this.contact = FormatUtil.removeHyphen(contact);
-    }
 }

@@ -25,7 +25,7 @@ public class ClientCreateRequestDto {
 
     /* 매출 정보 */
     private String[] salesYears;
-    private Integer[] salesAmount;
+    private String[] salesAmount;
 
     // 연락처는 하이픈 제거된 형태로 받아오기
     public void setContact(String contact) {
@@ -35,7 +35,7 @@ public class ClientCreateRequestDto {
     @Builder
     public ClientCreateRequestDto(String companyName, String contact, String owner, String address,
                                   Character type, String establishDate, String sector, String keyItem,
-                                  String[] salesYears, Integer[] salesAmount) {
+                                  String[] salesYears, String[] salesAmount) {
         this.companyName = companyName;
         this.contact = contact;
         this.owner = owner;

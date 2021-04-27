@@ -8,7 +8,7 @@ public class SalesResponseDto {
     private Long salesSeq;
     private Long clientSeq;
     private String salesYear;
-    private Integer salesAmount;
+    private String salesAmount;
 
     public SalesResponseDto(Sales entity) {
         this.salesSeq = entity.getSalesSeq();

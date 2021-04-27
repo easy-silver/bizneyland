@@ -40,7 +40,7 @@ public class ClientService {
     }
 
     /** Sales(매출) 리스트 생성 */
-    private List<Sales> toSalesList(String[] years, Integer[] amounts, Client client) {
+    private List<Sales> toSalesList(String[] years, String[] amounts, Client client) {
         List<Sales> salesList = new ArrayList<>();
 
         if (years != null && amounts != null) {

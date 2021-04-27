@@ -41,7 +41,7 @@ public class SalesServiceTest {
         service.register(SalesRequestDto.builder()
                 .clientSeq(1L)
                 .salesYear("2020")
-                .salesAmount(1000)
+                .salesAmount("1000")
                 .build());
 
         //then

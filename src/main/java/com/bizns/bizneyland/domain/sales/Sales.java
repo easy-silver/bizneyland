@@ -27,10 +27,10 @@ public class Sales {
 
     // 금액
     @Column(nullable = false)
-    private Integer amount;
+    private String amount;
 
     @Builder
-    public Sales(Client client, String salesYear, Integer amount) {
+    public Sales(Client client, String salesYear, String amount) {
         this.client = client;
         this.salesYear = salesYear;
         this.amount = amount;

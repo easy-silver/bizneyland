@@ -72,7 +72,7 @@ public class ClientServiceTest {
                 .companyName("테스트 클라이언트")
                 .contact("010-1234-1234")
                 .salesYears(new String[] {"2012", "2020", "2019"})
-                .salesAmount(new Integer[] {1000, 3000})
+                .salesAmount(new String[] {"1000억", "3000억"})
                 .build());
     }
 }

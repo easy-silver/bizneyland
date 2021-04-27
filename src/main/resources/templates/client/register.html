@@ -76,10 +76,10 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <input class="form-control" name="salesYears">
+                                        <input class="form-control" name="salesYears" maxlength="4" placeholder="숫자 4자리로 입력하세요.(ex.2021)">
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" name="salesAmount">
+                                        <input class="form-control" name="salesAmount">
                                     </td>
                                     <td></td>
                                 </tr>
@@ -99,8 +99,8 @@
             $('#addSalesBtn').on('click', function () {
                 const addElement =
                     '<tr>' +
-                        '<td><input class="form-control" name="salesYears" required></td>' +
-                        '<td><input class="form-control" type="number" name="salesAmount" required></td>' +
+                        '<td><input class="form-control" name="salesYears" maxlength="4" required></td>' +
+                        '<td><input class="form-control" name="salesAmount" required></td>' +
                         '<td class="text-center">' +
                         '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button></td>' +
                     '</tr>';

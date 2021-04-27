@@ -2,10 +2,10 @@ package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.domain.client.ClientRepository;
+import com.bizns.bizneyland.domain.sales.Sales;
 import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.ClientResponseDto;
 import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
-import com.bizns.bizneyland.web.dto.SalesRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,39 +24,41 @@ public class ClientService {
 
     /**
      * 고객 등록
-     * @param requestDto
+     * @param dto
      * @return
      */
     @Transactional
-    public Long save(ClientCreateRequestDto requestDto) {
+    public Long save(ClientCreateRequestDto dto) {
         // 업체 등록
-        Client savedClient = repository.save(requestDto.toEntity());
-
+        Client savedClient = repository.save(dto.toEntity());
         // 매출 정보 만들기
-        List<SalesRequestDto> salesList = createSalesList(requestDto.getSalesYears(), requestDto.getSalesAmount());
-
+        List<Sales> salesList = toSalesList(dto.getSalesYears(), dto.getSalesAmount(), savedClient);
         // 업체 매출 정보 등록
-        salesService.register(salesList, savedClient.getClientSeq());
+        salesService.register(salesList);
 
         return savedClient.getClientSeq();
     }
 
-    private List<SalesRequestDto> createSalesList(String[] salesYears, Integer[] salesAmounts) {
-        List<SalesRequestDto> salesList = new ArrayList<>();
+    /** Sales(매출) 리스트 생성 */
+    private List<Sales> toSalesList(String[] years, Integer[] amounts, Client client) {
+        List<Sales> salesList = new ArrayList<>();
 
-        if (salesYears != null && salesAmounts != null) {
-            for (int i = 0; i < salesYears.length; i++) {
-                if (salesYears[i] == null || salesAmounts[i] == null) {
+        if (years != null && amounts != null) {
+            // 더 작은 배열 길이만큼 반복
+            int length = Math.min(years.length, amounts.length);
+
+            for (int i = 0; i < length; i++) {
+                // 값 없다면 건너뛴다.
+                if (years[i] == null || amounts[i] == null)
                     continue;
-                }
-                salesList.add(SalesRequestDto.builder()
-                        .salesYear(salesYears[i])
-                        .salesAmount(salesAmounts[i])
+
+                salesList.add(Sales.builder()
+                        .client(client)
+                        .salesYear(years[i])
+                        .amount(amounts[i])
                         .build());
             }
-
         }
-
         return salesList;
     }
 

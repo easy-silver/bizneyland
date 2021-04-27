@@ -22,25 +22,17 @@ public class SalesService {
 
 
     /**
-     * 매출 정보 등록
+     * 매출 정보 복수건 등록
      * @param salesList 리스트
      */
-    public void register(List<SalesRequestDto> salesList, Long clientSeq) {
-
-        Client findClient = clientRepository.findById(clientSeq)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 업체입니다. id=" + clientSeq));
-
-        for (SalesRequestDto sales : salesList) {
-            repository.save(Sales.builder()
-                    .client(findClient)
-                    .salesYear(sales.getSalesYear())
-                    .amount(sales.getSalesAmount())
-                    .build());
+    public void register(List<Sales> salesList) {
+        for (Sales sales : salesList) {
+            repository.save(sales);
         }
     }
 
     /**
-     * 매출 정보 등록
+     * 매출 정보 단건 등록
      * @param requestDto
      */
     public void register(SalesRequestDto requestDto) {

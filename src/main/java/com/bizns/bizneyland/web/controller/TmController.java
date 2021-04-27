@@ -56,6 +56,9 @@ public class TmController {
     @PostMapping("register")
     public String register(ClientCreateRequestDto clientDto, TmRequestDto tmDto) {
 
+        // 고객(업체) 정보 및 매출 정보 등록
+        clientService.save(clientDto);
+
         return "redirect:/tm/list";
     }
 

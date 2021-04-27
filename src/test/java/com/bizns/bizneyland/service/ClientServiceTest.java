@@ -71,7 +71,8 @@ public class ClientServiceTest {
         service.save(ClientCreateRequestDto.builder()
                 .companyName("테스트 클라이언트")
                 .contact("010-1234-1234")
-                .salesYears(new String[] {"2012"})
+                .salesYears(new String[] {"2012", "2020", "2019"})
+                .salesAmount(new Integer[] {1000, 3000})
                 .build());
     }
 }

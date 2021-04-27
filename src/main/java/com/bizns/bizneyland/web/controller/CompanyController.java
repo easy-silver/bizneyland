@@ -2,7 +2,7 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
-import com.bizns.bizneyland.web.dto.CompanyRequestDto;
+import com.bizns.bizneyland.web.dto.CompanyCreateRequestDto;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
 import com.bizns.bizneyland.web.dto.CompanyUpdateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
@@ -54,14 +54,14 @@ public class CompanyController {
      * */
     @GetMapping("register")
     public void register(Model model) {
-        model.addAttribute("companyRequestDto", new CompanyRequestDto());
+        model.addAttribute("companyRequestDto", new CompanyCreateRequestDto());
     }
 
     /**
      * 회사 등록
      * */
     @PostMapping("register")
-    public String registerCompany(@Valid CompanyRequestDto requestDto, BindingResult result) {
+    public String registerCompany(@Valid CompanyCreateRequestDto requestDto, BindingResult result) {
         if (result.hasErrors())
             return "company/register";
 

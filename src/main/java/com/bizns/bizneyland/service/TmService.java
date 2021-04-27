@@ -2,16 +2,20 @@ package com.bizns.bizneyland.service;
 
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.domain.client.ClientRepository;
+import com.bizns.bizneyland.domain.loan.Loan;
+import com.bizns.bizneyland.domain.loan.LoanRepository;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.domain.tm.Tm;
 import com.bizns.bizneyland.domain.tm.TmRepository;
-import com.bizns.bizneyland.web.dto.TmRequestDto;
+import com.bizns.bizneyland.web.dto.LoanRequestDto;
+import com.bizns.bizneyland.web.dto.TmCreateRequestDto;
 import com.bizns.bizneyland.web.dto.TmResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +25,7 @@ public class TmService {
     private final TmRepository repository;
     private final ClientRepository clientRepository;
     private final MemberRepository memberRepository;
+    private final LoanService loanService;
 
     /**
      * TM 상담 등록
@@ -28,7 +33,7 @@ public class TmService {
      * @return
      */
     @Transactional
-    public Long save(TmRequestDto requestDto) {
+    public Long save(TmCreateRequestDto requestDto) {
 
         // 고객(Client) 조회
         Client client = clientRepository.findById(requestDto.getClientSeq())
@@ -38,10 +43,42 @@ public class TmService {
         Member member = memberRepository.findByUserSeq(requestDto.getUserSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상담사입니다. id=" + requestDto.getUserSeq()));
 
+        // TM 등록
         Tm tm = requestDto.toEntity().updateClient(client).updateCaller(member);
+        Tm savedTm = repository.save(tm);
 
-        // TM 상담 내역 등록
-        return repository.save(tm).getTmSeq();
+        // 대출 정보 등록
+        loanService.save(toLoanList(requestDto.getLoan(), savedTm));
+
+        return savedTm.getTmSeq();
+    }
+
+    private List<Loan> toLoanList(LoanRequestDto dto, Tm tm) {
+        List<Loan> list = new ArrayList<>();
+
+        if (dto != null) {
+            String[] creditors = dto.getCreditors();
+            int[] amounts = dto.getAmounts();
+            String[] purposes = dto.getPurposes();
+            String[] memos = dto.getMemos();
+
+            int repeatCount = Math.min(creditors.length, amounts.length);
+
+            for (int i = 0; i < repeatCount; i++) {
+                if (creditors[i] == null)
+                    continue;
+
+                list.add(Loan.builder()
+                        .tm(tm)
+                        .creditor(creditors[i])
+                        .amount(amounts[i])
+                        .purpose(purposes[i])
+                        .memo(memos[i])
+                        .build());
+            }
+        }
+
+        return list;
     }
 
     /**

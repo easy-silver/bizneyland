@@ -25,6 +25,7 @@ public class SalesService {
      * 매출 정보 복수건 등록
      * @param salesList 리스트
      */
+    @Transactional
     public void register(List<Sales> salesList) {
         for (Sales sales : salesList) {
             repository.save(sales);
@@ -35,6 +36,7 @@ public class SalesService {
      * 매출 정보 단건 등록
      * @param requestDto
      */
+    @Transactional
     public void register(SalesRequestDto requestDto) {
         Client client = clientRepository.findById(requestDto.getClientSeq())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 업체입니다. id=" + requestDto.getClientSeq()));

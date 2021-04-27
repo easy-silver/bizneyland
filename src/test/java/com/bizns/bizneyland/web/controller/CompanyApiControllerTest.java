@@ -2,9 +2,8 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
-import com.bizns.bizneyland.web.dto.CompanyRequestDto;
+import com.bizns.bizneyland.web.dto.CompanyCreateRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +50,7 @@ public class CompanyApiControllerTest {
         //given
         String name = "애플";
 
-        CompanyRequestDto requestDto = CompanyRequestDto.builder()
+        CompanyCreateRequestDto requestDto = CompanyCreateRequestDto.builder()
                 .businessNo("123-45-67890")
                 .name(name)
                 .build();
@@ -82,7 +81,7 @@ public class CompanyApiControllerTest {
         Long updateId = savedCompany.getId();
         String expectedAddress = "CaliCalifornia";
 
-        CompanyRequestDto requestDto = CompanyRequestDto.builder()
+        CompanyCreateRequestDto requestDto = CompanyCreateRequestDto.builder()
                 .address(expectedAddress)
                 .build();
 

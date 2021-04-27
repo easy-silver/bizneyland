@@ -7,7 +7,7 @@ import com.bizns.bizneyland.service.ClientService;
 import com.bizns.bizneyland.service.SalesService;
 import com.bizns.bizneyland.service.TmService;
 import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
-import com.bizns.bizneyland.web.dto.TmRequestDto;
+import com.bizns.bizneyland.web.dto.TmCreateRequestDto;
 import com.bizns.bizneyland.web.dto.TmResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -55,7 +55,7 @@ public class TmController {
      * TM 등록
      */
     @PostMapping("register")
-    public String register(ClientCreateRequestDto clientDto, TmRequestDto tmDto) {
+    public String register(ClientCreateRequestDto clientDto, TmCreateRequestDto tmDto) {
 
         // 고객(업체) 정보 및 매출 정보 등록
         Long clientSeq = clientService.save(clientDto);
@@ -100,7 +100,7 @@ public class TmController {
      * TM 등록(상담 정보) 등록
      */
     @PostMapping("register/tmInfo")
-    public String registerTmInfo(TmRequestDto requestDto, @LoginUser SessionUser user) {
+    public String registerTmInfo(TmCreateRequestDto requestDto, @LoginUser SessionUser user) {
 
         requestDto.setUserSeq(user.getUserSeq());
         service.save(requestDto);
@@ -124,4 +124,19 @@ public class TmController {
         return "redirect:/tm/list";
     }
 
+    /**
+     * 대출 정보 등록 화면
+     */
+    @GetMapping("loan/register")
+    public void registerLoanInfo() {
+
+    }
+
+    /**
+     * 대출 정보 등록
+     */
+    @PostMapping("loan/register")
+    public void registerLoanInfo(TmCreateRequestDto requestDto) {
+        service.save(requestDto);
+    }
 }

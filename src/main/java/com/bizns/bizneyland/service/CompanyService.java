@@ -4,7 +4,7 @@ import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.util.FormatUtil;
-import com.bizns.bizneyland.web.dto.CompanyRequestDto;
+import com.bizns.bizneyland.web.dto.CompanyCreateRequestDto;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
 import com.bizns.bizneyland.web.dto.CompanyUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -52,7 +52,7 @@ public class CompanyService {
      * 회사 등록
      * */
     @Transactional
-    public Long save(CompanyRequestDto requestDto) {
+    public Long save(CompanyCreateRequestDto requestDto) {
         // 전화번호 하이픈 제거
         requestDto.setTel(FormatUtil.removeHyphen(requestDto.getTel()));
 

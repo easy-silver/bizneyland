@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Getter @Setter
 @NoArgsConstructor
-public class CompanyRequestDto {
+public class CompanyCreateRequestDto {
 
     @NotEmpty(message = "사업자 번호는 필수입니다.")
     @Size(min = 12, max = 12, message = "10자리를 정확히 입력해주세요.")
@@ -29,7 +29,7 @@ public class CompanyRequestDto {
     private Long logoFileSeq;
 
     @Builder
-    public CompanyRequestDto(String name, String address, String tel, Long logoFileSeq, String businessNo) {
+    public CompanyCreateRequestDto(String name, String address, String tel, Long logoFileSeq, String businessNo) {
         this.name = name;
         this.address = address;
         this.tel = tel;

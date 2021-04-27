@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Getter @Setter
 @NoArgsConstructor
-public class TmRequestDto {
+public class TmCreateRequestDto {
 
     private Long clientSeq;
     private Long userSeq;
@@ -24,11 +24,14 @@ public class TmRequestDto {
     private String hopeCallTime;
     private String memo;
 
+    //대출 정보
+    private LoanRequestDto loan;
+
     @Builder
-    public TmRequestDto(Long clientSeq, Long userSeq, LocalDateTime callDate,
-                        String recipient, String headcount, Integer hopeAmount,
-                        Character arrearsYn, String arrearsDetail, String creditStatus,
-                        String hopeCallTime, String memo) {
+    public TmCreateRequestDto(Long clientSeq, Long userSeq, LocalDateTime callDate,
+                              String recipient, String headcount, Integer hopeAmount,
+                              Character arrearsYn, String arrearsDetail, String creditStatus,
+                              String hopeCallTime, String memo, LoanRequestDto loan) {
         this.clientSeq = clientSeq;
         this.userSeq = userSeq;
         this.callDate = callDate;
@@ -40,6 +43,7 @@ public class TmRequestDto {
         this.creditStatus = creditStatus;
         this.hopeCallTime = hopeCallTime;
         this.memo = memo;
+        this.loan = loan;
     }
 
     public Tm toEntity() {

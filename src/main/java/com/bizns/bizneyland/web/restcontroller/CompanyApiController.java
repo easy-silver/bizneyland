@@ -3,7 +3,7 @@ package com.bizns.bizneyland.web.restcontroller;
 import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.company.CompanyRepository;
 import com.bizns.bizneyland.service.CompanyService;
-import com.bizns.bizneyland.web.dto.CompanyRequestDto;
+import com.bizns.bizneyland.web.dto.CompanyCreateRequestDto;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
 import com.bizns.bizneyland.web.dto.CompanyUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class CompanyApiController {
     private final CompanyRepository repository;
 
     @PostMapping("/company")
-    public Long save(@RequestBody CompanyRequestDto requestDto) {
+    public Long save(@RequestBody CompanyCreateRequestDto requestDto) {
         return service.save(requestDto);
     }
 

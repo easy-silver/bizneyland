@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <!-- 체납 선택시 보여주기 -->
-                        <div class="form-group d-none">
+                        <div class="form-group d-none" id="arrearsDetailDiv">
                             <label for="arrearsDetail">체납 내역</label>
                             <textarea class="form-control" id="arrearsDetail" name="arrearsDetail"></textarea>
                         </div>
@@ -186,6 +186,16 @@
         </div>
         <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
         <script>
+            /** 체납 선택 시 상세 내역 보여주기 */
+            $('#arrearsYn').on('change', function() {
+                $('#arrearsDetail').val('');
+
+                if (this.value == 'Y') {
+                    $('#arrearsDetailDiv').removeClass("d-none");
+                } else {
+                    $('#arrearsDetailDiv').addClass("d-none");
+                }
+            });
 
             /** 매출 정보 추가 버튼 */
             $('#addSalesBtn').on('click', function () {

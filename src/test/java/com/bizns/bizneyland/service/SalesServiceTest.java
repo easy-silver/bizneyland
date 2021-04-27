@@ -5,7 +5,6 @@ import com.bizns.bizneyland.domain.client.ClientRepository;
 import com.bizns.bizneyland.domain.sales.Sales;
 import com.bizns.bizneyland.domain.sales.SalesRepository;
 import com.bizns.bizneyland.web.dto.SalesRequestDto;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,8 @@ public class SalesServiceTest {
     @Autowired SalesRepository repository;
     @Autowired ClientRepository clientRepository;
 
-    @Before
-    public void 업체_등록() {
-        clientRepository.save(Client.builder()
+    private Client createClient() {
+        return clientRepository.save(Client.builder()
                 .companyName("테스트")
                 .contact("032-123-1234")
                 .build());
@@ -37,15 +35,18 @@ public class SalesServiceTest {
 
     @Test
     public void 매출정보_등록() {
+        //given
+        Client client = createClient();
+
         //when
         service.register(SalesRequestDto.builder()
-                .clientSeq(1L)
+                .clientSeq(client.getClientSeq())
                 .salesYear("2020")
                 .salesAmount("1000")
                 .build());
 
         //then
-        List<Sales> salesList = repository.findByClient(clientRepository.findById(1L).get());
+        List<Sales> salesList = repository.findByClient(client);
         assertThat(salesList.size()).isEqualTo(1);
         assertThat(salesList.get(0).getSalesYear()).isEqualTo("2020");
     }

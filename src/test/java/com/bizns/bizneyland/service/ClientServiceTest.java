@@ -34,7 +34,6 @@ public class ClientServiceTest {
         Client client = createClient();
 
         assertThat(client.getCompanyName()).isEqualTo("테스트 클라이언트");
-        assertThat(client.getContact()).isEqualTo("01012341234");
     }
 
 

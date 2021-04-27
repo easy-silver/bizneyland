@@ -38,20 +38,22 @@ public class LoanRepositoryTest {
                 .name("Member Company")
                 .build());
 
-        Member member = memberRepository.save(Member.builder()
+        memberRepository.save(Member.builder()
                 .userSeq(1L)
                 .name("Call Tester")
                 .company(company)
                 .build());
+    }
 
+    private Tm createClientAndTm() {
         Client client = clientRepository.save(Client.builder()
                 .companyName("Client Company")
                 .contact("02-123-1234")
                 .build());
 
-        tmRepository.save(Tm.builder()
+        return tmRepository.save(Tm.builder()
                 .client(client)
-                .caller(member)
+                .caller(memberRepository.findByUserSeq(1L).get())
                 .build());
     }
 
@@ -62,12 +64,13 @@ public class LoanRepositoryTest {
         int amount = 3000;
 
         Loan loan = repository.save(Loan.builder()
-                .tm(tmRepository.findById(1L).get())
+                .tm(createClientAndTm())
                 .creditor(creditor)
                 .amount(amount)
                 .build());
         //when
-        Loan findLoan = repository.findById(loan.getLoanSeq()).get();
+        Loan findLoan = repository.findById(loan.getLoanSeq())
+                .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 대출 정보"));
 
         //then
         assertThat(findLoan.getCreditor()).isEqualTo(creditor);
@@ -77,7 +80,7 @@ public class LoanRepositoryTest {
     @Test
     public void TM번호로_조회() {
         //given
-        Tm tm = tmRepository.findById(1L).get();
+        Tm tm = createClientAndTm();
         Loan loan = repository.save(Loan.builder()
                 .tm(tm)
                 .creditor("농협")

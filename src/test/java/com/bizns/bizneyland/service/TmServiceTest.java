@@ -47,8 +47,10 @@ public class TmServiceTest {
                 .name("Call Tester")
                 .company(company)
                 .build());
+    }
 
-        clientRepository.save(Client.builder()
+    private Client createClient() {
+        return clientRepository.save(Client.builder()
                 .companyName("Client Company")
                 .contact("02-123-1234")
                 .build());
@@ -56,8 +58,9 @@ public class TmServiceTest {
 
     @Test
     public void TM_등록() {
+        Long clientSeq = createClient().getClientSeq();
         service.save(TmCreateRequestDto.builder()
-                .clientSeq(1L)
+                .clientSeq(clientSeq)
                 .userSeq(1L)
                 .build());
     }
@@ -65,8 +68,10 @@ public class TmServiceTest {
     @Test
     public void 대출현황_포함_등록() {
         //given
+        Long clientSeq = createClient().getClientSeq();
+
         Long tmSeq = service.save(TmCreateRequestDto.builder()
-                .clientSeq(1L)
+                .clientSeq(clientSeq)
                 .userSeq(1L)
                 .loan(LoanRequestDto.builder()
                         .creditors(new String[]{"국민은행", "농협"})

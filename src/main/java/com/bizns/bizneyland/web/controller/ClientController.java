@@ -96,7 +96,7 @@ public class ClientController {
     @GetMapping("delete/{clientSeq}")
     public String delete(@PathVariable Long clientSeq) {
 
-        service.deleteById(clientSeq);
+        service.delete(clientSeq);
 
         return "redirect:/client/list";
     }

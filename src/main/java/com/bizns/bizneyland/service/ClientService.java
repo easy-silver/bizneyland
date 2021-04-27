@@ -83,11 +83,11 @@ public class ClientService {
     }
 
     /**
-     * 기본키로 고객 삭제
+     * 고객 삭제
      * @param clientSeq
      */
     @Transactional
-    public void deleteById(Long clientSeq) {
+    public void delete(Long clientSeq) {
         repository.deleteById(clientSeq);
     }
 

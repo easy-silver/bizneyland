@@ -21,7 +21,9 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                      aria-labelledby="dropdownMenuLink2">
                                     <div class="dropdown-header">업체 정보 관리:</div>
-                                    <a class="dropdown-item" href="#">수정</a>
+                                    <a class="dropdown-item" th:href="@{/client/update/{seq}(seq=${client.clientSeq})}">수정</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" th:href="|javascript:deleteClient('${client.clientSeq}')|">삭제</a>
                                 </div>
                             </div>
                         </div>
@@ -208,6 +210,12 @@
             const deleteTm = function (seq) {
                 if (confirm('정말 삭제하시겠습니까?'))
                     window.location.href = '/tm/delete/' + seq;
+            };
+
+            /** 삭제 확인 이벤트 */
+            const deleteClient = function (seq) {
+                if (confirm('고객을 삭제하면 관련 상담 건이 전부 삭제됩니다.\n정말 삭제하시겠습니까?'))
+                    window.location.href = '/client/delete/' + seq;
             };
         </script>
     </div>

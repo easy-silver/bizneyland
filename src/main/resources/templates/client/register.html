@@ -12,24 +12,18 @@
                 </div>
                 <div class="card-body">
                     <form action="/client/register" method="post">
+                        <div class="form-group">
+                            <label for="companyName">회사명
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input class="form-control" id="companyName" name="companyName" required>
+                        </div>
                         <div class="form-group row">
                             <div class="col">
                                 <label for="contact">연락처
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input class="form-control" id="contact" name="contact" maxlength="14" required>
-                            </div>
-                            <div class="col">
-                                <label for="caller">상담사</label>
-                                <input class="form-control" id="caller" name="caller" maxlength="14" readonly2>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <label for="companyName">회사명
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input class="form-control" id="companyName" name="companyName" required>
                             </div>
                             <div class="col">
                                 <label for="type">업체 구분</label>

@@ -103,11 +103,13 @@
 
             /** 매출 정보 추가 버튼 */
             $('#addSalesBtn').on('click', function () {
-                const addElement = '<tr><td><input class="form-control" name="salesYears"></td>' +
-                    '<td><input type="number" class="form-control" name="salesAmount"></td>' +
-                    '<td class="text-center">' +
-                    '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button>' +
-                    '</td></tr>';
+                const addElement =
+                    '<tr>' +
+                        '<td><input class="form-control" name="salesYears" required></td>' +
+                        '<td><input class="form-control" type="number" name="salesAmount" required></td>' +
+                        '<td class="text-center">' +
+                        '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button></td>' +
+                    '</tr>';
 
                 $("#salesTable>tbody").append(addElement);
             });

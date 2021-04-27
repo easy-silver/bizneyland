@@ -12,6 +12,8 @@
                 </div>
                 <div class="card-body">
                     <form action="register" method="post">
+                        <!-- 상담사 정보 -->
+                        <input type="hidden" name="userSeq" th:value="${session.user.userSeq}">
 
                         <h4>업체 정보</h4>
                         <hr>

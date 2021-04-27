@@ -62,11 +62,9 @@ public class ClientController {
      * 고객 등록
      * */
     @PostMapping("register")
-    public String register(ClientCreateRequestDto clientDto, SalesRequestDto salesDto) {
+    public String register(ClientCreateRequestDto clientDto) {
 
-        Long clientSeq = service.save(clientDto);
-        salesDto.setClientSeq(clientSeq);
-        salesService.register(salesDto);
+        service.save(clientDto);
 
         return "redirect:/client/list";
     }

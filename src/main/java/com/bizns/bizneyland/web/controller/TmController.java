@@ -4,6 +4,7 @@ import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.service.ClientService;
+import com.bizns.bizneyland.service.LoanService;
 import com.bizns.bizneyland.service.SalesService;
 import com.bizns.bizneyland.service.TmService;
 import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
@@ -23,6 +24,7 @@ public class TmController {
     private final TmService service;
     private final ClientService clientService;
     private final SalesService salesService;
+    private final LoanService loanService;
 
     /**
      * TM 상담 목록
@@ -41,6 +43,7 @@ public class TmController {
         model.addAttribute("tm", tm);
         model.addAttribute("client", tm.getClient());
         model.addAttribute("salesList", salesService.findAllByClient(tm.getClient().getClientSeq()));
+        model.addAttribute("loanList", loanService.findAllByTm(tm.getTmSeq()));
         return "tm/detail";
     }
 

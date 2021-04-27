@@ -71,13 +71,17 @@
                         </div>
                         <div class="card-body">
                             <table class="table">
+                                <thead>
+                                    <th>연도</th>
+                                    <th>금액</th>
+                                </thead>
                                 <tbody>
                                     <tr th:if="${salesList.size()} == 0">
-                                        <td colspan="2">내용이 없습니다</td>
+                                        <td class="text-center" colspan="2">내용이 없습니다</td>
                                     </tr>
                                     <tr th:each="sales : ${salesList}">
-                                        <th th:text="${sales.salesYear}"/>
-                                        <td th:text="${sales.salesAmount}"/>
+                                        <th class="text-center" th:text="${sales.salesYear}"/>
+                                        <td class="text-center" th:text="${sales.salesAmount}"/>
                                     </tr>
                                 </tbody>
                             </table>
@@ -164,6 +168,35 @@
                         </div>
                     </div>
                     <!-- 우측 첫번째 카드 종료 -->
+
+                    <!-- 우측 두 번째 카드 -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">대출 정보</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <th>해당 기관명</th>
+                                    <th>용도</th>
+                                    <th>금액</th>
+                                    <th>메모 및 특이사항</th>
+                                </thead>
+                                <tbody>
+                                    <tr th:if="${loanList.size()} == 0">
+                                        <td colspan="4">내용이 없습니다</td>
+                                    </tr>
+                                    <tr th:each="loan : ${loanList}">
+                                        <td class="text-center" th:text="${loan.creditor}"/>
+                                        <td class="text-center" th:text="${loan.purpose}"/>
+                                        <td class="text-center" th:text="${loan.amount}"/>
+                                        <td class="text-center" th:text="${loan.memo}"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- //우측 두 번째 카드 -->
 
                 </div>
                 <!-- 우측열 카드 목록 종료 -->

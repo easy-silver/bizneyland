@@ -58,6 +58,8 @@ public class Client extends BaseTimeEntity {
     }
 
     public void update(ClientUpdateRequestDto dto) {
+        this.companyName = dto.getCompanyName();
+        this.owner = dto.getOwner();
         this.type = dto.getType();
         this.establishDate = dto.getEstablishDate();
         this.sector = dto.getSector();

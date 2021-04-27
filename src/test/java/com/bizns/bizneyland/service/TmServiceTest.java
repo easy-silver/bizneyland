@@ -11,6 +11,8 @@ import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.domain.tm.TmRepository;
 import com.bizns.bizneyland.web.dto.LoanRequestDto;
 import com.bizns.bizneyland.web.dto.TmCreateRequestDto;
+import com.bizns.bizneyland.web.dto.TmResponseDto;
+import com.bizns.bizneyland.web.dto.TmUpdateRequestDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -86,6 +88,33 @@ public class TmServiceTest {
 
         //then
         assertThat(loanList.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void 상담내용_수정() {
+        //given
+        Long clientSeq = createClient().getClientSeq();
+        Long tmSeq = service.save(TmCreateRequestDto.builder()
+                .clientSeq(clientSeq)
+                .userSeq(1L)
+                .memo("변경 전 메모")
+                .arrearsYn('Y')
+                .build());
+
+        //when
+        String modifiedMemo = "변경 후 메모";
+
+        Long updateTmSeq = service.updateTmInfo(TmUpdateRequestDto.builder()
+                .tmSeq(tmSeq)
+                .memo(modifiedMemo)
+                .arrearsYn('N')
+                .build());
+
+        TmResponseDto updateTm = service.findById(updateTmSeq);
+
+        //then
+        assertThat(updateTm.getMemo()).isEqualTo(modifiedMemo);
+        assertThat(updateTm.getArrearsYn()).isEqualTo('N');
     }
 
 }

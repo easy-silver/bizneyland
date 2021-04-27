@@ -10,6 +10,7 @@ import com.bizns.bizneyland.domain.tm.TmRepository;
 import com.bizns.bizneyland.web.dto.LoanRequestDto;
 import com.bizns.bizneyland.web.dto.TmCreateRequestDto;
 import com.bizns.bizneyland.web.dto.TmResponseDto;
+import com.bizns.bizneyland.web.dto.TmUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 @Service
 public class TmService {
     private final TmRepository repository;
@@ -118,5 +120,19 @@ public class TmService {
         Tm entity = repository.findById(tmSeq)
                 .orElseThrow(() -> new IllegalArgumentException("해당 상담 건이 없습니다. tmSeq=" + tmSeq));
         return new TmResponseDto(entity);
+    }
+
+    /**
+     * 상담 내용 수정
+     * @param requestDto
+     * @return
+     */
+    public Long updateTmInfo(TmUpdateRequestDto requestDto) {
+        Tm tm = repository.findById(requestDto.getTmSeq())
+                .orElseThrow(() -> new IllegalArgumentException("해당 상담 건이 없습니다. SEQ=" + requestDto.getTmSeq()));
+
+        tm.updateTmInfo(requestDto);
+
+        return tm.getTmSeq();
     }
 }

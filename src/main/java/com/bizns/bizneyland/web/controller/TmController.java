@@ -7,6 +7,7 @@ import com.bizns.bizneyland.service.TmService;
 import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.TmCreateRequestDto;
 import com.bizns.bizneyland.web.dto.TmResponseDto;
+import com.bizns.bizneyland.web.dto.TmUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,12 +67,22 @@ public class TmController {
         return "redirect:/tm/list";
     }
 
+    /**
+     * TM 수정 화면
+     */
     @GetMapping("update/{seq}")
     public String update(@PathVariable Long seq, Model model) {
         TmResponseDto tm = service.findById(seq);
         model.addAttribute("tm", tm);
 
         return "tm/update";
+    }
+
+    @PostMapping("update")
+    public String update(TmUpdateRequestDto requestDto) {
+        service.updateTmInfo(requestDto);
+
+        return "redirect:/tm/detail/" + requestDto.getTmSeq();
     }
 
 

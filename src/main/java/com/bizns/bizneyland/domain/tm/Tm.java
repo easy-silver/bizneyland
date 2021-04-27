@@ -3,6 +3,7 @@ package com.bizns.bizneyland.domain.tm;
 import com.bizns.bizneyland.domain.BaseTimeEntity;
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.domain.member.Member;
+import com.bizns.bizneyland.web.dto.TmUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,6 +70,17 @@ public class Tm extends BaseTimeEntity {
         this.creditStatus = creditStatus;
         this.hopeCallTime = hopeCallTime;
         this.memo = memo;
+    }
+
+    public void updateTmInfo(TmUpdateRequestDto dto) {
+        this.recipient = dto.getRecipient();
+        this.headcount = dto.getHeadcount();
+        this.hopeAmount = dto.getHopeAmount();
+        this.arrearsYn = dto.getArrearsYn();
+        this.arrearsDetail = dto.getArrearsDetail();
+        this.creditStatus = dto.getCreditStatus();
+        this.hopeCallTime = dto.getHopeCallTime();
+        this.memo = dto.getMemo();
     }
 
     public Tm updateClient(Client client) {

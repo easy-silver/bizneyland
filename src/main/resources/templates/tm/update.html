@@ -11,8 +11,18 @@
                     <h6 class="m-0 font-weight-bold text-primary">TM 등록</h6>
                 </div>
                 <div class="card-body">
-                    <form action="register" method="post" th:object="${tm}">
+                    <form action="/tm/update" method="post" th:object="${tm}">
                         <input type="hidden" th:field="*{tmSeq}">
+                        <div class="form-group row">
+                            <div class="col">
+                                <label>통화일시</label>
+                                <input class="form-control" th:value="${tm.callDate}" readonly>
+                            </div>
+                            <div class="col">
+                                <label th:for="recipient">수신인</label>
+                                <input class="form-control" th:field="*{recipient}">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col">
                                 <label th:for="headcount">직원 수</label>

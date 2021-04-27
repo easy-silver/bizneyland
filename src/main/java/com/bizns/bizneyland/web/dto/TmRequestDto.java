@@ -6,36 +6,52 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter @Setter
 @NoArgsConstructor
 public class TmRequestDto {
 
     private Long clientSeq;
     private Long userSeq;
-    private String hopeCallTime;
+    private LocalDateTime callDate;
+    private String recipient;
+    private String headcount;
     private Integer hopeAmount;
-    private String creditStatus;
     private Character arrearsYn;
+    private String arrearsDetail;
+    private String creditStatus;
+    private String hopeCallTime;
     private String memo;
 
     @Builder
-    public TmRequestDto(Long clientSeq, Long userSeq, String hopeCallTime, Integer hopeAmount,
-                        String creditStatus, Character arrearsYn, String memo) {
+    public TmRequestDto(Long clientSeq, Long userSeq, LocalDateTime callDate,
+                        String recipient, String headcount, Integer hopeAmount,
+                        Character arrearsYn, String arrearsDetail, String creditStatus,
+                        String hopeCallTime, String memo) {
         this.clientSeq = clientSeq;
         this.userSeq = userSeq;
-        this.hopeCallTime = hopeCallTime;
+        this.callDate = callDate;
+        this.recipient = recipient;
+        this.headcount = headcount;
         this.hopeAmount = hopeAmount;
-        this.creditStatus = creditStatus;
         this.arrearsYn = arrearsYn;
+        this.arrearsDetail = arrearsDetail;
+        this.creditStatus = creditStatus;
+        this.hopeCallTime = hopeCallTime;
         this.memo = memo;
     }
 
     public Tm toEntity() {
         return Tm.builder()
-                .hopeCallTime(hopeCallTime)
+                .callDate(callDate)
+                .recipient(recipient)
+                .headcount(headcount)
                 .hopeAmount(hopeAmount)
-                .creditStatus(creditStatus)
                 .arrearsYn(arrearsYn)
+                .arrearsDetail(arrearsDetail)
+                .creditStatus(creditStatus)
+                .hopeCallTime(hopeCallTime)
                 .memo(memo)
                 .build();
     }

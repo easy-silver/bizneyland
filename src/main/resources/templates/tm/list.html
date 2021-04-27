@@ -41,7 +41,7 @@
                                 <tr th:each="tm, idx : ${tmList}">
                                     <!--<td class="text-center" th:text="${idx.count}"/>-->
                                     <td class="text-center" th:text="${tm.tmSeq}"/>
-                                    <td class="text-center" th:text="${tm.clientSeq}"/>
+                                    <td class="text-center" th:text="${tm.client.clientSeq}"/>
                                     <td>
                                         <a th:href="@{detail/{tmSeq}(tmSeq=${tm.tmSeq})}" th:text="${tm.client.companyName}" />
                                     </td>

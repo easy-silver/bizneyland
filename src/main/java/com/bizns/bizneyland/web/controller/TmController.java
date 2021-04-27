@@ -4,6 +4,7 @@ import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.service.ClientService;
+import com.bizns.bizneyland.service.SalesService;
 import com.bizns.bizneyland.service.TmService;
 import com.bizns.bizneyland.web.dto.ClientCreateRequestDto;
 import com.bizns.bizneyland.web.dto.TmRequestDto;
@@ -19,15 +20,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class TmController {
 
+    private final TmService service;
     private final ClientService clientService;
-    private final TmService tmService;
+    private final SalesService salesService;
 
     /**
      * TM 상담 목록
      */
     @GetMapping("list")
     public void list(Model model) {
-        model.addAttribute("tmList", tmService.findAllDesc());
+        model.addAttribute("tmList", service.findAllDesc());
     }
 
     /**
@@ -35,11 +37,10 @@ public class TmController {
      */
     @GetMapping("detail/{tmNo}")
     public String tmDetail(Model model, @PathVariable Long tmNo) {
-        TmResponseDto tm = tmService.findById(tmNo);
-        Long clientNo = tm.getClientSeq();
-        clientService.findById(clientNo);
+        TmResponseDto tm = service.findById(tmNo);
         model.addAttribute("tm", tm);
-        model.addAttribute("client", clientService.findById(clientNo));
+        model.addAttribute("client", tm.getClient());
+        model.addAttribute("salesList", salesService.findAllByClient(tm.getClient().getClientSeq()));
         return "tm/detail";
     }
 
@@ -57,7 +58,9 @@ public class TmController {
     public String register(ClientCreateRequestDto clientDto, TmRequestDto tmDto) {
 
         // 고객(업체) 정보 및 매출 정보 등록
-        clientService.save(clientDto);
+        Long clientSeq = clientService.save(clientDto);
+        tmDto.setClientSeq(clientSeq);
+        service.save(tmDto);
 
         return "redirect:/tm/list";
     }
@@ -100,7 +103,7 @@ public class TmController {
     public String registerTmInfo(TmRequestDto requestDto, @LoginUser SessionUser user) {
 
         requestDto.setUserSeq(user.getUserSeq());
-        tmService.save(requestDto);
+        service.save(requestDto);
 
         return "redirect:/tm/list";
     }

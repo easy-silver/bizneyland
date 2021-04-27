@@ -6,6 +6,7 @@ import com.bizns.bizneyland.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,7 +23,7 @@ public class Tm extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long tmSeq;
 
-    /* 고객 번호(FK) */
+    /* 고객(업체) 번호(FK) */
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "client_seq", nullable = false)
     private Client client;
@@ -59,7 +60,7 @@ public class Tm extends BaseTimeEntity {
               String creditStatus, String hopeCallTime, String memo) {
         this.client = client;
         this.caller = caller;
-        this.callDate = callDate;
+        this.callDate = callDate == null ? LocalDateTime.now() : callDate;
         this.recipient = recipient;
         this.headcount = headcount;
         this.hopeAmount = hopeAmount;

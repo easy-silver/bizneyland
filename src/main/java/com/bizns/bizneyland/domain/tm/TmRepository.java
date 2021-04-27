@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TmRepository extends JpaRepository<Tm, Long> {
 
-    @Query("SELECT t FROM Tm t ORDER BY t.tmSeq DESC")
+    @Query("SELECT t FROM Tm t JOIN FETCH t.client JOIN FETCH t.caller ORDER BY t.tmSeq DESC")
     List<Tm> findAllDesc();
 
     @Query("SELECT t FROM Tm t WHERE t.client.clientSeq = ?1 ORDER BY t.tmSeq DESC")

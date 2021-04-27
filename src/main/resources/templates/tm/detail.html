@@ -6,9 +6,7 @@
 
     <div layout:fragment="content">
         <div class="container-fluid">
-
             <div class="row">
-
                 <!-- 좌측열 카드 목록 -->
                 <div class="col-lg-6">
                     <!-- 좌측열 첫 번째 카드 -->
@@ -22,11 +20,8 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                      aria-labelledby="dropdownMenuLink2">
-                                    <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-header">업체 정보 관리:</div>
+                                    <a class="dropdown-item" href="#">수정</a>
                                 </div>
                             </div>
                         </div>
@@ -70,32 +65,24 @@
                     <!-- 좌측 첫 번째 카드 종료 -->
 
                     <!-- 좌측 두 번째 카드 -->
-                    <!--
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Sales Info</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">매출 정보</h6>
                         </div>
                         <div class="card-body">
                             <table class="table">
-                                <tr>
-                                    <th>2021년</th>
-                                    <td>30,000 원</td>
-                                </tr>
-                                <tr>
-                                    <th>2020년</th>
-                                    <td>50,000 만원</td>
-                                </tr>
-                                <tr>
-                                    <th>2019년</th>
-                                    <td>45,000 만원</td>
-                                </tr>
-                                <tr>
-                                    <th>2018년</th>
-                                    <td>40,000 만원</td>
-                                </tr>
+                                <tbody>
+                                    <tr th:if="${salesList.size()} == 0">
+                                        <td colspan="2">내용이 없습니다</td>
+                                    </tr>
+                                    <tr th:each="sales : ${salesList}">
+                                        <th th:text="${sales.salesYear}"/>
+                                        <td th:text="${sales.salesAmount}"/>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
-                    </div>-->
+                    </div>
                     <!-- 좌측 두 번째 카드 종료 -->
                 </div>
                 <!-- 좌측열 카드 목록 종료 -->
@@ -114,11 +101,10 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                      aria-labelledby="dropdownMenuLink">
-                                    <div class="dropdown-header">Dropdown Header:</div>
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-header">상담내역 관리:</div>
+                                    <a class="dropdown-item" href="#">수정</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item text-danger" href="#">삭제</a>
                                 </div>
                             </div>
                         </div>
@@ -129,32 +115,28 @@
                                     <td th:text="${tm.callDate}"/>
                                 </tr>
                                 <tr>
-                                    <th>희망 통화 시간</th>
-                                    <td th:text="${tm.hopeCallTime}"/>
-                                </tr>
-                                <tr>
                                     <th>상담사</th>
                                     <td th:text="${tm.caller.name}"/>
+                                </tr>
+                                <tr>
+                                    <th>수신인</th>
+                                    <td th:text="${tm.recipient}"/>
+                                </tr>
+                                <tr>
+                                    <th>직원 수</th>
+                                    <td th:text="${tm.headcount}"/>
                                 </tr>
                                 <tr>
                                     <th>대출 희망액</th>
                                     <td>
                                         <span th:if="${tm.hopeAmount}">
-                                            <span th:text="${#numbers.formatInteger(tm.getHopeAmount(), 3, 'COMMA')}">3,000</span>원
+                                            <span th:text="${#numbers.formatInteger(tm.hopeAmount, 3, 'COMMA')}">3,000</span>원
                                         </span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>자금 용도</th>
-                                    <td th:text="${tm.purpose}"/>
-                                </tr>
-                                <tr>
                                     <th>신용 상태</th>
                                     <td th:text="${tm.creditStatus}"/>
-                                </tr>
-                                <tr>
-                                    <th>주거래 은행</th>
-                                    <td th:text="${tm.mainBank}"/>
                                 </tr>
                                 <tr>
                                     <th>체납 여부</th>
@@ -162,23 +144,21 @@
                                         <span th:if="${tm.arrearsYn}" th:text="${tm.arrearsYn} == 'Y' ? '체납' : '완납'"/>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>주택 종류</th>
-                                    <td th:text="${tm.houseType}"/>
-                                </tr>
-                                <tr>
-                                    <th>대출 여부</th>
+                                <tr th:if="${tm.arrearsYn} == 'Y'">
+                                    <th>체납 상세 내역</th>
                                     <td>
-                                        <span th:if="${tm.loanYn}" th:text="${tm.loanYn} == 'Y' ? '있음' : '없음'"/>
+                                        <p th:text="${tm.arrearsDetail}"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>대출 총액</th>
-                                    <td th:text="${tm.loanAmount}"/>
+                                    <th>희망 통화 시간</th>
+                                    <td th:text="${tm.hopeCallTime}"/>
                                 </tr>
                                 <tr>
                                     <th>특이사항</th>
-                                    <td th:text="${tm.memo}"/>
+                                    <td>
+                                        <p th:text="${tm.memo}"/>
+                                    </td>
                                 </tr>
                             </table>
                         </div>

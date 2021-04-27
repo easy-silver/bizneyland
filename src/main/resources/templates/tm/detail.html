@@ -184,7 +184,7 @@
                                 </thead>
                                 <tbody>
                                     <tr th:if="${loanList.size()} == 0">
-                                        <td colspan="4">내용이 없습니다</td>
+                                        <td class="text-center" colspan="4">내용이 없습니다</td>
                                     </tr>
                                     <tr th:each="loan : ${loanList}">
                                         <td class="text-center" th:text="${loan.creditor}"/>

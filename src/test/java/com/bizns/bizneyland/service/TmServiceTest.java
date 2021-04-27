@@ -117,4 +117,21 @@ public class TmServiceTest {
         assertThat(updateTm.getArrearsYn()).isEqualTo('N');
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void 상담_삭제() {
+        //given
+        Long clientSeq = createClient().getClientSeq();
+        Long tmSeq = service.save(TmCreateRequestDto.builder()
+                .clientSeq(clientSeq)
+                .userSeq(1L)
+                .build());
+
+        //when
+        service.delete(tmSeq);
+
+        //then
+        service.findById(tmSeq);
+        assertThat(service.findAllDesc().size()).isEqualTo(0);
+    }
+
 }

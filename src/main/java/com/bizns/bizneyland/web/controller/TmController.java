@@ -48,7 +48,7 @@ public class TmController {
     }
 
     /**
-     * TM 등록 양식
+     * TM 등록 화면
      */
     @GetMapping("register")
     public void register() { }
@@ -78,6 +78,9 @@ public class TmController {
         return "tm/update";
     }
 
+    /**
+     * TM 수정
+     */
     @PostMapping("update")
     public String update(TmUpdateRequestDto requestDto) {
         service.updateTmInfo(requestDto);
@@ -85,6 +88,15 @@ public class TmController {
         return "redirect:/tm/detail/" + requestDto.getTmSeq();
     }
 
+    /**
+     * TM 삭제
+     */
+    @GetMapping("delete/{seq}")
+    public String delete(@PathVariable Long seq) {
+        service.delete(seq);
+
+        return "redirect:/tm/list";
+    }
 
     /**
      * [TEST] 대출 정보 등록 화면

@@ -106,9 +106,9 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                      aria-labelledby="dropdownMenuLink">
                                     <div class="dropdown-header">상담내역 관리:</div>
-                                    <a class="dropdown-item" href="#">수정</a>
+                                    <a class="dropdown-item" th:href="@{/tm/update/{seq}(seq=${tm.tmSeq})}">수정</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="#">삭제</a>
+                                    <a class="dropdown-item text-danger" th:href="|javascript:deleteTm('${tm.tmSeq}')|">삭제</a>
                                 </div>
                             </div>
                         </div>
@@ -203,6 +203,12 @@
             </div>
 
         </div>
-
+        <script>
+            /** 삭제 확인 이벤트 */
+            const deleteTm = function (seq) {
+                if (confirm('정말 삭제하시겠습니까?'))
+                    window.location.href = '/tm/delete/' + seq;
+            };
+        </script>
     </div>
 </html>

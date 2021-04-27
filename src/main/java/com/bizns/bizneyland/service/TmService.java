@@ -135,4 +135,12 @@ public class TmService {
 
         return tm.getTmSeq();
     }
+
+    /**
+     * 한 건 삭제
+     * @param seq(PK)
+     */
+    public void delete(Long seq) {
+        repository.deleteById(seq);
+    }
 }

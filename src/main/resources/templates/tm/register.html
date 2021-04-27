@@ -26,8 +26,8 @@
                                 <input class="form-control" id="contact" name="contact" maxlength="14" required>
                             </div>
                             <div class="col">
-                                <label for="">수신인</label>
-                                <input class="form-control" id="" name="" maxlength="14">
+                                <label for="recipient">수신인</label>
+                                <input class="form-control" id="recipient" name="recipient" maxlength="14">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -72,18 +72,18 @@
                         </div>
                         <div class="form-group row">
                             <div class="col">
-                                <label for="">직원 수</label>
-                                <input class="form-control" id="" name="">
+                                <label for="headcount">직원 수</label>
+                                <input class="form-control" id="headcount" name="headcount">
                             </div>
                             <div class="col">
-                                <label for="">신용평점</label>
-                                <input class="form-control" id="" name="">
+                                <label for="creditStatus">신용평점</label>
+                                <input class="form-control" id="creditStatus" name="creditStatus">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col">
-                                <label for="">희망자금</label>
-                                <input class="form-control" id="" name="">
+                                <label for="hopeAmount">희망자금</label>
+                                <input class="form-control" id="hopeAmount" name="hopeAmount" placeholder="숫자만 입력">
                             </div>
                             <div class="col">
                                 <label for="arrearsYn">세금 체납 여부</label>
@@ -96,10 +96,11 @@
                         </div>
                         <!-- 체납 선택시 보여주기 -->
                         <div class="form-group d-none">
-                            <label for="">체납 내역</label>
-                            <textarea class="form-control" id="" name=""></textarea>
+                            <label for="arrearsDetail">체납 내역</label>
+                            <textarea class="form-control" id="arrearsDetail" name="arrearsDetail"></textarea>
                         </div>
 
+                        <!-- 매출 정보 -->
                         <h4 class="mt-4">매출 정보</h4>
                         <table class="table" id="salesTable">
                             <colgroup>
@@ -115,15 +116,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <input class="form-control" name="salesYears">
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control" name="salesAmount">
-                                </td>
-                                <td></td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <input class="form-control" name="salesYears" maxlength="4" placeholder="숫자 4자리로 입력하세요.(ex.2021)">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" name="salesAmount">
+                                    </td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                         <button type="button" id="addSalesBtn" class="mb-4 btn btn-secondary">추가</button>
@@ -141,34 +142,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control">
-                                    </td>
-                                    <td>
-                                        <input class="form-control">
-                                    </td>
-                                    <td>
-                                        <input class="form-control">
-                                    </td>
-                                    <td>
-                                        <input class="form-control">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input class="form-control">
-                                    </td>
-                                    <td>
-                                        <input class="form-control">
-                                    </td>
-                                    <td>
-                                        <input class="form-control">
-                                    </td>
-                                    <td>
-                                        <input class="form-control">
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td>
                                         <input class="form-control">
@@ -204,11 +177,14 @@
 
             /** 매출 정보 추가 버튼 */
             $('#addSalesBtn').on('click', function () {
-                const addElement = '<tr><td><input class="form-control" name="salesYears"></td>' +
-                    '<td><input type="number" class="form-control" name="salesAmount"></td>' +
-                    '<td class="text-center">' +
-                    '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button>' +
-                    '</td></tr>';
+                const addElement =
+                    '<tr>' +
+                        '<td><input class="form-control" name="salesYears" maxlength="4" required></td>' +
+                        '<td><input class="form-control" name="salesAmount" required></td>' +
+                        '<td class="text-center">' +
+                            '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button>' +
+                        '</td>' +
+                    '</tr>';
 
                 $("#salesTable>tbody").append(addElement);
             });

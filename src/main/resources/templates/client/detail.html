@@ -115,11 +115,11 @@
                         </thead>
                         <tbody>
                             <tr th:each="tm : ${tms}">
-                                <td th:text="${tm.tmSeq}"></td>
-                                <td>
+                                <td class="text-center" th:text="${tm.tmSeq}"/>
+                                <td class="text-center">
                                     <a th:href="@{/tm/detail/{seq}(seq=${tm.tmSeq})}" th:text="${tm.callDate}"/>
                                 </td>
-                                <td th:text="${tm.caller.name}"></td>
+                                <td class="text-center" th:text="${tm.caller.name}"/>
                             </tr>
                         </tbody>
                     </table>

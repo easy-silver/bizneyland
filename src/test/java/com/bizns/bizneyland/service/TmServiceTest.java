@@ -69,11 +69,10 @@ public class TmServiceTest {
                 .clientSeq(1L)
                 .userSeq(1L)
                 .loan(LoanRequestDto.builder()
-                        .creditors(new String[]{"국민은행"})
-                        .amounts(new int[]{1000})
-                        //FIXME: 필수값 아닌 것들 어떻게 저장할지 고민하기
-                        //.purposes(new String[]{""})
-                        //.memos(new String[]{""})
+                        .creditors(new String[]{"국민은행", "농협"})
+                        .amounts(new int[]{1000, 2000})
+                        .purposes(new String[] {"생활비"})
+                        .memos(new String[] {"특이사항"})
                         .build())
                 .build());
 
@@ -81,7 +80,7 @@ public class TmServiceTest {
         List<Loan> loanList = loanRepository.findByTm(repository.findById(tmSeq).get());
 
         //then
-        assertThat(loanList.size()).isEqualTo(1);
+        assertThat(loanList.size()).isEqualTo(2);
     }
 
 }

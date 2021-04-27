@@ -3,7 +3,6 @@ package com.bizns.bizneyland.service;
 import com.bizns.bizneyland.domain.client.Client;
 import com.bizns.bizneyland.domain.client.ClientRepository;
 import com.bizns.bizneyland.domain.loan.Loan;
-import com.bizns.bizneyland.domain.loan.LoanRepository;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberRepository;
 import com.bizns.bizneyland.domain.tm.Tm;
@@ -53,6 +52,9 @@ public class TmService {
         return savedTm.getTmSeq();
     }
 
+    /**
+     * 대출 정보 리스트 생성
+     */
     private List<Loan> toLoanList(LoanRequestDto dto, Tm tm) {
         List<Loan> list = new ArrayList<>();
 
@@ -68,13 +70,19 @@ public class TmService {
                 if (creditors[i] == null)
                     continue;
 
-                list.add(Loan.builder()
+                Loan entity = Loan.builder()
                         .tm(tm)
                         .creditor(creditors[i])
                         .amount(amounts[i])
-                        .purpose(purposes[i])
-                        .memo(memos[i])
-                        .build());
+                        .build();
+
+                if (purposes != null && purposes.length > i)
+                    entity.setPurpose(purposes[i]);
+
+                if (memos != null && memos.length > i)
+                    entity.setMemo(memos[i]);
+
+                list.add(entity);
             }
         }
 

@@ -51,4 +51,12 @@ public class Loan {
         this.tm = tm;
         return this;
     }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
+    }
 }

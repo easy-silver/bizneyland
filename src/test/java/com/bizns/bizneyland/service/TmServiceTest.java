@@ -53,7 +53,7 @@ public class TmServiceTest {
 
     private Client createClient() {
         return clientRepository.save(Client.builder()
-                .companyName("Client Company")
+                .name("Client Company")
                 .contact("02-123-1234")
                 .build());
     }

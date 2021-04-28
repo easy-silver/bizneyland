@@ -43,7 +43,7 @@
                                     <td class="text-center" th:text="${tm.tmSeq}"/>
                                     <td class="text-center" th:text="${tm.client.clientSeq}"/>
                                     <td>
-                                        <a th:href="@{detail/{tmSeq}(tmSeq=${tm.tmSeq})}" th:text="${tm.client.companyName}" />
+                                        <a th:href="@{detail/{tmSeq}(tmSeq=${tm.tmSeq})}" th:text="${tm.client.name}" />
                                     </td>
                                     <td th:text="${tm.client.owner}"/>
                                     <td th:text="${tm.callDate}"/>

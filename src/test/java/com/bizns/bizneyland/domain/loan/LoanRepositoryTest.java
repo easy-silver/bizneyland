@@ -47,7 +47,7 @@ public class LoanRepositoryTest {
 
     private Tm createClientAndTm() {
         Client client = clientRepository.save(Client.builder()
-                .companyName("Client Company")
+                .name("Client Company")
                 .contact("02-123-1234")
                 .build());
 

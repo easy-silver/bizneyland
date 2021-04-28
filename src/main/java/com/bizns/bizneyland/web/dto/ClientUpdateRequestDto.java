@@ -7,7 +7,7 @@ import lombok.Setter;
 public class ClientUpdateRequestDto {
 
     private Long clientSeq;
-    private String companyName;
+    private String name;
     private String contact;
     private String owner;
     private String address;

@@ -37,7 +37,7 @@
                                     <td class="text-center" th:text="${client.clientSeq}"></td>
                                     <td class="text-center" th:text="${client.type} == 'P' ? '개인' : '법인'"></td>
                                     <td>
-                                        <a th:text="${client.companyName}" th:href="@{detail/{clientSeq}(clientSeq=${client.clientSeq})}"/>
+                                        <a th:text="${client.name}" th:href="@{detail/{clientSeq}(clientSeq=${client.clientSeq})}"/>
                                     </td>
                                     <td th:text="${client.owner}"></td>
                                     <td th:text="${client.contact}"></td>

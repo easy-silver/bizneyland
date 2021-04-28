@@ -95,7 +95,7 @@ public class ClientService {
      * 동일한 고객(회사)명 존재하는지 확인
      * */
     public boolean isExist(String name) {
-        Client entity = repository.findByCompanyName(name);
+        Client entity = repository.findByName(name);
         return entity != null;
     }
 
@@ -103,7 +103,7 @@ public class ClientService {
      * 이름으로 조회 후 수정
      */
     public Client updateByName(String name, ClientCreateRequestDto dto) {
-        Client entity = repository.findByCompanyName(name);
+        Client entity = repository.findByName(name);
         //entity.update(dto);
 
         return entity;

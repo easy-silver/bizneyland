@@ -27,7 +27,7 @@ public class SalesServiceTest {
 
     private Client createClient() {
         return clientRepository.save(Client.builder()
-                .companyName("테스트")
+                .name("테스트")
                 .contact("032-123-1234")
                 .build());
     }

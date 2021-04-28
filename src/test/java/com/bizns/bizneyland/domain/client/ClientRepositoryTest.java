@@ -7,8 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +21,7 @@ public class ClientRepositoryTest {
 
     public Client create() {
         return Client.builder()
-                .companyName("Timo Company")
+                .name("Timo Company")
                 .contact("032-815-4553")
                 .build();
     }
@@ -47,7 +45,7 @@ public class ClientRepositoryTest {
 
         //then
         assertThat(clients.size()).isEqualTo(1);
-        assertThat(clients.get(0).getCompanyName()).isEqualTo(client.getCompanyName());
+        assertThat(clients.get(0).getName()).isEqualTo(client.getName());
     }
 
     @Test
@@ -58,7 +56,7 @@ public class ClientRepositoryTest {
         Client findClient = repository.findById(client.getClientSeq())
                 .orElseThrow(() -> new IllegalArgumentException("해당 업체가 없습니다. id=" + client.getClientSeq()));
 
-        assertThat(findClient.getCompanyName()).isEqualTo(client.getCompanyName());
+        assertThat(findClient.getName()).isEqualTo(client.getName());
     }
 
     @Test
@@ -67,7 +65,7 @@ public class ClientRepositoryTest {
         Client client = repository.save(create());
 
         //when
-        Client findClient = repository.findByCompanyName(client.getCompanyName());
+        Client findClient = repository.findByName(client.getName());
 
         //then
         assertThat(findClient).isEqualTo(client);

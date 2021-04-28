@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 public class ClientCreateRequestDto {
 
     @NotEmpty(message = "회사명은 필수입니다.")
-    private String companyName;
+    private String name;
     private String contact;
     private String owner;
     private String address;
@@ -33,10 +33,10 @@ public class ClientCreateRequestDto {
     }
 
     @Builder
-    public ClientCreateRequestDto(String companyName, String contact, String owner, String address,
+    public ClientCreateRequestDto(String name, String contact, String owner, String address,
                                   Character type, String establishDate, String sector, String keyItem,
                                   String[] salesYears, String[] salesAmount) {
-        this.companyName = companyName;
+        this.name = name;
         this.contact = contact;
         this.owner = owner;
         this.address = address;
@@ -51,7 +51,7 @@ public class ClientCreateRequestDto {
     /** Client 엔티티로 변환 */
     public Client toEntity() {
         return Client.builder()
-                .companyName(companyName)
+                .name(name)
                 .contact(contact)
                 .owner(owner)
                 .type(type)

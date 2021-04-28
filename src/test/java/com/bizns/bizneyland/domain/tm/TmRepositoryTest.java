@@ -30,7 +30,7 @@ public class TmRepositoryTest {
 
     private Client registerClient() {
         return clientRepository.save(Client.builder()
-                .companyName("Client Company")
+                .name("Client Company")
                 .contact("02-123-1234")
                 .build());
     }
@@ -66,7 +66,7 @@ public class TmRepositoryTest {
 
         //then
         assertThat(tms.size()).isEqualTo(1);
-        assertThat(tms.get(0).getClient().getCompanyName()).isEqualTo("Client Company");
+        assertThat(tms.get(0).getClient().getName()).isEqualTo("Client Company");
     }
 
     @Test
@@ -78,7 +78,7 @@ public class TmRepositoryTest {
                 .callDate(LocalDateTime.now())
                 .build());
         //then
-        assertThat(tm.getClient().getCompanyName()).isEqualTo("Client Company");
+        assertThat(tm.getClient().getName()).isEqualTo("Client Company");
         assertThat(tm.getCaller().getName()).isEqualTo("Call Tester");
 
     }

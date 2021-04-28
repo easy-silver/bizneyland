@@ -24,7 +24,7 @@ public class ClientServiceTest {
 
     private Client createClient() {
         return repository.save(Client.builder()
-                .companyName("테스트 클라이언트")
+                .name("테스트 클라이언트")
                 .contact("010-1234-1234")
                 .build());
     }
@@ -33,7 +33,7 @@ public class ClientServiceTest {
     public void 고객_등록() {
         Client client = createClient();
 
-        assertThat(client.getCompanyName()).isEqualTo("테스트 클라이언트");
+        assertThat(client.getName()).isEqualTo("테스트 클라이언트");
     }
 
 
@@ -68,7 +68,7 @@ public class ClientServiceTest {
     @Test
     public void 고객_등록_매출_포함() {
         service.save(ClientCreateRequestDto.builder()
-                .companyName("테스트 클라이언트")
+                .name("테스트 클라이언트")
                 .contact("010-1234-1234")
                 .salesYears(new String[] {"2012", "2020", "2019"})
                 .salesAmount(new String[] {"1000억", "3000억"})

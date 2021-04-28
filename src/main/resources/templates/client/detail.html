@@ -6,19 +6,19 @@
 
     <div layout:fragment="content">
         <div class="container-fluid">
-            <!-- 업체 정보 카드 -->
             <div class="row">
-                <div class="col">
+                <!-- 좌측 카드 -->
+                <div class="col-lg-6">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">업체 정보</h6>
                             <div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                     aria-labelledby="dropdownMenuLink2">
+                                     aria-labelledby="dropdownMenuLink1">
                                     <div class="dropdown-header">고객 관리</div>
                                     <a class="dropdown-item" th:href="@{/client/update/{seq}(seq=${client.clientSeq})}">수정</a>
                                     <div class="dropdown-divider"></div>
@@ -30,7 +30,7 @@
                             <table class="table">
                                 <tr>
                                     <th>회사명</th>
-                                    <td th:text="${client.companyName}"/>
+                                    <td th:text="${client.name}"/>
                                 </tr>
                                 <tr>
                                     <th>대표자</th>
@@ -64,68 +64,71 @@
                         </div>
                     </div>
                     <!-- //업체 정보 카드 -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">매출 정보</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <th>해당 연도</th>
+                                    <th>금액</th>
+                                </thead>
+                                <tbody>
+                                    <tr th:if="${salesList.size()} == 0">
+                                        <td class="text-center" colspan="2">내용이 없습니다</td>
+                                    </tr>
+                                    <tr th:each="sales : ${salesList}">
+                                        <th class="text-center" th:text="${sales.salesYear}"/>
+                                        <td class="text-center" th:text="${sales.salesAmount}"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <div class="col">
-                    <!-- 매출 정보 -->
+                <!-- 좌측 카드 종료-->
+
+                <!-- 우측 카드 -->
+                <div class="col-lg-6">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">매출 정보</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">TM 상담 내역</h6>
                             <div class="dropdown no-arrow">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1"
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                     aria-labelledby="dropdownMenuLink1">
-                                    <div class="dropdown-header">고객 관리</div>
-                                    <a class="dropdown-item" th:href="@{/client/update/{seq}(seq=${client.clientSeq})}">수정</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" th:href="|javascript:deleteBySeq('${client.clientSeq}')|">삭제</a>
+                                     aria-labelledby="dropdownMenuLink2">
+                                    <div class="dropdown-header">TM 상담 관리:</div>
+                                    <a class="dropdown-item" href="">추가</a>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <table class="table">
-                                <tr th:each="sales : ${salesList}">
-                                    <th th:text="${sales.salesYear}"></th>
-                                    <td th:text="${sales.salesAmount}"/>
+                                <thead>
+                                <tr>
+                                    <th>상담번호</th>
+                                    <th>상담일시</th>
+                                    <th>상담사</th>
                                 </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="tm : ${tms}">
+                                    <td class="text-center" th:text="${tm.tmSeq}"/>
+                                    <td class="text-center">
+                                        <a th:href="@{/tm/detail/{seq}(seq=${tm.tmSeq})}" th:text="${tm.callDate}"/>
+                                    </td>
+                                    <td class="text-center" th:text="${tm.caller.name}"/>
+                                </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
-                    <!-- //매출 정보 카드 -->
-
                 </div>
             </div>
-
-
-            <!-- 상담 내역 -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">상담 내역</h6>
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>상담번호</th>
-                                <th>상담일시</th>
-                                <th>상담사</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="tm : ${tms}">
-                                <td class="text-center" th:text="${tm.tmSeq}"/>
-                                <td class="text-center">
-                                    <a th:href="@{/tm/detail/{seq}(seq=${tm.tmSeq})}" th:text="${tm.callDate}"/>
-                                </td>
-                                <td class="text-center" th:text="${tm.caller.name}"/>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <!-- //상담 내역 -->
         </div>
         <script>
             /** 삭제 확인 이벤트 */

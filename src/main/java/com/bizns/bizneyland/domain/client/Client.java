@@ -20,7 +20,7 @@ public class Client extends BaseTimeEntity {
 
     // 회사명
     @Column(nullable = false)
-    private String companyName;
+    private String name;
 
     // 전화번호
     @Column(nullable = false)
@@ -45,9 +45,9 @@ public class Client extends BaseTimeEntity {
     private String keyItem;
 
     @Builder
-    public Client(String companyName, String contact, String owner, Character type,
+    public Client(String name, String contact, String owner, Character type,
                   String establishDate, String sector, String address, String keyItem) {
-        this.companyName = companyName;
+        this.name = name;
         this.contact = contact;
         this.owner = owner;
         this.type = type;
@@ -58,7 +58,7 @@ public class Client extends BaseTimeEntity {
     }
 
     public void update(ClientUpdateRequestDto dto) {
-        this.companyName = dto.getCompanyName();
+        this.name = dto.getName();
         this.owner = dto.getOwner();
         this.type = dto.getType();
         this.establishDate = dto.getEstablishDate();

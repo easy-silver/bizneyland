@@ -8,7 +8,7 @@ import lombok.Getter;
 public class ClientResponseDto {
 
     private Long clientSeq;
-    private String companyName;
+    private String name;
     private String contact;
     private String owner;
     private Character type;
@@ -19,7 +19,7 @@ public class ClientResponseDto {
 
     public ClientResponseDto(Client entity) {
         this.clientSeq = entity.getClientSeq();
-        this.companyName = entity.getCompanyName();
+        this.name = entity.getName();
         this.contact = entity.getContact();
         this.owner = entity.getOwner();
         this.type = entity.getType();

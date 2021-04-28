@@ -53,7 +53,7 @@
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">소속 직원 정보</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">소속 회원 정보</h6>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -65,7 +65,6 @@
                                 <th>휴대폰 번호</th>
                                 <th>이메일</th>
                                 <th>활동 지역</th>
-                                <th>대표자</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,8 +75,6 @@
                                 <td class="text-center" th:text="${member.mobile}"/>
                                 <td class="text-center" th:text="${member.email}"/>
                                 <td class="text-center" th:text="${member.workingArea}"/>
-                                <!-- 3항 연산자 -->
-                                <td class="text-center" th:text="${member.ceoYn} == 'Y' ? '대표자' : ''"/>
                             </tr>
                         </tbody>
                     </table>

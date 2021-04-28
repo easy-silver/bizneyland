@@ -41,8 +41,8 @@ public class TmService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 업체입니다. id=" + requestDto.getClientSeq()));
 
         // 상담사(Member) 조회
-        Member member = memberRepository.findByUserSeq(requestDto.getUserSeq())
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상담사입니다. id=" + requestDto.getUserSeq()));
+        Member member = memberRepository.findByUserSeq(requestDto.getUserSeq());
+                //.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상담사입니다. id=" + requestDto.getUserSeq()));
 
         // TM 등록
         Tm tm = requestDto.toEntity().updateClient(client).updateCaller(member);

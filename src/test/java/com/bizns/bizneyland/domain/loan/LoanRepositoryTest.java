@@ -53,7 +53,7 @@ public class LoanRepositoryTest {
 
         return tmRepository.save(Tm.builder()
                 .client(client)
-                .caller(memberRepository.findByUserSeq(1L).get())
+                .caller(memberRepository.findByUserSeq(1L))
                 .build());
     }
 

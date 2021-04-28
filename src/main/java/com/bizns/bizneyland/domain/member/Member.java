@@ -98,7 +98,7 @@ public class Member extends BaseTimeEntity {
         this.profileFileSeq = profileFileSeq;
     }
 
-    public void changeCompany(Company company) {
+    public void setCompany(Company company) {
         this.company = company;
     }
 }

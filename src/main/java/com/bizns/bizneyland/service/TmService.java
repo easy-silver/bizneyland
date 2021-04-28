@@ -42,7 +42,6 @@ public class TmService {
 
         // 상담사(Member) 조회
         Member member = memberRepository.findByUserSeq(requestDto.getUserSeq());
-                //.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상담사입니다. id=" + requestDto.getUserSeq()));
 
         // TM 등록
         Tm tm = requestDto.toEntity().updateClient(client).updateCaller(member);

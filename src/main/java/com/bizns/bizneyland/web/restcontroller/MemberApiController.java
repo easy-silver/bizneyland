@@ -25,6 +25,6 @@ public class MemberApiController {
 
     @GetMapping("/member/{id}")
     public MemberResponseDto findById(@PathVariable Long id) {
-        return memberService.findOne(id);
+        return memberService.findById(id);
     }
 }

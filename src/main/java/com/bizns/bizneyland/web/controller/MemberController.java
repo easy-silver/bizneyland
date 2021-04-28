@@ -2,10 +2,12 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
-import com.bizns.bizneyland.domain.user.Role;
 import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
-import com.bizns.bizneyland.web.dto.*;
+import com.bizns.bizneyland.web.dto.CompanyResponseDto;
+import com.bizns.bizneyland.web.dto.MemberCreateRequestDto;
+import com.bizns.bizneyland.web.dto.MemberResponseDto;
+import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ public class MemberController {
      * 회원 목록
      * */
     @GetMapping("list")
-    public void member(Model model) {
+    public void list(Model model) {
         model.addAttribute("members", service.findAllDesc());
     }
 
@@ -36,7 +38,7 @@ public class MemberController {
      * */
     @GetMapping("detail/{memberSeq}")
     public String detail(@PathVariable Long memberSeq, Model model) {
-        MemberResponseDto member = service.findOne(memberSeq);
+        MemberResponseDto member = service.findById(memberSeq);
         model.addAttribute("member", member);
 
         return "member/detail";
@@ -51,11 +53,11 @@ public class MemberController {
     }
 
     /**
-     * 가입 코드 확인
+     * [AJAX] 유효한 회사인지 확인
      */
     @PostMapping("checkValid")
     @ResponseBody
-    public Map<String, Object> isValidCompany(@RequestBody Map<String, String> paramMap) {
+    public Map<String, Object> checkValidCompany(@RequestBody Map<String, String> paramMap) {
 
         String comSeq = paramMap.get("companySeq");
         String businessNo = paramMap.get("businessNo");
@@ -67,7 +69,7 @@ public class MemberController {
     }
 
     /**
-     * 가입 코드 확인
+     * 가입 코드 확인시 리다이렉트
      */
     @PostMapping("checkCode")
     public String checkCode(Model model) {
@@ -79,7 +81,7 @@ public class MemberController {
      * 회원 등록 화면
      * */
     @GetMapping("register")
-    public void memberForm(MemberCreateRequestDto requestDto, Model model) {
+    public void register(MemberCreateRequestDto requestDto, Model model) {
         CompanyResponseDto company = companyService.findById(requestDto.getCompanySeq());
         requestDto.setCompanyName(company.getName());
 
@@ -90,14 +92,8 @@ public class MemberController {
      * 회원 등록
      * */
     @PostMapping("register")
-    public String registerMember(@Valid MemberCreateRequestDto requestDto, @LoginUser SessionUser user) {
-
-        requestDto.setUserSeq(user.getUserSeq());
+    public String register(@Valid MemberCreateRequestDto requestDto) {
         service.save(requestDto);
-
-        if (user.getRole() == Role.ADMIN) {
-            return "redirect:/member/list";
-        }
 
         return "redirect:/member/mypage";
     }
@@ -109,12 +105,15 @@ public class MemberController {
     @GetMapping("update/{id}")
     public String update(@PathVariable Long id, Model model) {
 
-        MemberResponseDto member = service.findOne(id);
+        MemberResponseDto member = service.findById(id);
         model.addAttribute("member", member);
 
         return "member/update";
     }
 
+    /**
+     * 회원 수정
+     */
     @PostMapping("update")
     public String update(@Valid MemberUpdateRequestDto requestDto) {
 
@@ -141,6 +140,6 @@ public class MemberController {
     public void mypage(@LoginUser SessionUser user, Model model) {
         MemberResponseDto member = service.findByUserSeq(user.getUserSeq());
 
-        model.addAttribute("member", service.findOne(member.getId()));
+        model.addAttribute("member", service.findById(member.getId()));
     }
 }

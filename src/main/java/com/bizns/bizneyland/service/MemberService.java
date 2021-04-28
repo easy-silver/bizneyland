@@ -9,10 +9,9 @@ import com.bizns.bizneyland.domain.owner.Owner;
 import com.bizns.bizneyland.domain.owner.OwnerRepository;
 import com.bizns.bizneyland.domain.user.Role;
 import com.bizns.bizneyland.domain.user.User;
-import com.bizns.bizneyland.domain.user.UserRepository;
 import com.bizns.bizneyland.web.dto.MemberCreateRequestDto;
-import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import com.bizns.bizneyland.web.dto.MemberResponseDto;
+import com.bizns.bizneyland.web.dto.MemberUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +27,7 @@ public class MemberService {
     private final MemberRepository repository;
     private final CompanyRepository companyRepository;
     private final OwnerRepository ownerRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     /**
      * 전체 회원 목록
@@ -47,7 +46,7 @@ public class MemberService {
      * 회원 상세
      * @return 단일 회원
      */
-    public MemberResponseDto findOne(Long id) {
+    public MemberResponseDto findById(Long id) {
         Member entity = repository.findOneWithCompany(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 회원이 없습니다. id=" + id));
 
@@ -67,9 +66,12 @@ public class MemberService {
         // DTO > Entity 변환
         Member member = requestDto.toEntity();
         // 연관 엔티티(회사) 등록
-        member.changeCompany(company);
+        member.setCompany(company);
         // 회원 등록
         Member registeredMember = repository.save(member);
+        // 사용자 정보의 회원정보 변경
+        Long userSeq = requestDto.getUserSeq();
+        updateMemberInfoInUser(userSeq, member);
 
         // FIXME : 메서드 분리할 것!
         // 대표자일 경우 대표자 정보 등록
@@ -81,11 +83,19 @@ public class MemberService {
                     .build());
 
             // USER 권한 변경
-            User user = userRepository.findById(requestDto.getUserSeq()).get();
-            userRepository.save(user.updateRole(Role.OWNER));
+            userService.changeRole(userSeq, Role.OWNER);
         }
-
         return registeredMember.getId();
+    }
+
+    /**
+     * 사용자 엔티티의 회원정보 변경
+     * @param userSeq
+     * @param member
+     * @return User 엔티티
+     */
+    private User updateMemberInfoInUser(Long userSeq, Member member) {
+        return userService.updateMemberInfo(userSeq, member);
     }
 
     /**

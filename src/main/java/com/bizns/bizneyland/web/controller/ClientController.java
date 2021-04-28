@@ -100,4 +100,28 @@ public class ClientController {
 
         return "redirect:/client/list";
     }
+
+    /**
+     * TM 상담 추가 등록 화면
+     */
+    @GetMapping("{clientSeq}/registerTmInfo")
+    public String registerTmInfo(@PathVariable Long clientSeq, Model model) {
+        ClientResponseDto client = service.findById(clientSeq);
+        model.addAttribute("clientName", client.getName());
+
+        TmCreateRequestDto tmDto = new TmCreateRequestDto();
+        tmDto.setClientSeq(client.getClientSeq());
+        model.addAttribute("tmDto", tmDto);
+
+        return "client/registerTmInfo";
+    }
+
+    /**
+     * TM 상담 추가 등록
+     */
+    @PostMapping("{clientSeq}/registerTmInfo")
+    public String registerTmInfo(@PathVariable Long clientSeq, TmCreateRequestDto requestDto) {
+        tmService.save(requestDto);
+        return "redirect:/client/detail/" + clientSeq;
+    }
 }

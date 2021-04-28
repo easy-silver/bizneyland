@@ -102,7 +102,7 @@
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                      aria-labelledby="dropdownMenuLink2">
                                     <div class="dropdown-header">TM 상담 관리:</div>
-                                    <a class="dropdown-item" href="">추가</a>
+                                    <a class="dropdown-item" th:href="@{/client/{seq}/registerTmInfo(seq=${client.clientSeq})}">추가</a>
                                 </div>
                             </div>
                         </div>

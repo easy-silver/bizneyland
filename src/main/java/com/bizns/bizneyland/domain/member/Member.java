@@ -66,10 +66,6 @@ public class Member extends BaseTimeEntity {
     @Column
     private Long profileFileSeq;
 
-    // 대표자 여부
-    @Column
-    private Character ceoYn = 'N';
-
     @Builder
     public Member(String name, String nickname, String birth, String gender,
                   String mobile, String grade, String workingArea, String email,

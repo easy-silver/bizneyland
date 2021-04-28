@@ -18,7 +18,6 @@ public class MemberResponseDto {
     private String email;
     private String fax;
     private Long profileFileSeq;
-    private Character ceoYn;
     private String joinDt;
     private CompanyResponseDto company;
 
@@ -34,7 +33,6 @@ public class MemberResponseDto {
         this.email = entity.getEmail();
         this.fax = FormatUtil.addHyphenPhoneNumber(entity.getFax());
         this.profileFileSeq = entity.getProfileFileSeq();
-        this.ceoYn = entity.getCeoYn();
         this.joinDt = FormatUtil.localDateTimeToYmd(entity.getCreatedDate());
         this.company = new CompanyResponseDto(entity.getCompany());
     }

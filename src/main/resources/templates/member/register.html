@@ -27,6 +27,7 @@
                         </div>
 
                         <form class="user" method="post" action="register" th:object="${memberRequestDto}">
+                            <input type="hidden" name="userSeq" th:value="${session.user.userSeq}">
                             <input type="hidden" th:field="*{memberType}">
                             <input type="hidden" th:field="*{companySeq}">
                             <div class="form-group">
@@ -109,12 +110,5 @@
                 </div>
             </div>
         </div>
-        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-        <script>
-            /** 대표자 여부 확인 이벤트 */
-            $('#ceoYn').on('click', function () {
-                confirm('대표자가 맞습니까?') ? $('#ceoYn').prop('checked', true) : $('#ceoYn').prop('checked', false);
-            });
-        </script>
     </body>
 </html>

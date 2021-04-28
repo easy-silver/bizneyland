@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">TM 상담 수정</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">상담 내용 등록</h6>
                 </div>
                 <div class="card-body">
                     <form action="registerTmInfo" method="post" th:object="${tmDto}">
@@ -20,8 +20,10 @@
                                 <input class="form-control" th:value="${clientName}" readonly>
                             </div>
                             <div class="col">
-                                <label th:for="recipient">수신인</label>
-                                <input class="form-control" th:field="*{recipient}">
+                                <label th:for="recipient">수신인
+                                    <span class="text-danger align-middle">*</span>
+                                </label>
+                                <input class="form-control" th:field="*{recipient}" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -49,7 +51,7 @@
                             </div>
                         </div>
                         <!-- 체납 선택시 보여주기 -->
-                        <div class="form-group" th:classappend="${tmDto.arrearsYn} == 'N' ? d-none" id="arrearsDetailDiv">
+                        <div class="form-group d-none" id="arrearsDetailDiv">
                             <label th:for="arrearsDetail">체납 내역</label>
                             <textarea class="form-control" th:field="*{arrearsDetail}"/>
                         </div>
@@ -117,20 +119,6 @@
                 } else {
                     $('#arrearsDetailDiv').addClass("d-none");
                 }
-            });
-
-            /** 매출 정보 추가 버튼 */
-            $('#addSalesBtn').on('click', function () {
-                const addElement =
-                    '<tr>' +
-                        '<td><input class="form-control" name="salesYears" maxlength="4" required></td>' +
-                        '<td><input class="form-control" name="salesAmount" required></td>' +
-                        '<td class="text-center">' +
-                            '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button>' +
-                        '</td>' +
-                    '</tr>';
-
-                $("#salesTable>tbody").append(addElement);
             });
 
             /** 삭제 버튼 클릭 시 행 삭제 */

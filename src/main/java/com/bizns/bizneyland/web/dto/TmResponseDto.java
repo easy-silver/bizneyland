@@ -14,6 +14,7 @@ public class TmResponseDto {
     private String callDate;
     private String recipient;
     private String headcount;
+    private String purpose;
     private Integer hopeAmount;
     private Character arrearsYn;
     private String arrearsDetail;
@@ -29,6 +30,7 @@ public class TmResponseDto {
         this.callDate = FormatUtil.localDateTimeToYmdHms(entity.getCallDate());
         this.recipient = entity.getRecipient();
         this.headcount = entity.getHeadcount();
+        this.purpose = entity.getPurpose();
         this.hopeAmount = entity.getHopeAmount();
         this.arrearsYn = entity.getArrearsYn();
         this.arrearsDetail = entity.getArrearsDetail();

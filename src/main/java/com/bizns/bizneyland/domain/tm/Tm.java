@@ -42,6 +42,8 @@ public class Tm extends BaseTimeEntity {
     private String recipient;
     // 직원 수
     private String headcount;
+    // 자금 목적
+    private String purpose;
     // 대출 희망 금액
     private Integer hopeAmount;
     // 체납 여부
@@ -57,13 +59,14 @@ public class Tm extends BaseTimeEntity {
 
     @Builder
     public Tm(Client client, Member caller, LocalDateTime callDate, String recipient,
-              String headcount, Integer hopeAmount, Character arrearsYn, String arrearsDetail,
+              String headcount, String purpose, Integer hopeAmount, Character arrearsYn, String arrearsDetail,
               String creditStatus, String hopeCallTime, String memo) {
         this.client = client;
         this.caller = caller;
         this.callDate = callDate == null ? LocalDateTime.now() : callDate;
         this.recipient = recipient;
         this.headcount = headcount;
+        this.purpose = purpose;
         this.hopeAmount = hopeAmount;
         this.arrearsYn = arrearsYn;
         this.arrearsDetail = arrearsDetail;
@@ -75,6 +78,7 @@ public class Tm extends BaseTimeEntity {
     public void updateTmInfo(TmUpdateRequestDto dto) {
         this.recipient = dto.getRecipient();
         this.headcount = dto.getHeadcount();
+        this.purpose = dto.getPurpose();
         this.hopeAmount = dto.getHopeAmount();
         this.arrearsYn = dto.getArrearsYn();
         this.arrearsDetail = dto.getArrearsDetail();

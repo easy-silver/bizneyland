@@ -45,7 +45,7 @@ public class Tm extends BaseTimeEntity {
     // 자금 목적
     private String purpose;
     // 대출 희망 금액
-    private Integer hopeAmount;
+    private String hopeAmount;
     // 체납 여부
     private Character arrearsYn;
     // 체납 상세 내역
@@ -59,7 +59,7 @@ public class Tm extends BaseTimeEntity {
 
     @Builder
     public Tm(Client client, Member caller, LocalDateTime callDate, String recipient,
-              String headcount, String purpose, Integer hopeAmount, Character arrearsYn, String arrearsDetail,
+              String headcount, String purpose, String hopeAmount, Character arrearsYn, String arrearsDetail,
               String creditStatus, String hopeCallTime, String memo) {
         this.client = client;
         this.caller = caller;

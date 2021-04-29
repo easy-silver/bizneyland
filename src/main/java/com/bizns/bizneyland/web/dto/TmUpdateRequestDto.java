@@ -13,7 +13,7 @@ public class TmUpdateRequestDto {
     private String recipient;
     private String headcount;
     private String purpose;
-    private Integer hopeAmount;
+    private String hopeAmount;
     private Character arrearsYn;
     private String arrearsDetail;
     private String creditStatus;
@@ -24,7 +24,7 @@ public class TmUpdateRequestDto {
     private LoanRequestDto loan;
 
     @Builder
-    public TmUpdateRequestDto(Long tmSeq, String recipient, String headcount, String purpose, Integer hopeAmount,
+    public TmUpdateRequestDto(Long tmSeq, String recipient, String headcount, String purpose, String hopeAmount,
                               Character arrearsYn, String arrearsDetail, String creditStatus,
                               String hopeCallTime, String memo) {
         this.tmSeq = tmSeq;

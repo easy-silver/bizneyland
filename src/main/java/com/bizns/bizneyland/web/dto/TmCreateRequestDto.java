@@ -18,7 +18,7 @@ public class TmCreateRequestDto {
     private String recipient;
     private String headcount;
     private String purpose;
-    private Integer hopeAmount;
+    private String hopeAmount;
     private Character arrearsYn;
     private String arrearsDetail;
     private String creditStatus;
@@ -30,7 +30,7 @@ public class TmCreateRequestDto {
 
     @Builder
     public TmCreateRequestDto(Long clientSeq, Long userSeq, LocalDateTime callDate,
-                              String recipient, String headcount, String purpose, Integer hopeAmount,
+                              String recipient, String headcount, String purpose, String hopeAmount,
                               Character arrearsYn, String arrearsDetail, String creditStatus,
                               String hopeCallTime, String memo, LoanRequestDto loan) {
         this.clientSeq = clientSeq;

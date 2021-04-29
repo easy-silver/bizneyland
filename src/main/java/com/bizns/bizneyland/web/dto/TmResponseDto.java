@@ -15,7 +15,7 @@ public class TmResponseDto {
     private String recipient;
     private String headcount;
     private String purpose;
-    private Integer hopeAmount;
+    private String hopeAmount;
     private Character arrearsYn;
     private String arrearsDetail;
     private String creditStatus;

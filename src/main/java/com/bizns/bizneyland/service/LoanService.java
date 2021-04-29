@@ -46,4 +46,15 @@ public class LoanService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 상담 건에 해당하는 대출 정보 전체 삭제
+     * @param tmSeq
+     */
+    public void deleteByTm(Long tmSeq) {
+        Tm tm = tmRepository.findById(tmSeq)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상담 건입니다. SEQ=" + tmSeq));
+
+        repository.deleteByTm(tm);
+    }
+
 }

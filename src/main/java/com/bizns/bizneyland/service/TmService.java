@@ -130,7 +130,13 @@ public class TmService {
         Tm tm = repository.findById(requestDto.getTmSeq())
                 .orElseThrow(() -> new IllegalArgumentException("해당 상담 건이 없습니다. SEQ=" + requestDto.getTmSeq()));
 
+        // 상담 내용 UPDATE
         tm.updateTmInfo(requestDto);
+
+        // 대출 정보 전체 삭제 후 재등록
+        List<Loan> loanList = toLoanList(requestDto.getLoan(), tm);
+        loanService.deleteByTm(tm.getTmSeq());
+        loanService.save(loanList);
 
         return tm.getTmSeq();
     }

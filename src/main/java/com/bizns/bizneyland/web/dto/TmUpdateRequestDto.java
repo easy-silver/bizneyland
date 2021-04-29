@@ -20,6 +20,9 @@ public class TmUpdateRequestDto {
     private String hopeCallTime;
     private String memo;
 
+    //대출 정보
+    private LoanRequestDto loan;
+
     @Builder
     public TmUpdateRequestDto(Long tmSeq, String recipient, String headcount, String purpose, Integer hopeAmount,
                               Character arrearsYn, String arrearsDetail, String creditStatus,

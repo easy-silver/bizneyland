@@ -35,9 +35,19 @@
                         </div>
                         <div class="form-group row">
                             <div class="col">
+                                <label th:for="purpose">자금 목적</label>
+                                <select class="form-control" th:field="*{purpose}">
+                                    <option value="">선택하세요</option>
+                                    <option value="운전">운전</option>
+                                    <option value="시설">시설</option>
+                                </select>
+                            </div>
+                            <div class="col">
                                 <label th:for="hopeAmount">희망자금</label>
                                 <input class="form-control" th:field="*{hopeAmount}" placeholder="숫자만 입력">
                             </div>
+                        </div>
+                        <div class="form-group row">
                             <div class="col">
                                 <label th:for="arrearsYn">세금 체납 여부</label>
                                 <select class="form-control" th:field="*{arrearsYn}">
@@ -46,9 +56,13 @@
                                     <option value="Y">체납</option>
                                 </select>
                             </div>
+                            <div class="col">
+                                <label th:for="hopeCallTime">희망 통화시간</label>
+                                <input class="form-control" th:field="*{hopeCallTime}">
+                            </div>
                         </div>
                         <!-- 체납 선택시 보여주기 -->
-                        <div class="form-group" th:classappend="${tm.arrearsYn} == 'N' ? d-none" id="arrearsDetailDiv">
+                        <div class="form-group" th:class="${tm.arrearsYn} == 'Y' ? '' : 'd-none'" id="arrearsDetailDiv">
                             <label th:for="arrearsDetail">체납 내역</label>
                             <textarea class="form-control" th:field="*{arrearsDetail}"/>
                         </div>
@@ -73,29 +87,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr th:if="${loanList.size() == 0}">
                                     <td>
                                         <input class="form-control" name="loan.creditors">
                                     </td>
                                     <td>
-                                        <input class="form-control" name="loan.purposes" value="">
+                                        <input class="form-control" name="loan.purposes">
                                     </td>
                                     <td>
                                         <input class="form-control" name="loan.amounts">
                                     </td>
                                     <td>
-                                        <input class="form-control" name="loan.memos" value="">
+                                        <input class="form-control" name="loan.memos">
                                     </td>
                                     <td></td>
+                                </tr>
+                                <tr th:each="loan : ${loanList}">
+                                    <td>
+                                        <input class="form-control" name="loan.creditors" th:value="${loan.creditor}">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" name="loan.purposes" th:value="${loan.purpose}">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" name="loan.amounts" th:value="${loan.amount}">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" name="loan.memos" th:value="${loan.memo}">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                         <button type="button" id="addLoanInfoBtn" class="mb-4 btn btn-secondary">추가</button>
                         <hr>
-                        <div class="form-group">
-                            <label th:for="hopeCallTime">희망 통화시간</label>
-                            <input class="form-control" th:field="*{hopeCallTime}">
-                        </div>
                         <div class="form-group">
                             <label th:for="memo">메모</label>
                             <textarea class="form-control" th:field="*{memo}"></textarea>
@@ -118,18 +145,20 @@
                 }
             });
 
-            /** 매출 정보 추가 버튼 */
-            $('#addSalesBtn').on('click', function () {
+            /** 대출 정보 추가 버튼 */
+            $('#addLoanInfoBtn').on('click', function () {
                 const addElement =
                     '<tr>' +
-                        '<td><input class="form-control" name="salesYears" maxlength="4" required></td>' +
-                        '<td><input class="form-control" name="salesAmount" required></td>' +
-                        '<td class="text-center">' +
+                        '<td><input class="form-control" name="loan.creditors" required></td>' +
+                        '<td><input class="form-control" name="loan.purposes"></td>' +
+                        '<td><input class="form-control" type="number" name="loan.amounts" required></td>' +
+                        '<td><input class="form-control" name="loan.memos"></td>' +
+                        '<td class="align-middle">' +
                             '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button>' +
                         '</td>' +
                     '</tr>';
 
-                $("#salesTable>tbody").append(addElement);
+                $("#loanInfoTable>tbody").append(addElement);
             });
 
             /** 삭제 버튼 클릭 시 행 삭제 */
@@ -137,19 +166,6 @@
                 $(element).parents("tr").remove();
             };
 
-            /** 대출 정보 추가 버튼 */
-            $('#addLoanInfoBtn').on('click', function () {
-                const addElement =
-                    '<tr>' +
-                    '<td><input class="form-control" name="creditor" required></td>' +
-                    '<td><input class="form-control" name="purpose" value=""></td>' +
-                    '<td><input class="form-control" type="number" name="amount" required></td>' +
-                    '<td><input class="form-control" name="memo" value=""></td>' +
-                    '<td><button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button></td>' +
-                    '</tr>';
-
-                $("#loanInfoTable>tbody").append(addElement);
-            });
         </script>
     </div>
 </html>

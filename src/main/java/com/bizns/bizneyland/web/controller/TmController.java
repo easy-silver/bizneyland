@@ -74,6 +74,7 @@ public class TmController {
     public String update(@PathVariable Long seq, Model model) {
         TmResponseDto tm = service.findById(seq);
         model.addAttribute("tm", tm);
+        model.addAttribute("loanList", loanService.findAllByTm(seq));
 
         return "tm/update";
     }

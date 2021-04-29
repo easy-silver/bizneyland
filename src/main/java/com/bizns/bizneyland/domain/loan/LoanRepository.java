@@ -8,4 +8,6 @@ import java.util.List;
 public interface LoanRepository extends JpaRepository<Loan, Long> {
 
     List<Loan> findByTm(Tm tm);
+
+    void deleteByTm(Tm tm);
 }

@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u LEFT JOIN FETCH u.member WHERE u.userSeq = :seq")
     User findOneWithMember(@Param("seq") Long seq);
+
+    @Query("SELECT u.member.company.id FROM User u WHERE u.userSeq = :seq")
+    Long getCompanySeq(@Param("seq") Long userSeq);
 }

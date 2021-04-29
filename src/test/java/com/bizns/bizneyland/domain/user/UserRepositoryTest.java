@@ -115,4 +115,18 @@ public class UserRepositoryTest {
         //then
         assertThat(findUser.getMember().getId()).isEqualTo(memberSeq);
     }
+    @Test
+    public void 소속회사_번호_조회() {
+        //given
+        User tester = repository.save(User.builder()
+                .name("TESTER")
+                .role(Role.USER)
+                .email("tester@gmail.com")
+                .build());
+
+        Long memberSeq = createMember(tester, createCompany());
+
+        Long companySeq = repository.getCompanySeq(tester.getUserSeq());
+        System.out.println("companySeq = " + companySeq);
+    }
 }

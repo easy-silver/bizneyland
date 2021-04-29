@@ -13,20 +13,13 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
                             <colgroup>
-                                <col width="80px"/>
-                                <col width="81px"/>
-                                <col/>
-                                <col/>
-                                <col/>
-                                <col/>
-                                <col/>
-                                <col/>
+                                <col width="101px"/>
+                                <col width="101px"/>
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <!--<th class="text-center">NO</th>-->
                                     <th class="text-center">TM번호</th>
                                     <th class="text-center">고객번호</th>
                                     <th>업체 이름</th>
@@ -39,7 +32,6 @@
                             </thead>
                             <tbody>
                                 <tr th:each="tm, idx : ${tmList}">
-                                    <!--<td class="text-center" th:text="${idx.count}"/>-->
                                     <td class="text-center" th:text="${tm.tmSeq}"/>
                                     <td class="text-center" th:text="${tm.client.clientSeq}"/>
                                     <td>
@@ -63,5 +55,10 @@
                 </a>
             </div>
         </div>
+        <script>
+            $(document).ready(function() {
+                $('#dataTable').DataTable();
+            });
+        </script>
     </div>
 </html>

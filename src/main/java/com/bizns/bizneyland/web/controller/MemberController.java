@@ -97,7 +97,8 @@ public class MemberController {
     public String register(@Valid MemberCreateRequestDto requestDto) {
         service.save(requestDto);
 
-        return "redirect:/member/mypage";
+        // 세션 정보 얻어오기 위해 로그아웃처리
+        return "redirect:/logout";
     }
 
     /**

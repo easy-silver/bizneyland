@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.domain.client;
 
 import com.bizns.bizneyland.domain.BaseTimeEntity;
+import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.web.dto.ClientUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.*;
 
 @Getter
 @NoArgsConstructor
@@ -44,6 +46,11 @@ public class Client extends BaseTimeEntity {
     // 주요 품목
     private String keyItem;
 
+    /* 담당 회사(FK) *//*
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "company_charge", nullable = false)
+    private Company companyCharge;
+*/
     @Builder
     public Client(String name, String contact, String owner, Character type,
                   String establishDate, String sector, String address, String keyItem) {
@@ -64,7 +71,6 @@ public class Client extends BaseTimeEntity {
         this.establishDate = dto.getEstablishDate();
         this.sector = dto.getSector();
         this.address = dto.getAddress();
-        this.contact = dto.getContact();
         this.keyItem = dto.getKeyItem();
     }
 

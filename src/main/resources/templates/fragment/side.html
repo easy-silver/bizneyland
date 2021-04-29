@@ -46,17 +46,37 @@
             </a>
         </li>
 
-        <!-- 고객 업체 목록 -->
-        <li class="nav-item">
-            <a class="nav-link" href="/client/list">
-                <i class="far fa-fw fa-address-book"></i>
-                <span>고객 정보</span>
-            </a>
-        </li>
+        <!-- 회사 대표자 메뉴 -->
+        <div th:if="${session.user.role.key == 'ROLE_OWNER'}">
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                OWNER
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/client/list">
+                    <i class="far fa-fw fa-address-book"></i>
+                    <span>고객 정보</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/member/list">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>소속 회원 정보</span>
+                </a>
+            </li>
+        </div>
 
         <!-- 시스템 관리자 메뉴(가입 회사/회원 관리) -->
         <div th:if="${session.user.role.key == 'ROLE_ADMIN'}">
+
             <hr class="sidebar-divider">
+
+            <!-- TM 상담 관련 메뉴 -->
+            <div class="sidebar-heading">
+                ADMIN
+            </div>
 
             <li class="nav-item">
                 <a class="nav-link" href="/company/list">
@@ -69,6 +89,12 @@
                 <a class="nav-link" href="/member/list">
                     <i class="fas fa-fw fa-users"></i>
                     <span>회원 관리</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/client/list">
+                    <i class="far fa-fw fa-address-book"></i>
+                    <span>고객 관리</span>
                 </a>
             </li>
         </div>

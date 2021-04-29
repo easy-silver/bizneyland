@@ -43,7 +43,7 @@ public class CompanyController {
         CompanyResponseDto company = service.findById(companySeq);
         model.addAttribute("company", company);
 
-        List<MemberResponseDto> members = memberService.findByCompanySeq(companySeq);
+        List<MemberResponseDto> members = memberService.findAllDesc(companySeq);
         model.addAttribute("members", members);
 
         return "company/detail";

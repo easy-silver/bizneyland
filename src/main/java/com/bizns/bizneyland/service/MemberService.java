@@ -43,6 +43,18 @@ public class MemberService {
     }
 
     /**
+     * 회사 소속 회원 전체 조회
+     * @param companySeq
+     * @return 소속 회원들
+     */
+    public List<MemberResponseDto> findAllDesc(Long companySeq) {
+        return repository.findByCompany(companySeq)
+                .stream()
+                .map(MemberResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    /**
      * 회원 상세
      * @return 단일 회원
      */
@@ -138,18 +150,6 @@ public class MemberService {
         Member entity = repository.findByUserSeq(userSeq);
 
         return entity == null ? null : new MemberResponseDto(entity);
-    }
-
-    /**
-     * 회사 소속 회원 전체 조회
-     * @param companySeq
-     * @return 소속 회원들
-     */
-    public List<MemberResponseDto> findByCompanySeq(Long companySeq) {
-        return repository.findByCompanySeq(companySeq)
-                .stream()
-                .map(MemberResponseDto::new)
-                .collect(Collectors.toList());
     }
 
 }

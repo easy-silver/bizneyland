@@ -2,6 +2,7 @@ package com.bizns.bizneyland.web.controller;
 
 import com.bizns.bizneyland.config.auth.LoginUser;
 import com.bizns.bizneyland.config.auth.dto.SessionUser;
+import com.bizns.bizneyland.domain.user.Role;
 import com.bizns.bizneyland.service.CompanyService;
 import com.bizns.bizneyland.service.MemberService;
 import com.bizns.bizneyland.web.dto.CompanyResponseDto;
@@ -26,11 +27,12 @@ public class MemberController {
     private final CompanyService companyService;
 
     /**
-     * 회원 목록
+     * 가입 회원 목록
      * */
     @GetMapping("list")
-    public void list(Model model) {
-        model.addAttribute("members", service.findAllDesc());
+    public void list(@LoginUser SessionUser user, Model model) {
+        model.addAttribute("members", user.getRole() == Role.ADMIN ?
+                 service.findAllDesc() : service.findAllDesc(user.getCompanySeq()));
     }
 
     /**

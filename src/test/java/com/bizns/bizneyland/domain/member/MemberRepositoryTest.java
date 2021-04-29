@@ -70,7 +70,7 @@ public class MemberRepositoryTest {
         createMember(12L, "tester2", company);
 
         //when
-        List<Member> findMembers = repository.findByCompanySeq(company.getId());
+        List<Member> findMembers = repository.findByCompany(company.getId());
 
         //then
         assertThat(findMembers.size()).isEqualTo(2);

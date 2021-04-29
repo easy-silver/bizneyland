@@ -69,22 +69,32 @@
                                 <col width="100px">
                             </colgroup>
                             <thead>
-                            <tr>
-                                <th>발생 연도</th>
-                                <th>금액</th>
-                                <th>&nbsp;</th>
-                            </tr>
+                                <tr>
+                                    <th>발생 연도</th>
+                                    <th>금액</th>
+                                    <th>&nbsp;</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <input class="form-control" name="salesYears" maxlength="4" placeholder="숫자 4자리로 입력하세요.(ex.2021)">
-                                </td>
-                                <td>
-                                    <input class="form-control" name="salesAmount">
-                                </td>
-                                <td></td>
-                            </tr>
+                                <tr th:if="${salesList.size() == 0}">
+                                    <td>
+                                        <input class="form-control" name="salesYears" maxlength="4" placeholder="숫자 4자리로 입력하세요.(ex.2021)">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" name="salesAmount">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr th:each="sales : ${salesList}">
+                                    <td>
+                                        <input class="form-control" name="salesYears" th:value="${sales.salesYear}"
+                                               maxlength="4" placeholder="숫자 4자리로 입력하세요.(ex.2021)">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" name="salesAmount" th:value="${sales.salesAmount}">
+                                    </td>
+                                    <td><button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button></td>
+                                </tr>
                             </tbody>
                         </table>
                         <button type="button" id="addSalesBtn" class="mb-4 btn btn-secondary">추가</button>

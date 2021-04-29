@@ -75,7 +75,9 @@ public class ClientController {
     @GetMapping("update/{seq}")
     public String update(@PathVariable Long seq, Model model) {
         ClientResponseDto client = service.findById(seq);
+        List<SalesResponseDto> salesList = salesService.findAllByClient(client.getClientSeq());
         model.addAttribute("client", client);
+        model.addAttribute("salesList", salesList);
 
         return "client/update";
     }

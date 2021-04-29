@@ -117,7 +117,13 @@ public class ClientService {
         Client client = repository.findById(seq)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 고객입니다. seq=" + seq));
 
+        // UPDATE
         client.update(dto);
+
+        // SALES DELETE -> INSERT
+        List<Sales> salesList = toSalesList(dto.getSalesYears(), dto.getSalesAmount(), client);
+        salesService.deleteByClient(client.getClientSeq());
+        salesService.register(salesList);
 
         return client.getClientSeq();
     }

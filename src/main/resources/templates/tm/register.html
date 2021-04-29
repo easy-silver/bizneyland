@@ -23,7 +23,7 @@
                                         <label for="contact">연락처
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <input class="form-control" id="contact" name="contact" maxlength="14" required>
+                                        <input class="form-control" id="contact" name="contact" th:value="${contact}" maxlength="14" readonly>
                                     </div>
                                     <div class="col">
                                         <label for="recipient">수신인

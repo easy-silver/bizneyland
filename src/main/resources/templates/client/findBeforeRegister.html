@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+    <div layout:fragment="content">
+        <div class="container-fluid">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">업체 연락처 확인</h6>
+                </div>
+                <div class="card-body">
+                    <form id="checkForm" action="/tm/register" method="get">
+                        <input type="hidden" id="companyCharge" th:value="${session.user.companySeq}">
+                        <div class="form-group">
+                            <label for="contact">연락처
+                                <span class="text-danger">*</span>
+                            </label>
+                            <input class="form-control" id="contact" name="contact" maxlength="14">
+                        </div>
+                        <button id="btn" type="submit" class="mt-4 btn btn-primary btn-block">확인</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script>
+            $("#btn").click(function(e){
+                e.preventDefault();
+
+                // ')', '-' 특수문자 제거
+                const contact = $('#contact').val().replace(/[\-\)]/g,'');
+                if (!contact) return;
+
+                $.ajax({
+                    url: "findBeforeRegister",
+                    type: "POST",
+                    data: JSON.stringify({
+                        contact: contact,
+                        companyCharge: $('#companyCharge').val()
+                    }),
+                    dataType: "JSON",
+                    contentType: "application/json"
+
+                }).done(function (response) {
+                    if (response.isExist) {
+                        alert("이미 등록된 고객입니다." + "\n업체명: " + response.client.name);
+                    } else {
+                        $('#checkForm').submit();
+                    }
+
+                }).fail(function (error) {
+                    alert('error!!!');
+                    console.log(error);
+                });
+            });
+        </script>
+    </div>
+</html>

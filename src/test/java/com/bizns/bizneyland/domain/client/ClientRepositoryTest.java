@@ -85,8 +85,24 @@ public class ClientRepositoryTest {
     }
 
     @Test
-    public void 고객_수정() {
+    public void 고객확인() {
+        //given
+        String contact = "021231234";
+        Long companySeq = 1L;
+        String name = "테스트회사";
 
+        Client client = repository.save(Client.builder()
+                .name(name)
+                .contact(contact)
+                .companyCharge(companySeq)
+                .build());
+
+        //when
+        Client findClient = repository.findByContactAndCompanyCharge(contact, companySeq);
+
+        //then
+        assertThat(findClient).isNotNull();
+        assertThat(findClient.getName()).isEqualTo(name);
     }
 
 }

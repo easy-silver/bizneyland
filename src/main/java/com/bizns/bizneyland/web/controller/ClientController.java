@@ -10,13 +10,12 @@ import com.bizns.bizneyland.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RequestMapping("/client")
@@ -70,6 +69,34 @@ public class ClientController {
         service.save(clientDto);
 
         return "redirect:/client/list";
+    }
+
+    /**
+     * [테스트] 등록 전 고객 확인 페이지
+     */
+    @GetMapping("findBeforeRegister")
+    public void findBeforeRegister() {
+
+    }
+
+    /**
+     * 업체 등록 여부 확인
+     * @param parameterMap
+     * @return
+     */
+    @PostMapping("findBeforeRegister")
+    @ResponseBody
+    public Map<String, Object> findBeforeRegister(@RequestBody Map<String, String> parameterMap) {
+        Map<String, Object> responseMap = new HashMap<>();
+        String contact = parameterMap.get("contact");
+        Long companySeq = Long.parseLong(parameterMap.get("companyCharge"));
+
+        ClientResponseDto client = service.findBeforeRegister(contact, companySeq);
+
+        responseMap.put("isExist", client != null);
+        responseMap.put("client", client);
+
+        return responseMap;
     }
 
     /**

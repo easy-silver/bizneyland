@@ -14,5 +14,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     @Query("SELECT c FROM Client c WHERE c.companyCharge = :companySeq ORDER BY c.clientSeq DESC")
     List<Client> findByCompany(@Param("companySeq") Long companySeq);
 
+    Client findByContactAndCompanyCharge(String contact, Long companySeq);
+
     Client findByName(String name);
 }

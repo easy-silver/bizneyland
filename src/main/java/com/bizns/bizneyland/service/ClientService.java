@@ -22,8 +22,8 @@ public class ClientService {
     private final SalesService salesService;
 
     /**
-     * 모든 고객 조회
-     * */
+     * 전체 고객 조회(관리자)
+     */
     public List<ClientResponseDto> findAll() {
         return repository.findAllDesc()
                 .stream()
@@ -31,11 +31,25 @@ public class ClientService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 담당회사별 고객 조회(대표자)
+     */
     public List<ClientResponseDto> findAll(Long companySeq) {
         return repository.findByCompany(companySeq)
                 .stream()
                 .map(ClientResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 단건 조회
+     * @param clientSeq
+     */
+    public ClientResponseDto findById(Long clientSeq) {
+        Client entity = repository.findById(clientSeq)
+                .orElseThrow(() -> new IllegalArgumentException("해당 업체가 없습니다. seq=" + clientSeq));
+
+        return new ClientResponseDto(entity);
     }
 
     /**
@@ -79,13 +93,23 @@ public class ClientService {
     }
 
     /**
-     * 기본키로 단일 고객 조회
-     * */
-    public ClientResponseDto findById(Long clientSeq) {
-        Client entity = repository.findById(clientSeq)
-                .orElseThrow(() -> new IllegalArgumentException("해당 업체가 없습니다. seq=" + clientSeq));
+     * 고객 정보 수정
+     * @return 고객번호
+     */
+    @Transactional
+    public Long update(Long seq, ClientUpdateRequestDto dto) {
+        Client client = repository.findById(seq)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 고객입니다. seq=" + seq));
 
-        return new ClientResponseDto(entity);
+        // UPDATE
+        client.update(dto);
+
+        // SALES DELETE -> INSERT
+        List<Sales> salesList = toSalesList(dto.getSalesYears(), dto.getSalesAmount(), client);
+        salesService.deleteByClient(client.getClientSeq());
+        salesService.register(salesList);
+
+        return client.getClientSeq();
     }
 
     /**
@@ -95,6 +119,18 @@ public class ClientService {
     @Transactional
     public void delete(Long clientSeq) {
         repository.deleteById(clientSeq);
+    }
+
+    /**
+     * 이미 등록된 회사인지 확인
+     * @param contact
+     * @param companySeq
+     * @return
+     */
+    public ClientResponseDto findBeforeRegister(String contact, Long companySeq) {
+        Client client = repository.findByContactAndCompanyCharge(contact, companySeq);
+
+        return client == null ? null : new ClientResponseDto(client);
     }
 
     /**
@@ -113,25 +149,6 @@ public class ClientService {
         //entity.update(dto);
 
         return entity;
-    }
-
-    /**
-     * 고객 정보 수정
-     * @return 고객번호
-     */
-    public Long update(Long seq, ClientUpdateRequestDto dto) {
-        Client client = repository.findById(seq)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 고객입니다. seq=" + seq));
-
-        // UPDATE
-        client.update(dto);
-
-        // SALES DELETE -> INSERT
-        List<Sales> salesList = toSalesList(dto.getSalesYears(), dto.getSalesAmount(), client);
-        salesService.deleteByClient(client.getClientSeq());
-        salesService.register(salesList);
-
-        return client.getClientSeq();
     }
 
 }

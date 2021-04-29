@@ -29,6 +29,27 @@ public class TmService {
     private final LoanService loanService;
 
     /**
+     * 전체 조회
+     */
+    public List<TmResponseDto> findAllDesc() {
+        return repository.findAllDesc()
+                .stream()
+                .map(TmResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * 담당 회사별로 조회
+     * @param companySeq
+     */
+    public List<TmResponseDto> findByCompany(Long companySeq) {
+        return repository.findByCompany(companySeq)
+                .stream()
+                .map(TmResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    /**
      * TM 상담 등록
      * @param requestDto
      * @return
@@ -90,15 +111,7 @@ public class TmService {
         return list;
     }
 
-    /**
-     * 전체 상담건 조회
-     */
-    public List<TmResponseDto> findAllDesc() {
-        return repository.findAllDesc()
-                .stream()
-                .map(TmResponseDto::new)
-                .collect(Collectors.toList());
-    }
+
 
     /**
      * 고객번호로 상담건 조회

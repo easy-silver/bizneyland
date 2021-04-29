@@ -1,5 +1,8 @@
 package com.bizns.bizneyland.web.controller;
 
+import com.bizns.bizneyland.config.auth.LoginUser;
+import com.bizns.bizneyland.config.auth.dto.SessionUser;
+import com.bizns.bizneyland.domain.user.Role;
 import com.bizns.bizneyland.service.ClientService;
 import com.bizns.bizneyland.service.LoanService;
 import com.bizns.bizneyland.service.SalesService;
@@ -30,8 +33,11 @@ public class TmController {
      * TM 상담 목록
      */
     @GetMapping("list")
-    public void list(Model model) {
-        model.addAttribute("tmList", service.findAllDesc());
+    public void list(@LoginUser SessionUser user, Model model) {
+        model.addAttribute("tmList",
+                user.getRole() == Role.ADMIN ? service.findAllDesc() :
+                //FIXME : TM일 때 본인 것만 보이도록
+                user.getRole() == Role.OWNER ? service.findByCompany(user.getCompanySeq()) : null);
     }
 
     /**

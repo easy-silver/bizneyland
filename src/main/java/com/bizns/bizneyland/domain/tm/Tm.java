@@ -7,7 +7,6 @@ import com.bizns.bizneyland.web.dto.TmUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -57,10 +56,13 @@ public class Tm extends BaseTimeEntity {
     // 메모
     private String memo;
 
+    // 담당 회사
+    private Long chargeCompany;
+
     @Builder
     public Tm(Client client, Member caller, LocalDateTime callDate, String recipient,
               String headcount, String purpose, String hopeAmount, Character arrearsYn, String arrearsDetail,
-              String creditStatus, String hopeCallTime, String memo) {
+              String creditStatus, String hopeCallTime, String memo, Long chargeCompany) {
         this.client = client;
         this.caller = caller;
         this.callDate = callDate == null ? LocalDateTime.now() : callDate;
@@ -73,6 +75,7 @@ public class Tm extends BaseTimeEntity {
         this.creditStatus = creditStatus;
         this.hopeCallTime = hopeCallTime;
         this.memo = memo;
+        this.chargeCompany = chargeCompany;
     }
 
     public void updateTmInfo(TmUpdateRequestDto dto) {

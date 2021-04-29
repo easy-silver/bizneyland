@@ -15,8 +15,8 @@
                                 <h6 class="m-0 font-weight-bold text-primary">TM 등록</h6>
                             </div>
                             <div class="card-body">
-                                <!-- 상담사 정보 -->
                                 <input type="hidden" name="userSeq" th:value="${session.user.userSeq}">
+                                <input type="hidden" name="chargeCompany" th:value="${session.user.companySeq}">
 
                                 <div class="form-group row">
                                     <div class="col">
@@ -99,7 +99,8 @@
                                             <label for="hopeAmount">매출정보</label>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input class="form-control" name="salesYears" placeholder="발생연도" maxlength="4">
+                                                    <input type="number" class="form-control" name="salesYears"
+                                                           placeholder="발생연도" maxlength="4">
                                                 </div>
                                                 <div class="col">
                                                     <input class="form-control" name="salesAmount" placeholder="금액">
@@ -109,7 +110,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col">
-                                                    <input class="form-control" name="salesYears" maxlength="4">
+                                                    <input type="number" class="form-control" name="salesYears" maxlength="4">
                                                 </div>
                                                 <div class="col">
                                                     <input class="form-control" name="salesAmount">
@@ -119,7 +120,7 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col">
-                                                    <input class="form-control" name="salesYears" maxlength="4">
+                                                    <input type="number" class="form-control" name="salesYears" maxlength="4">
                                                 </div>
                                                 <div class="col">
                                                     <input class="form-control" name="salesAmount">

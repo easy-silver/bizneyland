@@ -22,6 +22,7 @@ public class ClientCreateRequestDto {
     private String establishDate;
     private String sector;
     private String keyItem;
+    private Long companyCharge;
 
     /* 매출 정보 */
     private String[] salesYears;
@@ -35,7 +36,7 @@ public class ClientCreateRequestDto {
     @Builder
     public ClientCreateRequestDto(String name, String contact, String owner, String address,
                                   Character type, String establishDate, String sector, String keyItem,
-                                  String[] salesYears, String[] salesAmount) {
+                                  String[] salesYears, String[] salesAmount, Long companyCharge) {
         this.name = name;
         this.contact = contact;
         this.owner = owner;
@@ -46,6 +47,7 @@ public class ClientCreateRequestDto {
         this.keyItem = keyItem;
         this.salesYears = salesYears;
         this.salesAmount = salesAmount;
+        this.companyCharge = companyCharge;
     }
 
     /** Client 엔티티로 변환 */
@@ -59,6 +61,7 @@ public class ClientCreateRequestDto {
                 .sector(sector)
                 .address(address)
                 .keyItem(keyItem)
+                .companyCharge(companyCharge)
                 .build();
     }
 

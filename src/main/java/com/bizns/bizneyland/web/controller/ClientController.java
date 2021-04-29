@@ -1,5 +1,8 @@
 package com.bizns.bizneyland.web.controller;
 
+import com.bizns.bizneyland.config.auth.LoginUser;
+import com.bizns.bizneyland.config.auth.dto.SessionUser;
+import com.bizns.bizneyland.domain.user.Role;
 import com.bizns.bizneyland.service.ClientService;
 import com.bizns.bizneyland.service.SalesService;
 import com.bizns.bizneyland.service.TmService;
@@ -28,9 +31,9 @@ public class ClientController {
      * 고객 목록
      * */
     @GetMapping("list")
-    public String list(Model model) {
-        model.addAttribute("clients", service.findAll());
-        return "client/list";
+    public void list(@LoginUser SessionUser user, Model model) {
+        model.addAttribute("clients",
+                user.getRole() == Role.ADMIN ? service.findAll() : service.findAll(user.getCompanySeq()));
     }
 
     /**

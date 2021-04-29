@@ -18,9 +18,25 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 @Service
 public class ClientService {
-
     private final ClientRepository repository;
     private final SalesService salesService;
+
+    /**
+     * 모든 고객 조회
+     * */
+    public List<ClientResponseDto> findAll() {
+        return repository.findAllDesc()
+                .stream()
+                .map(ClientResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ClientResponseDto> findAll(Long companySeq) {
+        return repository.findByCompany(companySeq)
+                .stream()
+                .map(ClientResponseDto::new)
+                .collect(Collectors.toList());
+    }
 
     /**
      * 고객 등록
@@ -60,16 +76,6 @@ public class ClientService {
             }
         }
         return salesList;
-    }
-
-    /**
-     * 모든 고객 조회
-     * */
-    public List<ClientResponseDto> findAll() {
-        return repository.findAllDesc()
-                .stream()
-                .map(ClientResponseDto::new)
-                .collect(Collectors.toList());
     }
 
     /**

@@ -12,6 +12,7 @@
                 </div>
                 <div class="card-body">
                     <form action="/client/register" method="post">
+                        <input type="hidden" name="companyCharge" th:value="${session.user.companySeq}">
                         <div class="form-group">
                             <label for="name">회사명
                                 <span class="text-danger">*</span>

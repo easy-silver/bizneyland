@@ -46,14 +46,14 @@ public class Client extends BaseTimeEntity {
     // 주요 품목
     private String keyItem;
 
-    /* 담당 회사(FK) *//*
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "company_charge", nullable = false)
-    private Company companyCharge;
-*/
+    /* 담당 회사(FK) */
+    //@ManyToOne(fetch = LAZY)
+    //@JoinColumn(name = "company_charge", nullable = false)
+    private Long companyCharge;
+
     @Builder
     public Client(String name, String contact, String owner, Character type,
-                  String establishDate, String sector, String address, String keyItem) {
+                  String establishDate, String sector, String address, String keyItem, Long companyCharge) {
         this.name = name;
         this.contact = contact;
         this.owner = owner;
@@ -62,6 +62,7 @@ public class Client extends BaseTimeEntity {
         this.sector = sector;
         this.address = address;
         this.keyItem = keyItem;
+        this.companyCharge = companyCharge;
     }
 
     public void update(ClientUpdateRequestDto dto) {

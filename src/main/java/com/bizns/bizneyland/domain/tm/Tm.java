@@ -57,12 +57,12 @@ public class Tm extends BaseTimeEntity {
     private String memo;
 
     // 담당 회사
-    private Long chargeCompany;
+    private Long companyCharge;
 
     @Builder
     public Tm(Client client, Member caller, LocalDateTime callDate, String recipient,
               String headcount, String purpose, String hopeAmount, Character arrearsYn, String arrearsDetail,
-              String creditStatus, String hopeCallTime, String memo, Long chargeCompany) {
+              String creditStatus, String hopeCallTime, String memo, Long companyCharge) {
         this.client = client;
         this.caller = caller;
         this.callDate = callDate == null ? LocalDateTime.now() : callDate;
@@ -75,7 +75,7 @@ public class Tm extends BaseTimeEntity {
         this.creditStatus = creditStatus;
         this.hopeCallTime = hopeCallTime;
         this.memo = memo;
-        this.chargeCompany = chargeCompany;
+        this.companyCharge = companyCharge;
     }
 
     public void updateTmInfo(TmUpdateRequestDto dto) {

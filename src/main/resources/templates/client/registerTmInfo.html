@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <form action="registerTmInfo" method="post" th:object="${tmDto}">
                         <input type="hidden" name="userSeq" th:value="${session.user.userSeq}">
-                        <input type="hidden" name="chargeCompany" th:value="${session.user.companySeq}">
+                        <input type="hidden" name="companyCharge" th:value="${session.user.companySeq}">
 
                         <input type="hidden" th:field="*{clientSeq}">
                         <div class="form-group row">

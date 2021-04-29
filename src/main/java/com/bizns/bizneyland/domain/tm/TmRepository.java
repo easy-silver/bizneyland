@@ -14,7 +14,7 @@ public interface TmRepository extends JpaRepository<Tm, Long> {
     @Query("SELECT t FROM Tm t " +
             "JOIN FETCH t.client " +
             "JOIN FETCH t.caller " +
-            "WHERE t.chargeCompany = :companySeq " +
+            "WHERE t.companyCharge = :companySeq " +
             "ORDER BY t.tmSeq DESC")
     List<Tm> findByCompany(@Param("companySeq") Long companySeq);
 

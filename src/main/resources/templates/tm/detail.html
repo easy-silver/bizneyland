@@ -138,10 +138,10 @@
                                 </tr>
                                 <tr>
                                     <th>대출 희망액</th>
-                                    <td>
-                                        <span th:if="${tm.hopeAmount}">
+                                    <td th:text="${tm.hopeAmount}">
+                                        <!--<span th:if="${tm.hopeAmount}">
                                             <span th:text="${#numbers.formatInteger(tm.hopeAmount, 3, 'COMMA')}">3,000</span>원
-                                        </span>
+                                        </span>-->
                                     </td>
                                 </tr>
                                 <tr>

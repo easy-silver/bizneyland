@@ -68,7 +68,7 @@ public class TmService {
             int repeatCount = Math.min(creditors.length, amounts.length);
 
             for (int i = 0; i < repeatCount; i++) {
-                if (creditors[i] == null)
+                if (creditors[i].isEmpty())
                     continue;
 
                 Loan entity = Loan.builder()

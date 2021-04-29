@@ -6,185 +6,217 @@
 
     <div layout:fragment="content">
         <div class="container-fluid">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">TM 등록</h6>
+            <form action="register" method="post">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- 좌측 카드 -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">TM 등록</h6>
+                            </div>
+                            <div class="card-body">
+                                <!-- 상담사 정보 -->
+                                <input type="hidden" name="userSeq" th:value="${session.user.userSeq}">
+
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="contact">연락처
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input class="form-control" id="contact" name="contact" maxlength="14" required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="recipient">수신인
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input class="form-control" id="recipient" name="recipient" maxlength="14" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="name">회사명
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input class="form-control" id="name" name="name" required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="type">업체 구분</label>
+                                        <select class="form-control" id="type" name="type">
+                                            <option value="">선택하세요</option>
+                                            <option value="P">개인</option>
+                                            <option value="C">법인</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="owner">대표자</label>
+                                        <input class="form-control" id="owner" name="owner">
+                                    </div>
+                                    <div class="col">
+                                        <label for="establishDate">설립년도</label>
+                                        <input class="form-control" id="establishDate" name="establishDate"
+                                               placeholder="숫자 4자리로 입력 (ex. 1998)" maxlength="4">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="sector">업종</label>
+                                        <input class="form-control" id="sector" name="sector">
+                                    </div>
+                                    <div class="col">
+                                        <label for="keyItem">주요 품목</label>
+                                        <input class="form-control" id="keyItem" name="keyItem">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="address">사업장 주소</label>
+                                        <input class="form-control" id="address" name="address">
+                                    </div>
+                                    <div class="col">
+                                        <label for="address">자금 목적</label>
+                                        <select class="form-control" id="purpose" name="purpose">
+                                            <option value="">선택하세요</option>
+                                            <option value="운전">운전</option>
+                                            <option value="시설">시설</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="headcount">직원 수</label>
+                                        <input class="form-control" id="headcount" name="headcount">
+                                    </div>
+                                    <div class="col">
+                                        <label for="hopeAmount">희망자금</label>
+                                        <input class="form-control" id="hopeAmount" name="hopeAmount" placeholder="숫자만 입력">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="hopeAmount">매출정보</label>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input class="form-control" name="salesYears" placeholder="발생연도">
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-control" name="salesAmount" placeholder="금액">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input class="form-control" name="salesYears">
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-control" name="salesAmount">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input class="form-control" name="salesYears">
+                                                </div>
+                                                <div class="col">
+                                                    <input class="form-control" name="salesAmount">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="creditStatus">신용평점</label>
+                                            <input class="form-control" id="creditStatus" name="creditStatus">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="arrearsYn">세금 체납 여부</label>
+                                            <select class="form-control" id="arrearsYn" name="arrearsYn">
+                                                <option value="">선택하세요</option>
+                                                <option value="N">완납</option>
+                                                <option value="Y">체납</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 체납 선택시 보여주기 -->
+                                <div class="form-group d-none" id="arrearsDetailDiv">
+                                    <label for="arrearsDetail">체납 내역</label>
+                                    <textarea class="form-control" id="arrearsDetail" name="arrearsDetail"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">상담 정보</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>대출 현황</label>
+                                    <table class="table" id="loanInfoTable">
+                                        <colgroup>
+                                            <col>
+                                            <col>
+                                            <col>
+                                            <col>
+                                            <col width="52px">
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th>해당 기관명</th>
+                                            <th>용도</th>
+                                            <th>금액</th>
+                                            <th>특이사항</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <input class="form-control" name="loan.creditors">
+                                            </td>
+                                            <td>
+                                                <input class="form-control" name="loan.purposes" value="">
+                                            </td>
+                                            <td>
+                                                <input class="form-control" name="loan.amounts">
+                                            </td>
+                                            <td>
+                                                <input class="form-control" name="loan.memos" value="">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" id="addLoanInfoBtn" class="mb-4 btn btn-secondary">추가</button>
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <label for="hopeCallTime">희망 통화시간</label>
+                                    <input class="form-control" id="hopeCallTime" name="hopeCallTime">
+                                </div>
+                                <div class="form-group">
+                                    <label for="memo">메모 및 특이사항</label>
+                                    <textarea class="form-control" id="memo" name="memo"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form action="register" method="post">
-                        <!-- 상담사 정보 -->
-                        <input type="hidden" name="userSeq" th:value="${session.user.userSeq}">
-
-                        <h4>업체 정보</h4>
-                        <hr>
-                        <!-- 업체 정보 -->
-                        <div class="form-group row">
-                            <div class="col">
-                                <label for="contact">연락처
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input class="form-control" id="contact" name="contact" maxlength="14" required>
-                            </div>
-                            <div class="col">
-                                <label for="recipient">수신인</label>
-                                <input class="form-control" id="recipient" name="recipient" maxlength="14">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <label for="name">회사명
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <input class="form-control" id="name" name="name" required>
-                            </div>
-                            <div class="col">
-                                <label for="type">업체 구분</label>
-                                <select class="form-control" id="type" name="type">
-                                    <option value="">선택하세요</option>
-                                    <option value="P">개인</option>
-                                    <option value="C">법인</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <label for="owner">대표자</label>
-                                <input class="form-control" id="owner" name="owner">
-                            </div>
-                            <div class="col">
-                                <label for="establishDate">설립일</label>
-                                <input class="form-control" id="establishDate" name="establishDate" maxlength="20">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <label for="sector">업종</label>
-                                <input class="form-control" id="sector" name="sector">
-                            </div>
-                            <div class="col">
-                                <label for="keyItem">주요 품목</label>
-                                <input class="form-control" id="keyItem" name="keyItem">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="address">사업장 주소</label>
-                            <input class="form-control" id="address" name="address">
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <label for="headcount">직원 수</label>
-                                <input class="form-control" id="headcount" name="headcount">
-                            </div>
-                            <div class="col">
-                                <label for="creditStatus">신용평점</label>
-                                <input class="form-control" id="creditStatus" name="creditStatus">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col">
-                                <label for="hopeAmount">희망자금</label>
-                                <input class="form-control" id="hopeAmount" name="hopeAmount" placeholder="숫자만 입력">
-                            </div>
-                            <div class="col">
-                                <label for="arrearsYn">세금 체납 여부</label>
-                                <select class="form-control" id="arrearsYn" name="arrearsYn">
-                                    <option value="">선택하세요</option>
-                                    <option value="N">완납</option>
-                                    <option value="Y">체납</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- 체납 선택시 보여주기 -->
-                        <div class="form-group d-none" id="arrearsDetailDiv">
-                            <label for="arrearsDetail">체납 내역</label>
-                            <textarea class="form-control" id="arrearsDetail" name="arrearsDetail"></textarea>
-                        </div>
-
-                        <!-- 매출 정보 -->
-                        <h4 class="mt-4">매출 정보</h4>
-                        <table class="table" id="salesTable">
-                            <colgroup>
-                                <col>
-                                <col>
-                                <col width="100px">
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th>발생 연도</th>
-                                <th>금액</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" name="salesYears" maxlength="4" placeholder="숫자 4자리로 입력하세요.(ex.2021)">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" name="salesAmount">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" id="addSalesBtn" class="mb-4 btn btn-secondary">추가</button>
-                        <hr>
-
-                        <!-- 대출 관련 -->
-                        <h4 class="mt-4">대출현황</h4>
-                        <table class="table" id="loanInfoTable">
-                            <colgroup>
-                                <col>
-                                <col>
-                                <col>
-                                <col>
-                                <col width="100px">
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>해당 기관명</th>
-                                    <th>용도</th>
-                                    <th>금액</th>
-                                    <th>메모 및 특이사항</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" name="loan.creditors">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" name="loan.purposes" value="">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" name="loan.amounts">
-                                    </td>
-                                    <td>
-                                        <input class="form-control" name="loan.memos" value="">
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="button" id="addLoanInfoBtn" class="mb-4 btn btn-secondary">추가</button>
-
-                        <hr>
-
-                        <div class="form-group">
-                            <label for="hopeCallTime">희망 통화시간</label>
-                            <input class="form-control" id="hopeCallTime" name="hopeCallTime">
-                        </div>
-                        <div class="form-group">
-                            <label for="memo">메모</label>
-                            <textarea class="form-control" id="memo" name="memo"></textarea>
-                        </div>
-                        <button type="submit" class="mt-4 btn btn-primary btn-block">저장</button>
-                    </form>
-                </div>
-            </div>
+                <button type="submit" class="mt-2 btn btn-primary btn-block">저장</button>
+            </form>
         </div>
         <script>
+            /** 삭제 버튼 클릭 시 행 삭제 */
+            const removeRow = function (element) {
+                $(element).parents("tr").remove();
+            };
+
             /** 체납 선택 시 상세 내역 보여주기 */
             $('#arrearsYn').on('change', function() {
                 $('#arrearsDetail').val('');
@@ -196,34 +228,17 @@
                 }
             });
 
-            /** 매출 정보 추가 버튼 */
-            $('#addSalesBtn').on('click', function () {
-                const addElement =
-                    '<tr>' +
-                        '<td><input class="form-control" name="salesYears" maxlength="4" required></td>' +
-                        '<td><input class="form-control" name="salesAmount" required></td>' +
-                        '<td class="text-center">' +
-                            '<button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button>' +
-                        '</td>' +
-                    '</tr>';
-
-                $("#salesTable>tbody").append(addElement);
-            });
-
-            /** 삭제 버튼 클릭 시 행 삭제 */
-            const removeRow = function (element) {
-                $(element).parents("tr").remove();
-            };
-
             /** 대출 정보 추가 버튼 */
             $('#addLoanInfoBtn').on('click', function () {
                 const addElement =
                     '<tr>' +
-                    '<td><input class="form-control" name="creditor" required></td>' +
-                    '<td><input class="form-control" name="purpose" value=""></td>' +
-                    '<td><input class="form-control" type="number" name="amount" required></td>' +
-                    '<td><input class="form-control" name="memo" value=""></td>' +
-                    '<td><button type="button" class="btn btn-secondary" onclick="removeRow(this)">삭제</button></td>' +
+                        '<td><input class="form-control" name="loan.creditors" required></td>' +
+                        '<td><input class="form-control" name="loan.purposes"></td>' +
+                        '<td><input class="form-control" type="number" name="loan.amounts" required></td>' +
+                        '<td><input class="form-control" name="loan.memos"></td>' +
+                        '<td class="align-middle">' +
+                            '<a href="javascript:void(0);" onclick="removeRow(this)">삭제</a>' +
+                        '</td>' +
                     '</tr>';
 
                 $("#loanInfoTable>tbody").append(addElement);

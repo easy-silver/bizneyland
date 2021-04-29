@@ -49,7 +49,7 @@ public class ClientService {
 
             for (int i = 0; i < length; i++) {
                 // 값 없다면 건너뛴다.
-                if (years[i] == null || amounts[i] == null)
+                if (years[i].isEmpty() || amounts[i].isEmpty())
                     continue;
 
                 salesList.add(Sales.builder()

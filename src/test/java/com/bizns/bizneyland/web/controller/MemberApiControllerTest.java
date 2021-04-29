@@ -53,7 +53,7 @@ public class MemberApiControllerTest {
                 .build();
     }
 
-    @Test
+    //@Test
     @WithMockUser(roles = "USER")
     public void Member_등록된다() throws Exception {
         //given

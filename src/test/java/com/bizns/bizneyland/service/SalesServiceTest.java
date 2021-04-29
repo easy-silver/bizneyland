@@ -5,6 +5,7 @@ import com.bizns.bizneyland.domain.client.ClientRepository;
 import com.bizns.bizneyland.domain.sales.Sales;
 import com.bizns.bizneyland.domain.sales.SalesRepository;
 import com.bizns.bizneyland.web.dto.SalesRequestDto;
+import com.bizns.bizneyland.web.dto.SalesResponseDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,34 @@ public class SalesServiceTest {
         List<Sales> salesList = repository.findByClient(client);
         assertThat(salesList.size()).isEqualTo(1);
         assertThat(salesList.get(0).getSalesYear()).isEqualTo("2020");
+    }
+
+    @Test
+    public void 전체_삭제() {
+        //given
+        Client client = createClient();
+
+        //when
+        service.register(SalesRequestDto.builder()
+                .clientSeq(client.getClientSeq())
+                .salesYear("2020")
+                .salesAmount("1000")
+                .build());
+
+        service.register(SalesRequestDto.builder()
+                .clientSeq(client.getClientSeq())
+                .salesYear("2019")
+                .salesAmount("2000")
+                .build());
+
+        //when
+        List<SalesResponseDto> salesList = service.findAllByClient(client.getClientSeq());
+        assertThat(salesList.size()).isEqualTo(2);
+
+        //then
+        service.deleteByClient(client.getClientSeq());
+        List<SalesResponseDto> deletedSalesList = service.findAllByClient(client.getClientSeq());
+        assertThat(deletedSalesList.size()).isEqualTo(0);
+
     }
 }

@@ -64,4 +64,15 @@ public class SalesService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 해당 고객의 매출 정보 삭제
+     * @param clientSeq
+     */
+    public void deleteByClient(Long clientSeq) {
+        Client client = clientRepository.findById(clientSeq)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 업체입니다. id=" + clientSeq));
+
+        repository.deleteByClient(client);
+    }
+
 }

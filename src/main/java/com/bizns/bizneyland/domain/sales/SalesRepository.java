@@ -8,4 +8,7 @@ import java.util.List;
 public interface SalesRepository extends JpaRepository<Sales, Long> {
 
     List<Sales> findByClient(Client client);
+
+    void deleteByClient(Client client);
+
 }

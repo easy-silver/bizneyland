@@ -12,7 +12,7 @@
                 </div>
                 <div class="card-body">
                     <form action="/client/register" method="post">
-                        <input type="hidden" name="companyCharge" th:value="${session.user.companySeq}">
+                        <input type="hidden" id="companyCharge" name="companyCharge" th:value="${session.user.companySeq}">
                         <div class="form-group">
                             <label for="name">회사명
                                 <span class="text-danger">*</span>
@@ -25,6 +25,9 @@
                                     <span class="text-danger">*</span>
                                 </label>
                                 <input class="form-control" id="contact" name="contact" maxlength="14" required>
+                                <div class="invalid-feedback" id="contact-invalid-msg">
+                                    이미 등록된 업체입니다.
+                                </div>
                             </div>
                             <div class="col">
                                 <label for="type">업체 구분</label>
@@ -88,13 +91,51 @@
                         </table>
                         <button type="button" id="addSalesBtn" class="mb-4 btn btn-secondary">추가</button>
 
-                        <button type="submit" class="mt-4 btn btn-primary btn-block">저장</button>
+                        <button id="submitBtn" type="submit" class="mt-4 btn btn-primary btn-block">저장</button>
                     </form>
                 </div>
             </div>
         </div>
-        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
         <script>
+            $(document).ready(function() {
+               $('#contact').focus();
+            });
+
+            /** 연락처 입력 시 등록된 업체인지 확인 */
+            $('#contact').on('blur', function () {
+                $('#contact').removeClass('is-invalid');
+                $('#submitBtn').attr('disabled', false);
+
+                const contact = $('#contact').val().replace(/[\-\)]/g,'');
+                if (!contact) return;
+
+                $.ajax({
+                    url: "findBeforeRegister",
+                    type: "POST",
+                    data: JSON.stringify({
+                        contact: contact,
+                        companyCharge: $('#companyCharge').val()
+                    }),
+                    dataType: "JSON",
+                    contentType: "application/json"
+
+                }).done(function (response) {
+                    if (response.isExist) {
+                        if (confirm("이미 등록된 고객입니다." +
+                            "\n업체명: " + response.client.name +
+                            "\n해당 업체의 상세화면으로 이동하시겠습니까?")) {
+                            window.location.href = "/client/detail/" + response.client.clientSeq;
+                        } else {
+                            $('#contact').addClass('is-invalid');
+                            $('#contact-invalid-msg').text("이미 등록된 고객입니다. 업체명: " + response.client.name);
+                            $('#submitBtn').attr('disabled', true);
+                        }
+                    }
+                }).fail(function (error) {
+                    alert('error!!!');
+                    console.log(error);
+                });
+            });
 
             /** 매출 정보 추가 버튼 */
             $('#addSalesBtn').on('click', function () {

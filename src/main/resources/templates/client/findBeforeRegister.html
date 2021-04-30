@@ -44,7 +44,9 @@
 
                 }).done(function (response) {
                     if (response.isExist) {
-                        alert("이미 등록된 고객입니다." + "\n업체명: " + response.client.name);
+                        if (confirm("이미 등록된 고객입니다." + " (업체명: " + response.client.name + ")\n섭외 정보만 추가 등록하시겠습니까?")) {
+                            window.location.href = '/client/' + response.client.clientSeq + '/registerTmInfo';
+                        }
                     } else {
                         $('#checkForm').submit();
                     }

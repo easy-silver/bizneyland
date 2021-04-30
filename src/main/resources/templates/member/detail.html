@@ -5,7 +5,7 @@
       layout:decorator="layout/default">
 
     <div layout:fragment="content">
-        <div class="container-fluid">
+        <div class="container">
 
             <!-- 회원 상세 정보 -->
             <div class="card shadow mb-4">
@@ -28,6 +28,10 @@
                 </div>
                 <div class="card-body">
                     <table class="table">
+                        <colgroup>
+                            <col width="300px">
+                        </colgroup>
+                        <tbody>
                         <tr>
                             <th>회원 이름</th>
                             <td th:text="${member.name}"/>
@@ -68,17 +72,22 @@
                             <th>가입일</th>
                             <td th:text="${member.joinDt}"/>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
             <!-- 첫 번째 카드 종료 -->
 
-            <div class="card shadow mb-4">
+            <div class="card shadow mb-4" th:if="${session.user.role == T(com.bizns.bizneyland.domain.user.Role).ADMIN}">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">소속 회사 정보</h6>
                 </div>
                 <div class="card-body">
                     <table class="table">
+                        <colgroup>
+                            <col width="300px">
+                        </colgroup>
+                        <tbody>
                         <tr>
                             <th>회사번호</th>
                             <td th:text="${member.company.id}"></td>
@@ -89,7 +98,7 @@
                         </tr>
                         <tr>
                             <th>대표자</th>
-                            <td/>
+                            <td th:text="${member.company.ownerName}"/>
                         </tr>
                         <tr>
                             <th>주소</th>
@@ -99,6 +108,7 @@
                             <th>전화번호</th>
                             <td th:text="${member.company.tel}" />
                         </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

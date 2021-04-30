@@ -14,7 +14,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">고객(업체) 정보</h6>
-                            <div class="dropdown no-arrow">
+                            <div class="dropdown no-arrow"
+                                 th:if="${session.user.role == T(com.bizns.bizneyland.domain.user.Role).ADMIN
+                                            || session.user.role == T(com.bizns.bizneyland.domain.user.Role).OWNER}">
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -110,8 +112,11 @@
                                      aria-labelledby="dropdownMenuLink">
                                     <div class="dropdown-header">상담내역 관리:</div>
                                     <a class="dropdown-item" th:href="@{/tm/update/{seq}(seq=${tm.tmSeq})}">수정</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" th:href="|javascript:deleteTm('${tm.tmSeq}')|">삭제</a>
+                                    <div th:if="${session.user.role == T(com.bizns.bizneyland.domain.user.Role).ADMIN
+                                            || session.user.role == T(com.bizns.bizneyland.domain.user.Role).OWNER}">
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-danger" th:href="|javascript:deleteTm('${tm.tmSeq}')|">삭제</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

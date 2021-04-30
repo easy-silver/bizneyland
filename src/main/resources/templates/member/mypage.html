@@ -10,12 +10,12 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">내 프로필</h6>
                     <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                             aria-labelledby="dropdownMenuLink2">
+                             aria-labelledby="dropdownMenuLink1">
                             <div class="dropdown-header">나의 정보 관리</div>
                             <a class="dropdown-item"
                                th:href="@{/member/update/{id}(id=${member.id})}">정보 수정</a>
@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col">
                     <div class="card shadow mb-4">
-                        <div class="card-header">
+                        <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">연락처</h6>
                         </div>
                         <div class="card-body">
@@ -97,16 +97,35 @@
                 </div>
                 <div class="col">
                     <div class="card shadow mb-4">
-                        <div class="card-header">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">소속 회사</h6>
+                            <div class="dropdown no-arrow"
+                                 th:if="${session.user.role == T(com.bizns.bizneyland.domain.user.Role).OWNER}">
+                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                     aria-labelledby="dropdownMenuLink2">
+                                    <div class="dropdown-header">회사 정보 관리</div>
+                                    <a class="dropdown-item"
+                                       th:href="@{/company/update/{id}(id=${member.company.id})}">정보 수정</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-danger" href="#">회사 탈퇴</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <table class="table">
+                                <tr th:if="${session.user.role == T(com.bizns.bizneyland.domain.user.Role).OWNER}">
+                                    <th>회사번호</th>
+                                    <td th:text="${member.company.id}" />
+                                </tr>
                                 <tr>
                                     <th>회사명</th>
                                     <td th:text="${member.company.name}" />
                                 </tr>
-                                <tr>
+                                <tr th:if="${session.user.role != T(com.bizns.bizneyland.domain.user.Role).OWNER}">
                                     <th>대표자</th>
                                     <td th:text="${member.company.ownerName}"/>
                                 </tr>

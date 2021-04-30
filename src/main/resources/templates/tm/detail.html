@@ -6,6 +6,7 @@
 
     <div layout:fragment="content">
         <div class="container-fluid">
+            <div class="intro">
             <div class="row">
                 <!-- 좌측열 카드 목록 -->
                 <div class="col-lg-6">
@@ -203,23 +204,38 @@
                         </div>
                     </div>
                     <!-- //우측 두 번째 카드 -->
-
                 </div>
                 <!-- 우측열 카드 목록 종료 -->
             </div>
-
+            </div>
+            <div class="float-left mb-4">
+                <a href="javascript:void(0)" class="btn btn-primary" onclick="printPop()">
+                    <i class="fas fa-print"></i>
+                    <span class="text">인쇄</span>
+                </a>
+            </div>
         </div>
         <script>
-            /** 삭제 확인 이벤트 */
+            /** 섭외 정보 삭제 확인 */
             const deleteTm = function (seq) {
                 if (confirm('정말 삭제하시겠습니까?'))
                     window.location.href = '/tm/delete/' + seq;
             };
 
-            /** 삭제 확인 이벤트 */
+            /** 고객 정보 삭제 확인 */
             const deleteClient = function (seq) {
                 if (confirm('고객을 삭제하면 관련 상담 건이 전부 삭제됩니다.\n정말 삭제하시겠습니까?'))
                     window.location.href = '/client/delete/' + seq;
+            };
+
+            /** 인쇄 */
+            const printPop = function () {
+                const data = $('.intro').html();
+                const html = '<html><head><link rel="stylesheet" href="/css/sb-admin-2.css"></head><body onload="window.print()">' + data + '</body></html>'
+                const myWindow= window.open('', '섭외 정보 인쇄창', 'width=400, height=300, left=100, top=50');
+                myWindow.document.write(html);
+                myWindow.document.close();
+                myWindow.focus();
             };
         </script>
     </div>

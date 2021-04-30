@@ -96,7 +96,10 @@ public class MemberService {
 
             // USER 권한 변경
             userService.changeRole(userSeq, Role.OWNER);
+        } else {
+            userService.changeRole(userSeq, Role.USER);
         }
+        
         return registeredMember.getId();
     }
 

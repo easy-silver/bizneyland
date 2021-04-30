@@ -13,12 +13,6 @@
                 <div class="card-body">
                     <form action="/client/register" method="post">
                         <input type="hidden" id="companyCharge" name="companyCharge" th:value="${session.user.companySeq}">
-                        <div class="form-group">
-                            <label for="name">회사명
-                                <span class="text-danger">*</span>
-                            </label>
-                            <input class="form-control" id="name" name="name" required>
-                        </div>
                         <div class="form-group row">
                             <div class="col">
                                 <label for="contact">연락처
@@ -28,6 +22,17 @@
                                 <div class="invalid-feedback" id="contact-invalid-msg">
                                     이미 등록된 업체입니다.
                                 </div>
+                            </div>
+                            <div class="col">
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col">
+                                <label for="name">회사명
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" id="name" name="name" required>
                             </div>
                             <div class="col">
                                 <label for="type">업체 구분</label>

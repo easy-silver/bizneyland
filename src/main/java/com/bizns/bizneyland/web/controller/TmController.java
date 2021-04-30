@@ -34,6 +34,7 @@ public class TmController {
         model.addAttribute("tmList",
                 user.getRole() == Role.ADMIN ? service.findAllDesc()
                         : user.getRole() == Role.OWNER ? service.findByCompany(user.getCompanySeq())
+                        // FIXME : TM으로 역할 명시하는 게 좋을듯
                         : service.findByCaller(user.getMemberSeq()));
     }
 

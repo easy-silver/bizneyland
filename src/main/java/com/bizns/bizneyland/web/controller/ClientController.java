@@ -72,7 +72,7 @@ public class ClientController {
     }
 
     /**
-     * [테스트] 등록 전 고객 확인 페이지
+     * 등록 전 고객 확인 페이지
      */
     @GetMapping("findBeforeRegister")
     public void findBeforeRegister() {

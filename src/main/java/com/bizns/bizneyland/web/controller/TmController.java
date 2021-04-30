@@ -32,9 +32,9 @@ public class TmController {
     @GetMapping("list")
     public void list(@LoginUser SessionUser user, Model model) {
         model.addAttribute("tmList",
-                user.getRole() == Role.ADMIN ? service.findAllDesc() :
-                //FIXME : TM일 때 본인 것만 보이도록
-                user.getRole() == Role.OWNER ? service.findByCompany(user.getCompanySeq()) : null);
+                user.getRole() == Role.ADMIN ? service.findAllDesc()
+                        : user.getRole() == Role.OWNER ? service.findByCompany(user.getCompanySeq())
+                        : service.findByCaller(user.getMemberSeq()));
     }
 
     /**

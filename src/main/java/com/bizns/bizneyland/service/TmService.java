@@ -50,6 +50,21 @@ public class TmService {
     }
 
     /**
+     * 담당 TM 상담사별로 조회
+     * @param callerSeq
+     * @return
+     */
+    public List<TmResponseDto> findByCaller(Long callerSeq) {
+        Member member = memberRepository.findById(callerSeq)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다. MEMBER_SEQ=" + callerSeq));
+
+        return repository.findByCaller(member)
+                .stream()
+                .map(TmResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    /**
      * TM 상담 등록
      * @param requestDto
      * @return

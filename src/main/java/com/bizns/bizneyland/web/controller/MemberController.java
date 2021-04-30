@@ -126,11 +126,11 @@ public class MemberController {
     }
 
     /**
-     * 회원 삭제(PK)
+     * 회원 삭제(PK)/탈퇴
      * @param id
      */
-    @GetMapping("delete/{id}")
-    public String delete(@PathVariable Long id) {
+    @PostMapping("delete")
+    public String delete(@RequestParam("id") Long id) {
         service.delete(id);
 
         return "redirect:/member/list";

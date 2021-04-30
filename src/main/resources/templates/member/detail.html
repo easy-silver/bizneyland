@@ -22,7 +22,7 @@
                             <a class="dropdown-item" th:href="@{/member/update/{id}(id=${member.id})}">수정</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger"
-                               th:href="|javascript:deleteMember('${member.id}')|">삭제</a>
+                               th:href="|javascript:deleteMember()|">삭제</a>
                         </div>
                     </div>
                 </div>
@@ -102,12 +102,15 @@
                     </table>
                 </div>
             </div>
+            <form id="deleteForm" action="/member/delete" method="post">
+                <input type="hidden" name="id" th:value="${member.id}">
+            </form>
         </div>
         <script>
             /** 삭제 확인 이벤트 */
-            const deleteMember = function (id) {
+            const deleteMember = function () {
                 if (confirm('정말 삭제하시겠습니까?'))
-                    window.location.href = '/member/delete/' + id;
+                    $('#deleteForm').submit();
             };
         </script>
     </div>

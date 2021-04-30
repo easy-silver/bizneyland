@@ -5,11 +5,25 @@
       layout:decorator="layout/default">
 
     <div layout:fragment="content">
-
         <div class="container-fluid">
             <div class="card shadow mb-4">
-                <div class="card-header">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">내 프로필</h6>
+                    <div class="dropdown no-arrow">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink2"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                             aria-labelledby="dropdownMenuLink2">
+                            <div class="dropdown-header">나의 정보 관리</div>
+                            <a class="dropdown-item"
+                               th:href="@{/member/update/{id}(id=${member.id})}">정보 수정</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger"
+                               th:href="|javascript:deleteMember()|">회원 탈퇴</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -94,7 +108,7 @@
                                 </tr>
                                 <tr>
                                     <th>대표자</th>
-                                    <td/>
+                                    <td th:text="${member.company.ownerName}"/>
                                 </tr>
                                 <tr>
                                     <th>주소</th>
@@ -109,9 +123,16 @@
                     </div>
                 </div>
             </div>
-
+            <form id="deleteForm" action="/member/delete" method="post">
+                <input type="hidden" name="id" th:value="${session.user.memberSeq}">
+            </form>
         </div>
-        <!-- /.container-fluid -->
-
+        <script>
+            /** 탈퇴 의사 확인 */
+            const deleteMember = function () {
+                if (confirm('정말 탈퇴하시겠습니까?'))
+                    $('#deleteForm').submit();
+            };
+        </script>
     </div>
 </html>

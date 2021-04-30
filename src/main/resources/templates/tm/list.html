@@ -15,8 +15,8 @@
                     <div class="table-responsive">
                         <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0">
                             <colgroup>
-                                <col width="101px"/>
-                                <col width="101px"/>
+                                <col width="110px"/>
+                                <col width="110px"/>
                             </colgroup>
                             <thead>
                                 <tr>
@@ -27,7 +27,6 @@
                                     <th>상담일시</th>
                                     <th>상담사</th>
                                     <th>희망 통화 시간</th>
-                                    <th>진행 상태</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,7 +40,6 @@
                                     <td th:text="${tm.callDate}"/>
                                     <td th:text="${tm.caller.name}"/>
                                     <td th:text="${tm.hopeCallTime}"/>
-                                    <td>진행중</td>
                                 </tr>
                             </tbody>
                         </table>

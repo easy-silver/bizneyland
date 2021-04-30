@@ -48,9 +48,8 @@
                     </div>
                 </div>
             </div>
-            <!-- TODO : 상수 값으로 관리자 확인해야 함 -->
-            <div th:if="${session.user.role.key == 'ROLE_ADMIN'}" class="float-right">
-                <a href="/tm/register" class="btn btn-primary">
+            <div class="float-right mb-4">
+                <a href="/client/findBeforeRegister" class="btn btn-primary">
                     <span class="text">TM 등록</span>
                 </a>
             </div>

@@ -1,11 +1,10 @@
 package com.bizns.bizneyland.util;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.time.LocalDate;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FormatUtilTest {
 
@@ -22,6 +21,16 @@ public class FormatUtilTest {
     public void 문자열_날짜_변환() {
         LocalDate localDate = FormatUtil.parseToDate("2011-01-01");
         System.out.println("localDate = " + localDate);
+    }
+
+    @Test
+    public void 숫자만_남기기() {
+        assertThat(FormatUtil.formatOnlyNumber("02)1234-1234")).isEqualTo("0212341234");
+        assertThat(FormatUtil.formatOnlyNumber("0212341234")).isEqualTo("0212341234");
+        assertThat(FormatUtil.formatOnlyNumber("0212341234 ")).isEqualTo("0212341234");
+        assertThat(FormatUtil.formatOnlyNumber("+010 6649 1441 ")).isEqualTo("01066491441");
+        assertThat(FormatUtil.formatOnlyNumber(null)).isNull();
+        assertThat(FormatUtil.formatOnlyNumber("")).isNull();
     }
 
 }

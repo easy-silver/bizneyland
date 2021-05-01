@@ -7,10 +7,17 @@ import java.time.format.DateTimeFormatter;
 public class FormatUtil {
 
     /**
+     * 숫자를 제외한 모든 문자 제거
+     * */
+    public static String formatOnlyNumber(String target) {
+        return target == null || target.isEmpty() ? null : target.replaceAll("\\D", "");
+    }
+
+    /**
      * 문자열 -> 날짜 변환
      * */
     public static LocalDate parseToDate(String target) {
-        return (target == null || target == "") ? null : LocalDate.parse(target, DateTimeFormatter.ISO_DATE);
+        return target == null || target.isEmpty() ? null : LocalDate.parse(target, DateTimeFormatter.ISO_DATE);
     }
 
     /**
@@ -25,16 +32,6 @@ public class FormatUtil {
      * */
     public static String localDateTimeToYmdHms(LocalDateTime dateTime) {
         return dateTime == null ? null : dateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
-    }
-
-
-    /**
-     * 하이픈 제거
-     * */
-    public static String removeHyphen(String target) {
-        if(target == null) return null;
-
-        return target.replaceAll("-", "");
     }
 
     /**
@@ -58,10 +55,6 @@ public class FormatUtil {
         }
 
         return formatNumber;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(localDateTimeToYmdHms(LocalDateTime.now()));
     }
 
 }

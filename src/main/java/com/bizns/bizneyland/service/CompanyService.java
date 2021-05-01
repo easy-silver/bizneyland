@@ -54,7 +54,7 @@ public class CompanyService {
     @Transactional
     public Long save(CompanyCreateRequestDto requestDto) {
         // 전화번호 하이픈 제거
-        requestDto.setTel(FormatUtil.removeHyphen(requestDto.getTel()));
+        requestDto.setTel(FormatUtil.formatOnlyNumber(requestDto.getTel()));
 
         return repository.save(requestDto.toEntity()).getId();
     }

@@ -1,6 +1,7 @@
 package com.bizns.bizneyland.web.dto;
 
 import com.bizns.bizneyland.domain.company.Company;
+import com.bizns.bizneyland.util.FormatUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,13 @@ public class CompanyCreateRequestDto {
     private String tel;
 
     private Long logoFileSeq;
+
+    public void setBusinessNo(String businessNo) {
+        this.businessNo = FormatUtil.formatOnlyNumber(businessNo);
+    }
+    public void setTel(String tel) {
+        this.tel = FormatUtil.formatOnlyNumber(tel);
+    }
 
     @Builder
     public CompanyCreateRequestDto(String name, String address, String tel, Long logoFileSeq, String businessNo) {

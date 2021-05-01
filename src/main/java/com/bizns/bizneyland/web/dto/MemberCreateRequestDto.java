@@ -1,8 +1,8 @@
 package com.bizns.bizneyland.web.dto;
 
-import com.bizns.bizneyland.domain.company.Company;
 import com.bizns.bizneyland.domain.member.Member;
 import com.bizns.bizneyland.domain.member.MemberType;
+import com.bizns.bizneyland.util.FormatUtil;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +30,13 @@ public class MemberCreateRequestDto {
     // 회사 정보
     private Long companySeq;
     private String companyName;
+
+    public void setMobile(String mobile) {
+        this.mobile = FormatUtil.formatOnlyNumber(mobile);
+    }
+    public void setFax(String fax) {
+        this.fax = FormatUtil.formatOnlyNumber(fax);
+    }
 
     @Builder
     public MemberCreateRequestDto(String name, String nickname, String birth, String gender,
@@ -61,7 +68,6 @@ public class MemberCreateRequestDto {
                 .email(email)
                 .fax(fax)
                 .profileFileSeq(profileFileSeq)
-                .company(new Company(companySeq))
                 .userSeq(userSeq)
                 .build();
     }

@@ -28,9 +28,8 @@ public class ClientCreateRequestDto {
     private String[] salesYears;
     private String[] salesAmount;
 
-    // 연락처는 하이픈 제거된 형태로 받아오기
     public void setContact(String contact) {
-        this.contact = FormatUtil.removeHyphen(contact);
+        this.contact = FormatUtil.formatOnlyNumber(contact);
     }
 
     @Builder

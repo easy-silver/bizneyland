@@ -11,6 +11,10 @@
 * AWS(EC2, RDS)
 * OAuth2.0
 
+## 프로그램 화면
+<img width="500" alt="스크린샷 2021-05-04 오전 9 45 58" src="https://user-images.githubusercontent.com/42424276/116949790-2e91c180-acbe-11eb-8726-d0062d999dff.png">
+<img width="500" alt="스크린샷 2021-05-04 오전 9 49 57" src="https://user-images.githubusercontent.com/42424276/116949821-4701dc00-acbe-11eb-9300-672fed9bbe58.png">
+
 ## 테이블 구조
 
 ## 엔티티 설명

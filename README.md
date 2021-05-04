@@ -41,3 +41,6 @@ USER는 자신이 상담한 고객만 관리할 수 있다.
 반드시 하나의 고객이 지정되어야 한다.   
 상담을 기준으로 고객은 ManyToOne 관계를 갖는다.
 
+## 인프라 정보
+* Amazon EC2 (Amazon Linux 2)
+* Amazon RDS (MariaDB 10.4.13)

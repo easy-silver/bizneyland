@@ -16,6 +16,8 @@
 <img width="500" alt="스크린샷 2021-05-04 오전 9 49 57" src="https://user-images.githubusercontent.com/42424276/116949821-4701dc00-acbe-11eb-9300-672fed9bbe58.png">
 
 ## 테이블 구조
+<img width="900" alt="스크린샷 2021-05-04 오전 10 02 10" src="https://user-images.githubusercontent.com/42424276/116950388-d491fb80-acbf-11eb-8677-f5eaf8614889.png">
+
 
 ## 엔티티 설명
 

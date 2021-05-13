@@ -30,7 +30,7 @@ public class Loan {
 
     /* 대출 금액 */
     @Column(nullable = false)
-    private int amount;
+    private String amount;
 
     /* 용도 */
     private String purpose;
@@ -39,7 +39,7 @@ public class Loan {
     private String memo;
 
     @Builder
-    public Loan(Tm tm, String creditor, int amount, String purpose, String memo) {
+    public Loan(Tm tm, String creditor, String amount, String purpose, String memo) {
         this.tm = tm;
         this.creditor = creditor;
         this.amount = amount;

@@ -77,7 +77,7 @@ public class TmServiceTest {
                 .userSeq(1L)
                 .loan(LoanRequestDto.builder()
                         .creditors(new String[]{"국민은행", "농협"})
-                        .amounts(new int[]{1000, 2000})
+                        .amounts(new String[]{"1000", "2000"})
                         .purposes(new String[] {"생활비"})
                         .memos(new String[] {"특이사항"})
                         .build())

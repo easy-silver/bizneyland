@@ -7,7 +7,7 @@ import lombok.Getter;
 public class LoanResponseDto {
     private Long loanSeq;
     private String creditor;
-    private int amount;
+    private String amount;
     private String purpose;
     private String memo;
 

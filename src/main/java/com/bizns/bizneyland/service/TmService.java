@@ -97,7 +97,7 @@ public class TmService {
 
         if (dto != null) {
             String[] creditors = dto.getCreditors();
-            int[] amounts = dto.getAmounts();
+            String[] amounts = dto.getAmounts();
             String[] purposes = dto.getPurposes();
             String[] memos = dto.getMemos();
 

@@ -61,7 +61,7 @@ public class LoanRepositoryTest {
     public void 대출정보_등록() {
         //given
         String creditor = "국민은행";
-        int amount = 3000;
+        String amount = "3000";
 
         Loan loan = repository.save(Loan.builder()
                 .tm(createClientAndTm())
@@ -84,7 +84,7 @@ public class LoanRepositoryTest {
         Loan loan = repository.save(Loan.builder()
                 .tm(tm)
                 .creditor("농협")
-                .amount(300)
+                .amount("300만원")
                 .build());
 
         //when

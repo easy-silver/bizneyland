@@ -10,12 +10,12 @@ import lombok.Setter;
 public class LoanRequestDto {
 
     private String[] creditors;
-    private int[] amounts;
+    private String[] amounts;
     private String[] purposes;
     private String[] memos;
 
     @Builder
-    public LoanRequestDto(String[] creditors, int[] amounts, String[] purposes, String[] memos) {
+    public LoanRequestDto(String[] creditors, String[] amounts, String[] purposes, String[] memos) {
         this.creditors = creditors;
         this.amounts = amounts;
         this.purposes = purposes;

@@ -74,18 +74,15 @@ public class ClientService {
         List<Sales> salesList = new ArrayList<>();
 
         if (years != null && amounts != null) {
-            // 더 작은 배열 길이만큼 반복
-            int length = Math.min(years.length, amounts.length);
+            // 발생연도 만큼 반복
+            int length = years.length;
 
             for (int i = 0; i < length; i++) {
-                // 값 없다면 건너뛴다.
-                if (years[i].isEmpty() || amounts[i].isEmpty())
-                    continue;
 
                 salesList.add(Sales.builder()
                         .client(client)
                         .salesYear(years[i])
-                        .amount(amounts[i])
+                        .amount(i < amounts.length ? amounts[i] : null)
                         .build());
             }
         }
